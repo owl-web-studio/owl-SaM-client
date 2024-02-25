@@ -1,23 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import {TranslateModule, TranslateService} from "@ngx-translate/core";
+import {HeaderComponent} from "../widgets/header/header.component";
+import {ToolbarComponent} from "../widgets/toolbar/toolbar.component";
 
 @Component({
-  selector: 'app-root',
+  selector: 'owl-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, TranslateModule],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, ToolbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'owl-SaM';
 
-  constructor(public translate: TranslateService) {
-    translate.addLangs(['en', 'ru']);
-    translate.setDefaultLang('en');
-
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang?.match(/en|ru/) ? browserLang : 'en');
-  }
 }

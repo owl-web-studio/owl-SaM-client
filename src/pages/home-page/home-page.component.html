@@ -1,4 +1,4 @@
-<main class="main">
+<main class="main container">
   <h1>3DSaM - storage and management</h1>
   <p>{{ 'HOME.TITLE' | translate }}</p>
   <label>
@@ -7,4 +7,6 @@
       <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
     </select>
   </label>
+
+  <p-button label="aboooba"></p-button>
 </main>

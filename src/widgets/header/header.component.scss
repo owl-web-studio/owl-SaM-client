@@ -1,4 +1,40 @@
 .header {
   display: flex;
   justify-content: space-between;
+  height: var(--header-height);
+
+  &__side {
+    display: flex;
+    gap: var(--spacing-03);
+  }
+
+  &__logo {
+    text-decoration: none;
+    color: #2a2a2a;
+    font-size: 24px;
+    font-weight: 700;
+
+    span {
+      color: #8FE147;
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #2a2a2a;
+  }
+
+  &__side {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

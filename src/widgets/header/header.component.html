@@ -1,6 +1,24 @@
 <header class="header">
-  <a href="#" class="header-logo">
-    3DSaM
-  </a>
-  поиск
+  <div class="header__side">
+    <a [routerLink]="['/']" class="header__logo">
+      <span>3D</span>SaM
+    </a>
+    <div class="header__title">
+      <a [routerLink]="['/organization']">Организация</a>
+      <span> > </span>
+      <span>{{ title$ | async }}</span>
+    </div>
+  </div>
+  <div class="header__side">
+    <a class="header__link" pTooltip="Уведомления">
+      <i class="pi pi-bell" style="font-size: 1.25rem"></i>
+    </a>
+    <a class="header__link" pTooltip="Справка">
+      <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
+    </a>
+    <a [routerLink]="['/profile']" class="header__link" pTooltip="Профиль">
+      <i class="pi pi-user" style="font-size: 1.25rem"></i>
+    </a>
+  </div>
 </header>
+<p-divider></p-divider>

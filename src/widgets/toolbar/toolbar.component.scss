@@ -4,4 +4,16 @@
   background-color: #f1f1f1;
   display: flex;
   justify-content: space-between;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__element {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-03);
+  }
 }

@@ -16,6 +16,10 @@ section, .container {
   flex-direction: column;
 }
 
+section:has([class]) {
+  padding-top: var(--spacing-04);
+}
+
 @media (min-width: 575.98px){
   section, header, .container {
     padding: 0 calc(50vw - 270px);

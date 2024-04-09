@@ -11,13 +11,18 @@ section, header, .container {
   padding: 0 15px;
 }
 
-section, .container {
+section {
   display: flex;
   flex-direction: column;
 }
 
-section:has([class]) {
+section.full-width {
+  padding: 0 var(--spacing-02);
+}
+
+section[class] {
   padding-top: var(--spacing-04);
+  padding-bottom: var(--spacing-04);
 }
 
 @media (min-width: 575.98px){
@@ -42,4 +47,20 @@ section:has([class]) {
   section, header, .container {
     padding: 0 calc(13vw - 114px);
   }
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
 }

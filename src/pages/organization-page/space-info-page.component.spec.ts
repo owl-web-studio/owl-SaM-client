@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrganizationPageComponent } from './organization-page.component';
+import { SpaceInfoPageComponent } from './space-info-page.component';
 
 describe('OrganizationPageComponent', () => {
-  let component: OrganizationPageComponent;
-  let fixture: ComponentFixture<OrganizationPageComponent>;
+  let component: SpaceInfoPageComponent;
+  let fixture: ComponentFixture<SpaceInfoPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrganizationPageComponent]
+      imports: [SpaceInfoPageComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(OrganizationPageComponent);
+
+    fixture = TestBed.createComponent(SpaceInfoPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

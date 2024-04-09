@@ -3,15 +3,15 @@ import {RouterLink} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 
 @Component({
-  selector: 'owl-organization-page',
+  selector: 'owl-space-info-page',
   standalone: true,
   imports: [
     RouterLink,
     ButtonModule
   ],
-  templateUrl: './organization-page.component.html',
-  styleUrl: './organization-page.component.scss'
+  templateUrl: './space-info-page.component.html',
+  styleUrl: './space-info-page.component.scss'
 })
-export class OrganizationPageComponent {
+export class SpaceInfoPageComponent {
 
 }

@@ -60,4 +60,8 @@ export class HeaderComponent {
   ) {
     this.title$ = breadcrumbService.title$;
   }
+
+  get currentUser$() {
+    return this.authService.currentUser$;
+  }
 }

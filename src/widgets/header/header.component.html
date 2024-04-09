@@ -10,16 +10,32 @@
     </div>
   </div>
   <div class="header__side">
-    <a class="header__link" pTooltip="Уведомления">
-      <i class="pi pi-bell" style="font-size: 1.25rem"></i>
-    </a>
-    <a class="header__link" pTooltip="Справка">
-      <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
-    </a>
-    <a (click)="menu.toggle($event)" class="header__link" pTooltip="Профиль">
-      <i class="pi pi-user" style="font-size: 1.25rem"></i>
-    </a>
-    <p-menu #menu [model]="accountMenuItems" [popup]="true"></p-menu>
+    @if (currentUser$ | async) {
+      <a class="header__link" pTooltip="Уведомления">
+        <i class="pi pi-bell" style="font-size: 1.25rem"></i>
+      </a>
+      <a class="header__link" pTooltip="Справка">
+        <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
+      </a>
+      <a (click)="menu.toggle($event)" class="header__link" pTooltip="Профиль">
+        <i class="pi pi-user" style="font-size: 1.25rem"></i>
+      </a>
+    }
+    @else {
+      <p-button
+        [routerLink]="['/auth/sign-in']"
+        [text]="true"
+        label="Войти"
+      ></p-button>
+      <p-button
+        [routerLink]="['/auth/sign-up']"
+        [outlined]="true"
+        label="Зарегистрироваться"
+      ></p-button>
+    }
+
   </div>
 </header>
+
+<p-menu #menu [model]="accountMenuItems" [popup]="true"></p-menu>
 <p-divider></p-divider>

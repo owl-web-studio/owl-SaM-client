@@ -16,9 +16,10 @@
     <a class="header__link" pTooltip="Справка">
       <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
     </a>
-    <a [routerLink]="['/profile']" class="header__link" pTooltip="Профиль">
+    <a (click)="menu.toggle($event)" class="header__link" pTooltip="Профиль">
       <i class="pi pi-user" style="font-size: 1.25rem"></i>
     </a>
+    <p-menu #menu [model]="accountMenuItems" [popup]="true"></p-menu>
   </div>
 </header>
 <p-divider></p-divider>

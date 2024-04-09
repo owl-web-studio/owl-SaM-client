@@ -7,6 +7,7 @@ import {HttpClient, provideHttpClient} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AuthService} from "../services/auth.service";
 import {MessageService} from "primeng/api";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 // AoT requires an exported function for factories
@@ -37,6 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     importProvidersFrom(
+      BrowserAnimationsModule,
       TranslateModule.forRoot({
         defaultLanguage: 'ru',
         loader: {

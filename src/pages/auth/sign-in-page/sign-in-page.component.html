@@ -1,0 +1,11 @@
+<section class="sign-in-page">
+  <div class="auth-header">
+
+    <h1>Авторизация</h1>
+  </div>
+  <form [formGroup]="authForm" class="auth-form">
+    <input type="text" pInputText formControlName="login"/>
+    <input type="password" pInputText formControlName="password"/>
+    <p-button (click)="signIn()" label="Войти"></p-button>
+  </form>
+</section>

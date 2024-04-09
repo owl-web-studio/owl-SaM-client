@@ -8,6 +8,7 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {AuthService} from "../services/auth.service";
 import {MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {LanguageService} from "../services/language.service";
 
 
 // AoT requires an exported function for factories
@@ -16,13 +17,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 export function initialize(
-  authService: AuthService
+  authService: AuthService,
+  languageService: LanguageService
 ) {
 
   return async () => {
     authService.autoLogin().subscribe(v => {
       console.log('[app.config.ts]: auto login successfully');
     });
+    languageService.initialize();
     console.log('[app.config.ts]: app initialized');
   };
 }
@@ -32,7 +35,7 @@ export const appConfig: ApplicationConfig = {
     {
       provide: APP_INITIALIZER,
       useFactory: initialize,
-      deps: [AuthService],
+      deps: [AuthService, LanguageService],
       multi: true
     },
     provideRouter(routes),

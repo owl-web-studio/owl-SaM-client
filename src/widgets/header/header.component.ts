@@ -39,8 +39,8 @@ export class HeaderComponent {
       label: 'Настройки',
       icon: 'pi pi-cog',
       command: () => {
+        this.router.navigate(['/settings']);
       },
-      disabled: true
     },
     {
       label: 'Выйти из аккаунта',

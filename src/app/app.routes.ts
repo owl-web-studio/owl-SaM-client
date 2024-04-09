@@ -6,6 +6,7 @@ import {ProfilePageComponent} from "../pages/profile-page/profile-page.component
 import {SignInPageComponent} from "../pages/auth/sign-in-page/sign-in-page.component";
 import {SignUpPageComponent} from "../pages/auth/sign-up-page/sign-up-page.component";
 import {authGuard} from "../guards/auth.guard";
+import {SettingsPageComponent} from "../pages/settings-page/settings-page.component";
 
 export const routes: Routes = [
   {
@@ -39,6 +40,12 @@ export const routes: Routes = [
     component: ProfilePageComponent,
     title: 'Профиль',
     data: {title: 'ssss'},
+    canActivate: [authGuard],
+  },
+  {
+    path: 'settings',
+    component: SettingsPageComponent,
+    title: 'Настройки',
     canActivate: [authGuard],
   },
 

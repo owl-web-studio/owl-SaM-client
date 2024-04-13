@@ -1,3 +1,5 @@
+import {Role} from "../role.model";
+
 export interface MockUserData {
   id: number;
   login: string;
@@ -9,5 +11,5 @@ export interface MockUserData {
   email: string;
   phoneNumber: string;
 
-  role: string;
+  roles: Role[];
 }

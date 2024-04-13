@@ -7,6 +7,7 @@ import {SignInPageComponent} from "../pages/auth/sign-in-page/sign-in-page.compo
 import {SignUpPageComponent} from "../pages/auth/sign-up-page/sign-up-page.component";
 import {authGuard} from "../guards/auth.guard";
 import {SettingsPageComponent} from "../pages/settings-page/settings-page.component";
+import {SpaceHomePageComponent} from "../pages/space-home-page/space-home-page.component";
 
 export const routes: Routes = [
   {
@@ -27,12 +28,19 @@ export const routes: Routes = [
   {
     path: 'space/:id',
     children: [
+      { path: '', redirectTo: 'home', pathMatch: "full" },
       {
         path: 'info',
         component: SpaceInfoPageComponent,
-        title: 'Пространство',
+        title: 'Информация о пространстве',
         canActivate: [authGuard],
       },
+      {
+        path: 'home',
+        component: SpaceHomePageComponent,
+        title: 'Пространство: главная',
+        canActivate: [authGuard],
+      }
     ]
   },
   {

@@ -10,7 +10,11 @@
           <a [routerLink]="['/profile']">Зубенко Михаил Петрович</a>
           <span class="leader__post">Генеральный директор</span>
         </p>
-        <p-button label="Перейти" size="small"></p-button>
+        <p-button
+          [routerLink]="['/space/' + space.id + '/home']"
+          label="Перейти"
+          size="small"
+        ></p-button>
       </div>
     </div>
     <div class="organization__content">

@@ -1,14 +1,12 @@
 <div class="toolbar">
   <div class="toolbar__content">
-    <div class="toolbar__element">
-      <a [routerLink]="['/space/info']" class="toolbar__link">Пространство 1</a>
-    </div>
-    <div class="toolbar__element">
-      <a [routerLink]="['/space/info']" class="toolbar__link">Пространство 2</a>
-    </div>
-    <div class="toolbar__element">
-      <a [routerLink]="['/space/info']" class="toolbar__link">Пространство 3</a>
-    </div>
+
+    <h4>Пространства</h4>
+    @for (space of (spaces | async); track space.id) {
+      <div class="toolbar__element">
+        <a [routerLink]="['/space/' + space.id + '/info']" class="toolbar__link">{{ space.name }}</a>
+      </div>
+    }
   </div>
   <p-divider layout="vertical"></p-divider>
 </div>

@@ -25,7 +25,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'space',
+    path: 'space/:id',
     children: [
       {
         path: 'info',

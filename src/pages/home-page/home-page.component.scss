@@ -1,0 +1,11 @@
+.spaces {
+  display: flex;
+  flex-direction: column;
+
+  &__element {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--spacing-03);
+  }
+}

@@ -15,32 +15,18 @@
   height: calc(100vh - var(--header-height));
   background-color: #f1f1f1;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 
   transition: width .3s;
   overflow-x: hidden;
 
+  &__header {
+    display: flex;
+    justify-content: end;
+  }
+
   &__collapse-btn {
     left: 100px;
     transition: left .7s;
-  }
-
-  &__content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--spacing-02) var(--spacing-02) 0 var(--spacing-02);
-  }
-
-  &__element {
-    height: 42px;
-    display: flex;
-    align-items: center;
-    padding: 0 var(--spacing-03);
   }
 }

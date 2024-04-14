@@ -1,3 +1,19 @@
+<owl-toolbar>
+  <h4>Пространства</h4>
+
+  <div class="spaces">
+    @for (space of (spaces$ | async); track space.id) {
+      <div class="spaces__element">
+        <a
+          [routerLink]="['/space/' + space.id + '/info']"
+        >
+          {{ space.name }}
+        </a>
+      </div>
+    }
+  </div>
+
+</owl-toolbar>
 <section class="home-page">
   <h1>Добро пожаловать!</h1>
 </section>

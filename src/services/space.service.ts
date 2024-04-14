@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MockDataService} from "./_mock/mock-data.service";
+import {Space} from "../entities/space.model";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,6 @@ export class SpaceService {
   }
 
   getSpaces() {
-    return this.mockDataService.get('spaces');
+    return this.mockDataService.get('spaces') as Observable<Space[]>;
   }
 }

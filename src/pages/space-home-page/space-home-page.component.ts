@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'owl-space-home-page',
@@ -7,6 +7,12 @@ import { Component } from '@angular/core';
   templateUrl: './space-home-page.component.html',
   styleUrl: './space-home-page.component.scss'
 })
-export class SpaceHomePageComponent {
+export class SpaceHomePageComponent implements OnInit {
+  constructor(
+  ) {
+  }
 
+  ngOnInit() {
+
+  }
 }

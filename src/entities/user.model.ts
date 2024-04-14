@@ -6,9 +6,10 @@ export interface User {
 
   firstName: string;
   lastName: string;
-  patronymic: string;
+  patronymic?: string;
   email: string;
   phoneNumber: string;
+  jobTitle: string;
 
   roles: Role[];
 }

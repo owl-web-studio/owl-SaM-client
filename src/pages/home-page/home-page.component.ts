@@ -7,6 +7,8 @@ import {RouterLink} from "@angular/router";
 import {SpaceService} from "../../services/space.service";
 import {BehaviorSubject, Subject, switchMap, takeUntil} from "rxjs";
 import {Space} from "../../entities/space.model";
+import {OrganizationService} from "../../services/organization.service";
+import {Organization} from "../../entities/organization.model";
 
 @Component({
   selector: 'owl-home-page',
@@ -27,30 +29,30 @@ export class HomePageComponent implements OnDestroy {
 
   title = 'owl-SaM';
 
-  openedSpace$ = new BehaviorSubject<undefined | Space>(undefined);
-  openSpace$ = new Subject<number>();
+  openedOrganization$ = new BehaviorSubject<undefined | Organization>(undefined);
+  openOrganization$ = new Subject<number>();
 
   constructor(
-    private readonly spaceService: SpaceService,
+    private readonly organizationService: OrganizationService
   ) {
-    this.openSpace$
+    this.openOrganization$
       .pipe(
         takeUntil(this.destroy$),
-        switchMap((spaceId: number) => {
-          return this.spaceService.getSpaceInfo(spaceId);
+        switchMap((organizationId: number) => {
+          return this.organizationService.getOrganizationInfo(organizationId);
         })
       )
-      .subscribe(space => {
-        this.openedSpace$.next(space);
+      .subscribe(organization => {
+        this.openedOrganization$.next(organization);
       });
   }
 
-  get spaces$() {
-    return this.spaceService.getSpaces();
+  get organizations$() {
+    return this.organizationService.getOrganizations();
   }
 
-  openSpaceCard(spaceId: number) {
-    this.openSpace$.next(spaceId);
+  openSpaceCard(organizationId: number) {
+    this.openOrganization$.next(organizationId);
   }
 
   ngOnDestroy(): void {

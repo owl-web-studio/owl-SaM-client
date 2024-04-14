@@ -3,7 +3,7 @@
     <h4>Пространства</h4>
 
     <div class="toolbar-spaces">
-      @for (space of (spaces$ | async); track space.id) {
+      @for (space of (organizations$ | async); track space.id) {
         <div class="spaces__element">
           <button
             (click)="openSpaceCard(space.id)"
@@ -17,20 +17,24 @@
   </owl-toolbar>
   <section class="home-page">
 
-    @if (openedSpace$ | async; as space) {
-      <div class="space">
+    @if (openedOrganization$ | async; as organization) {
+      <div class="organization">
         <div class="header">
           <div class="header__avatar">
             <img src="assets/img/organization-example.jpg" alt="">
           </div>
           <div class="header__content">
-            <h1>{{ space.name }}</h1>
+            <h1>{{ organization.name }}</h1>
             <p class="leader">
-              <a [routerLink]="['/profile']">Зубенко Михаил Петрович</a>
+              <a [routerLink]="['/profile']">
+                {{ organization.leader.lastName }}
+                {{ organization.leader.firstName }}
+                {{ organization.leader?.patronymic }}
+              </a>
               <span class="leader__post">Генеральный директор</span>
             </p>
             <p-button
-              [routerLink]="['/space/' + space.id + '/home']"
+              [routerLink]="['/organizations/' + organization.id]"
               label="Перейти"
               size="small"
             ></p-button>
@@ -38,13 +42,13 @@
         </div>
         <div class="organization__content">
           <h2>Информация</h2>
-          <p>{{ space.description }}</p>
+          <p>{{ organization.description }}</p>
         </div>
       </div>
     }
     @else {
       <h1>Добро пожаловать!</h1>
-      <p>Выберите пространство</p>
+      <p>Выберите организацию</p>
     }
   </section>
 </div>

@@ -3,8 +3,10 @@ import {MockUserData} from "../../entities/_mock/mock-user-data.model";
 import {Space} from "../../entities/space.model";
 import {Role} from "../../entities/role.model";
 import {of} from "rxjs";
+import {Organization} from "../../entities/organization.model";
 
 type DataType =
+  'organizations' |
   'spaces' |
   'users';
 
@@ -34,6 +36,7 @@ export class MockDataService {
       patronymic: 'Иванович',
       email: 'test@mail.ru',
       phoneNumber: '+79876543210',
+      jobTitle: 'Тестовая должность',
       roles: [this.roles[0]],
     },
     {
@@ -45,6 +48,7 @@ export class MockDataService {
       patronymic: 'Игоревич',
       email: 'studiorain27@gmail.com',
       phoneNumber: '+799900000000',
+      jobTitle: 'Генеральный директор',
       roles: [this.roles[1]],
     },
   ];
@@ -52,12 +56,21 @@ export class MockDataService {
     {
       id: 1,
       name: 'Департамент R&D',
-      description: 'Знания департамента развития и проектирования'
+      description: 'Знания департамента развития и проектирования',
+
     },
     {
       id: 2,
       name: 'Департамент разработки',
-      description: 'Знания департамента разработки'
+      description: 'Знания департамента разработки',
+    }
+  ];
+  organizations: Organization[] = [
+    {
+      id: 0,
+      name: 'Блины и галошницы',
+      description: 'лалаа',
+      leader: this.users[1]
     }
   ]
 
@@ -67,6 +80,9 @@ export class MockDataService {
     let result: any = [];
 
     switch (dataType) {
+      case "organizations":
+        result = this.organizations;
+        break;
       case "spaces":
         result = this.spaces;
         break;
@@ -85,6 +101,11 @@ export class MockDataService {
     let result: any = {};
 
     switch (dataType) {
+      case "organizations":
+        result = this.organizations.find((organization) => {
+          return organization.id === id;
+        });
+        break;
       case "spaces":
         result = this.spaces.find((space) => {
           return space.id === id;
@@ -105,6 +126,13 @@ export class MockDataService {
     let result: any = [];
 
     switch (dataType) {
+      case "organizations":
+        this.organizations.push({
+          id: this.organizations[this.organizations.length - 1].id + 1,
+          ...data
+        });
+        result = this.organizations.find(element => element.id === this.organizations[this.organizations.length - 1].id + 1)
+        break;
       case "spaces":
         this.spaces.push({
           id: this.spaces[this.spaces.length - 1].id + 1,

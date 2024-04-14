@@ -10,6 +10,7 @@ export interface MockUserData {
   patronymic: string;
   email: string;
   phoneNumber: string;
+  jobTitle: string;
 
   roles: Role[];
 }

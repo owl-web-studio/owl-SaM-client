@@ -1,0 +1,71 @@
+<section class="organization">
+  @if (organization) {
+    <div class="organization__header header">
+      <div class="header__avatar">
+        <img src="assets/img/organization-example.jpg" alt="">
+      </div>
+      <div class="header__content">
+        <div class="header__heading">
+          <h1>{{ organization.name }}</h1>
+          <a class="icon-btn" pTooltip="Редактировать организацию">
+            <i class="pi pi-pencil" style="font-size: 1.25rem"></i>
+          </a>
+        </div>
+        <a
+          [routerLink]="['/profile']"
+          class="header__leader-name"
+        >
+          {{
+            organization.leader.lastName +
+            ' ' +
+            organization.leader.firstName +
+            ' ' +
+            organization.leader.patronymic
+          }}
+        </a>
+        <span class="header__leader-post">{{ organization.leader.jobTitle }}</span>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <p-card header="Участники">
+        <div class="organization__members">
+          @for (user of (users$ | async); track user.id) {
+            <div class="organization__member">
+              <a
+                [routerLink]="['users/' + user.id]"
+                [relativeTo]="this.activatedRoute"
+                class="member__name"
+              >
+                {{ user.lastName + ' ' + user.firstName[0] + '.' }}
+                @if (user.patronymic) {
+                  {{ user.patronymic[0] + '.' }}
+                }
+              </a>
+              <span class="member__role">
+                {{ user.jobTitle }}
+              </span>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <p-card header="Пространства">
+        <div class="organization__spaces">
+          @for (space of (spaces$ | async); track space.id) {
+            <div class="organization__space">
+              <a
+                [routerLink]="['spaces/' + space.id]"
+                [relativeTo]="this.activatedRoute"
+                class="space__name"
+              >
+                {{ space.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
+    </div>
+  }
+</section>

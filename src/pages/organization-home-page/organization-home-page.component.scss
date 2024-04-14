@@ -1,0 +1,51 @@
+.organization {
+  .header {
+    display: flex;
+    gap: var(--spacing-04);
+
+    &__avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__heading {
+      display: flex;
+    }
+
+    &__leader-post {
+      font-size: 12px;
+      color: #545454;
+    }
+  }
+
+  .main {
+    width: 100%;
+    display: flex;
+    gap: var(--spacing-05);
+  }
+
+  &__members {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__member {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-04);
+  }
+
+  &__spaces {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+

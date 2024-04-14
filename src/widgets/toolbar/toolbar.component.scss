@@ -1,13 +1,40 @@
 .toolbar {
+  &.collapsed {
+    width: 0;
+
+    .toolbar__collapse-btn {
+      position: absolute;
+      top: calc(var(--header-height) + 4px);
+      left: 4px;
+      border-radius: 8px;
+      border: 2px solid gray;
+    }
+  }
+
   width: 200px;
   height: calc(100vh - var(--header-height));
   background-color: #f1f1f1;
   display: flex;
   justify-content: space-between;
 
+  transition: width .3s;
+  overflow-x: hidden;
+
+  &__collapse-btn {
+    left: 100px;
+    transition: left .7s;
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-02) var(--spacing-02) 0 var(--spacing-02);
   }
 
   &__element {

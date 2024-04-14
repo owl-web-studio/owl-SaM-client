@@ -1,7 +1,22 @@
-<div class="toolbar">
+<div
+  class="toolbar"
+  [ngClass]="{'collapsed': isCollapsed}"
+>
   <div class="toolbar__content">
+    <div class="toolbar__header">
+      <h4>Пространства</h4>
+      <a
+        (click)="toggleToolbar()"
+        class="icon-btn toolbar__collapse-btn"
+        pTooltip="Скрыть"
+      >
+        <i
+          [ngClass]="isCollapsed ? 'pi pi-arrow-right' : 'pi pi-arrow-left'"
+          style="font-size: 1.25rem"
+        ></i>
+      </a>
+    </div>
 
-    <h4>Пространства</h4>
     @for (space of (spaces | async); track space.id) {
       <div class="toolbar__element">
         <a [routerLink]="['/space/' + space.id + '/info']" class="toolbar__link">{{ space.name }}</a>

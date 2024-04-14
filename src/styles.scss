@@ -65,6 +65,11 @@ h4 {
   font-size: 1.25rem;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+
 .icon-btn {
   width: 32px;
   height: 32px;
@@ -72,4 +77,8 @@ h4 {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+
+.page-toolbar {
+  display: flex;
 }

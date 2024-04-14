@@ -1,4 +1,4 @@
-.spaces {
+.toolbar-spaces {
   display: flex;
   flex-direction: column;
 
@@ -9,3 +9,37 @@
     padding: 0 var(--spacing-03);
   }
 }
+
+.space {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+
+  .header {
+    display: flex;
+    gap: var(--spacing-04);
+
+    &__avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+
+      .leader {
+        display: flex;
+        gap: var(--spacing-03);
+
+        &__post {
+          font-size: 12px;
+          color: #545454;
+        }
+      }
+    }
+  }
+}
+

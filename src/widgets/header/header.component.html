@@ -9,13 +9,13 @@
   </div>
   <div class="header__side">
     @if (currentUser$ | async) {
-      <a class="header__link" pTooltip="Уведомления">
+      <a class="icon-btn" pTooltip="Уведомления">
         <i class="pi pi-bell" style="font-size: 1.25rem"></i>
       </a>
-      <a class="header__link" pTooltip="Справка">
+      <a class="icon-btn" pTooltip="Справка">
         <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
       </a>
-      <a (click)="menu.toggle($event)" class="header__link" pTooltip="Профиль">
+      <a (click)="menu.toggle($event)" class="icon-btn-btn" pTooltip="Профиль">
         <i class="pi pi-user" style="font-size: 1.25rem"></i>
       </a>
     }

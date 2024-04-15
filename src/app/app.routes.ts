@@ -9,6 +9,13 @@ import {SettingsPageComponent} from "../pages/settings-page/settings-page.compon
 import {SpaceHomePageComponent} from "../pages/space-home-page/space-home-page.component";
 import {OrganizationHomePageComponent} from "../pages/organization-home-page/organization-home-page.component";
 import {UserPageComponent} from "../pages/users/user-page/user-page.component";
+import {
+  CreateKnowledgePageComponent
+} from "../pages/space-home-page/pages/create-knowledge-page/create-knowledge-page.component";
+import {
+  CreateDirectoryPageComponent
+} from "../pages/space-home-page/pages/create-directory-page/create-directory-page.component";
+import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-page/knowledge-page.component";
 
 export const routes: Routes = [
   {
@@ -44,12 +51,27 @@ export const routes: Routes = [
       {
         path: 'spaces/:id',
         children: [
-          { path: '', redirectTo: 'home', pathMatch: "full" },
           {
-            path: 'home',
+            path: '',
             component: SpaceHomePageComponent,
             title: 'Пространство: главная',
             canActivate: [authGuard],
+            children: [
+              {
+                path: 'directory',
+                children: [
+                  { path: 'create', component: CreateDirectoryPageComponent }
+                ]
+              },
+              {
+                path: 'knowledge',
+                children: [
+                  { path: 'create', component: CreateKnowledgePageComponent },
+
+                  { path: ':id', component: KnowledgePageComponent},
+                ]
+              }
+            ]
           }
         ]
       },

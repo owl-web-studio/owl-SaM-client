@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
-import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
+import {ActivatedRoute, ParamMap, Router, RouterLink} from "@angular/router";
 import {SpaceService} from "../../services/space.service";
-import {Observable, Subject, switchMap, takeUntil} from "rxjs";
+import {Subject, switchMap, takeUntil} from "rxjs";
 import {Space} from "../../entities/space.model";
 import {TooltipModule} from "primeng/tooltip";
 import {AsyncPipe} from "@angular/common";
@@ -10,6 +10,7 @@ import {ToolbarComponent} from "../../widgets/toolbar/toolbar.component";
 import {TreeModule} from "primeng/tree";
 import {MessageService, TreeDragDropService, TreeNode} from "primeng/api";
 import {KnowledgeStructureService} from "../../services/knowledge-structure.service";
+import {ContextMenuModule} from "primeng/contextmenu";
 
 @Component({
   selector: 'owl-space-home-page',
@@ -20,7 +21,8 @@ import {KnowledgeStructureService} from "../../services/knowledge-structure.serv
     TooltipModule,
     AsyncPipe,
     ToolbarComponent,
-    TreeModule
+    TreeModule,
+    ContextMenuModule
   ],
   templateUrl: './space-home-page.component.html',
   styleUrl: './space-home-page.component.scss',
@@ -32,7 +34,21 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
   space: Space | undefined;
   files: TreeNode[] | undefined;
 
+  treeKnowledgeMenuItems = [
+    { label: 'Переименовать', icon: 'pi pi-fw pi-search' },
+    { label: 'Удалить', icon: 'pi pi-fw pi-trash' }
+  ];
+  treeDirectoryMenuItems = [
+    {
+      label: 'Создать запись',
+      icon: 'pi pi-fw pi-file-edit',
+      routerLink: ['knowledge/create']
+    },
+    { label: 'Создать директорию', icon: 'pi pi-fw pi-folder-open' }
+  ];
+
   constructor(
+    private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
     private readonly spaceService: SpaceService,
     private readonly knowledgeStructureService: KnowledgeStructureService,
@@ -73,6 +89,7 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
       summary: 'Событие',
       detail: 'Открыто знание'
     });
+    this.router.navigate(['knowledge/' + knowledgeId], {relativeTo: this.activatedRoute});
   }
 
   ngOnDestroy(): void {

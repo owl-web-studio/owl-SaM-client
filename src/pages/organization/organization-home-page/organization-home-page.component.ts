@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subject, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
-import {OrganizationService} from "../../services/organization.service";
-import {Organization} from "../../entities/organization.model";
+import {OrganizationService} from "../../../services/organization.service";
+import {Organization} from "../../../entities/organization.model";
 import {TooltipModule} from "primeng/tooltip";
 import {CardModule} from "primeng/card";
-import {UserService} from "../../services/user.service";
+import {UserService} from "../../../services/user.service";
 import {AsyncPipe} from "@angular/common";
-import {SpaceService} from "../../services/space.service";
+import {SpaceService} from "../../../services/space.service";
 
 @Component({
   selector: 'owl-organization-home-page',

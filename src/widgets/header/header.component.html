@@ -9,6 +9,31 @@
   </div>
   <div class="header__side">
     @if (currentUser$ | async) {
+      <span class="p-input-icon-left header__search">
+        <i class="pi pi-search"></i>
+        <input
+          [(ngModel)]="searchBarValue"
+          (input)="onSearch()"
+          class="p-inputtext-sm"
+          type="text"
+          pInputText
+          placeholder="Поиск..."
+        />
+        @if (showSearchResult$ | async) {
+          <div class="search__result">
+            @for (searchElement of (searchResult$ | async); track 1) {
+              <a
+                [routerLink]="[searchElement.routerLink]"
+                (click)="onClickedSearchResult()"
+                class="result__element"
+              >
+                <div class="element__header">{{ searchElement.name }}</div>
+                <div class="element__type">{{ searchElement.type }}</div>
+              </a>
+            }
+          </div>
+        }
+      </span>
       <a class="icon-btn" pTooltip="Уведомления">
         <i class="pi pi-bell" style="font-size: 1.25rem"></i>
       </a>
@@ -18,8 +43,7 @@
       <a (click)="menu.toggle($event)" class="icon-btn" pTooltip="Профиль">
         <i class="pi pi-user" style="font-size: 1.25rem"></i>
       </a>
-    }
-    @else {
+    } @else {
       <p-button
         [routerLink]="['/auth/sign-in']"
         [text]="true"

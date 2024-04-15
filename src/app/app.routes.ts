@@ -7,7 +7,7 @@ import {SignUpPageComponent} from "../pages/auth/sign-up-page/sign-up-page.compo
 import {authGuard} from "../guards/auth.guard";
 import {SettingsPageComponent} from "../pages/settings-page/settings-page.component";
 import {SpaceHomePageComponent} from "../pages/space-home-page/space-home-page.component";
-import {OrganizationHomePageComponent} from "../pages/organization-home-page/organization-home-page.component";
+import {OrganizationHomePageComponent} from "../pages/organization/organization-home-page/organization-home-page.component";
 import {UserPageComponent} from "../pages/users/user-page/user-page.component";
 import {
   CreateKnowledgePageComponent
@@ -16,6 +16,9 @@ import {
   CreateDirectoryPageComponent
 } from "../pages/space-home-page/pages/create-directory-page/create-directory-page.component";
 import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-page/knowledge-page.component";
+import {
+  EditOrganizationPageComponent
+} from "../pages/organization/edit-organization-page/edit-organization-page.component";
 
 export const routes: Routes = [
   {
@@ -43,10 +46,16 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
+        path: 'edit',
+        component: EditOrganizationPageComponent,
+        canActivate: [authGuard],
+      },
+      {
         path: 'users',
         children: [
           { path:  ':id', component: UserPageComponent}
-        ]
+        ],
+        canActivate: [authGuard],
       },
       {
         path: 'spaces/:id',

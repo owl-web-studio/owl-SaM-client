@@ -29,4 +29,35 @@
     display: flex;
     align-items: center;
   }
+
+  &__search {
+    position: relative;
+
+    .search__result {
+      position: absolute;
+      right: 0;
+      background-color: #fff;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      min-width: 250px;
+      min-height: 150px;
+      padding: 4px;
+      z-index: 999;
+
+      .result__element {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-02);
+
+        .element__header {
+          color: var(--text-color);
+        }
+
+        .element__type {
+          font-size: 12px;
+          color: var(--text-color);
+        }
+      }
+    }
+  }
 }

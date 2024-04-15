@@ -8,7 +8,7 @@ import {TooltipModule} from "primeng/tooltip";
 import {AsyncPipe} from "@angular/common";
 import {ToolbarComponent} from "../../widgets/toolbar/toolbar.component";
 import {TreeModule} from "primeng/tree";
-import {TreeNode} from "primeng/api";
+import {TreeDragDropService, TreeNode} from "primeng/api";
 import {KnowledgeStructureService} from "../../services/knowledge-structure.service";
 
 @Component({
@@ -23,7 +23,8 @@ import {KnowledgeStructureService} from "../../services/knowledge-structure.serv
     TreeModule
   ],
   templateUrl: './space-home-page.component.html',
-  styleUrl: './space-home-page.component.scss'
+  styleUrl: './space-home-page.component.scss',
+  providers: [TreeDragDropService]
 })
 export class SpaceHomePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();

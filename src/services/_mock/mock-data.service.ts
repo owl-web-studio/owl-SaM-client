@@ -4,11 +4,17 @@ import {Space} from "../../entities/space.model";
 import {Role} from "../../entities/role.model";
 import {of} from "rxjs";
 import {Organization} from "../../entities/organization.model";
+import {Directory} from "../../entities/directory.model";
+import {Format} from "../../entities/format.model";
+import {Knowledge} from "../../entities/knowledge.model";
+import {Category} from "../../entities/category.model";
 
 type DataType =
   'organizations' |
   'spaces' |
-  'users';
+  'users' |
+  'knowledgeTree'
+  ;
 
 @Injectable({
   providedIn: 'root'
@@ -72,7 +78,72 @@ export class MockDataService {
       description: 'лалаа',
       leader: this.users[1]
     }
-  ]
+  ];
+  formats: Format[] = [
+    {
+      id: 1,
+      name: 'Текст',
+      extensions: ['.md']
+    }
+  ];
+  categories: Category[] = [
+    {
+      id: 1,
+      name: 'Общее',
+      description: ''
+    },
+    {
+      id: 2,
+      name: 'BPMN',
+      description: ''
+    },
+  ];
+  knowledgeTree: Directory = {
+    id: 1,
+    name: 'Корневая директория',
+    description: '',
+    availableFormats: this.formats,
+    createTime: new Date(),
+    updateTime: new Date(),
+    children: [
+      {
+        id: 3,
+        name: 'Основные бизнес-процессы',
+        description: '',
+        createTime: new Date(),
+        updateTime: new Date(),
+        children: [
+          {
+            id: 4,
+            name: 'Управление знаниями',
+            description: 'Основная информация о компании',
+            content: 'https://i.ibb.co/BCSRKXY/image.png',
+            format: this.formats[0],
+            createTime: new Date(),
+            updateTime: new Date(),
+            categories: [
+              this.categories[0]
+            ]
+          }
+        ],
+        categories: [
+          this.categories[1]
+        ],
+      },
+      {
+        id: 2,
+        name: 'Информация о компания',
+        description: 'Основная информация о компании',
+        content: 'Компания была основана в 2023 году',
+        format: this.formats[0],
+        createTime: new Date(),
+        updateTime: new Date(),
+        categories: [
+          this.categories[0]
+        ]
+      }
+    ]
+  };
 
   constructor() { }
 
@@ -80,17 +151,20 @@ export class MockDataService {
     let result: any = [];
 
     switch (dataType) {
-      case "organizations":
+      case 'organizations':
         result = this.organizations;
         break;
-      case "spaces":
+      case 'spaces':
         result = this.spaces;
         break;
-      case "users":
+      case 'users':
         result = this.users.map(user => {
           delete (user as any).password;
           return user
         });
+        break;
+      case 'knowledgeTree':
+        result = this.knowledgeTree;
         break;
     }
 

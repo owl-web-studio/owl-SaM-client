@@ -6,7 +6,7 @@ export interface Directory {
   id: number;
   name: string;
   description: string;
-  availableFormats: Format[];
+  availableFormats?: Format[];
   createTime: Date;
   updateTime?: Date;
   children?: (Directory | Knowledge)[];

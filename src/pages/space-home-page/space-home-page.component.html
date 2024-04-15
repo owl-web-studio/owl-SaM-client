@@ -1,12 +1,29 @@
 <div class="page-toolbar">
   <owl-toolbar>
-    <p-tree
-      [value]="files"
-      [draggableNodes]="true"
-      [droppableNodes]="true"
-      draggableScope="self"
-      droppableScope="self"
-    ></p-tree>
+    @if (files) {
+      <p-tree
+        [value]="files"
+        [draggableNodes]="true"
+        [droppableNodes]="true"
+        draggableScope="self"
+        droppableScope="self"
+      >
+        <ng-template let-node pTemplate="directory">
+          <a
+            (click)="openFolder(node.data)"
+          >
+            {{ node.label }}
+          </a>
+        </ng-template>
+        <ng-template
+          let-node
+          pTemplate="knowledge"
+          class="text-700 hover:text-primary"
+        >
+          <a (click)="openKnowledge(node.data)" >{{ node.label }}</a>
+        </ng-template>
+      </p-tree>
+    }
   </owl-toolbar>
   <section class="space-home">
 

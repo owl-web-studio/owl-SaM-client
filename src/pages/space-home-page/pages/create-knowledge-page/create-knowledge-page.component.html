@@ -1,1 +1,39 @@
-<h1>Создание записи</h1>
+<div class="create-knowledge">
+  <h1>Создание записи</h1>
+
+  <form
+    [formGroup]="createKnowledgeForm"
+    (ngSubmit)="onSubmit()"
+    class="create-form"
+  >
+    <label class="create-form__element">
+      <span>Формат</span>
+      <p-dropdown
+        [options]="availableFormats"
+        [showClear]="true"
+        formControlName="format"
+        optionLabel="name"
+        placeholder="Выберите формат"
+      ></p-dropdown>
+
+    </label>
+
+
+    <label class="create-form__element">
+      <span>Фамилия</span>
+      <input pInputText formControlName="format" placeholder="Иванов"/>
+    </label>
+
+    <div class="create-form__actions">
+      <p-button
+        label="Сохранить"
+        type="submit"
+      ></p-button>
+      <p-button
+        [outlined]="true"
+        (click)="onCancel()"
+        label="Отменить"
+      ></p-button>
+    </div>
+  </form>
+</div>

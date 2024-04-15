@@ -13,7 +13,8 @@ type DataType =
   'organizations' |
   'spaces' |
   'users' |
-  'knowledgeTree'
+  'knowledgeTree' |
+  'formats'
   ;
 
 @Injectable({
@@ -166,6 +167,9 @@ export class MockDataService {
       case 'knowledgeTree':
         result = this.knowledgeTree;
         break;
+      case 'formats':
+        result = this.formats;
+        break;
     }
 
     return of(result);
@@ -190,6 +194,11 @@ export class MockDataService {
           return user.id === id;
         });
         delete (result as any).password
+        break;
+      case "formats":
+        result = this.formats.find((format) => {
+          return format.id === id;
+        });
         break;
     }
 
@@ -220,6 +229,13 @@ export class MockDataService {
           ...data
         });
         result = this.users.find(element => element.id === this.users[this.users.length - 1].id + 1)
+        break;
+      case "formats":
+        this.formats.push({
+          id: this.formats[this.formats.length - 1].id + 1,
+          ...data
+        });
+        result = this.formats.find(element => element.id === this.formats[this.formats.length - 1].id + 1)
         break;
     }
 

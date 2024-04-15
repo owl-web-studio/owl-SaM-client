@@ -14,6 +14,7 @@ section, header, .container {
 section {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 section.full-width {
@@ -85,4 +86,34 @@ button {
 
 .page-toolbar {
   display: flex;
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+  max-width: 800px;
+
+  &__element {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-06);
+
+    span {
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+
+  &__group {
+    display: flex;
+    gap: var(--spacing-03);
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--spacing-03);
+  }
 }

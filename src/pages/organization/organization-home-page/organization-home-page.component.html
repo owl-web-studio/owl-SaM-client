@@ -29,7 +29,15 @@
 
     <div class="main">
 
-      <p-card header="Участники">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Пользователи</div>
+            <a class="icon-btn" pTooltip="Добавить">
+              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
+            </a>
+          </div>
+        </ng-template>
         <div class="organization__members">
           @for (user of (users$ | async); track user.id) {
             <div class="organization__member">
@@ -51,7 +59,24 @@
         </div>
       </p-card>
 
-      <p-card header="Пространства">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Группы пользователей</div>
+            <a class="icon-btn" pTooltip="Добавить">
+              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
+            </a>
+          </div>
+        </ng-template>
+        <!-- TODO -->
+      </p-card>
+
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Пространства</div>
+          </div>
+        </ng-template>
         <div class="organization__spaces">
           @for (space of (spaces$ | async); track space.id) {
             <div class="organization__space">

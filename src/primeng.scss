@@ -9,3 +9,28 @@
 .p-treenode-content {
   padding: 0;
 }
+
+.p-card {
+  .p-card-title {
+    margin-bottom: 0;
+  }
+
+  .p-card-content {
+    padding: 0;
+  }
+
+  .p-card-body {
+    padding: 0.25rem 1.25rem 1.25rem 1.25rem;
+  }
+}
+
+.info-card {
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--spacing-04);
+    padding: 1.25rem 1.25rem 0 1.25rem ;
+  }
+}

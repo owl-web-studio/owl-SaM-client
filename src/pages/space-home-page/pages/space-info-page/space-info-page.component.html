@@ -10,7 +10,15 @@
     </div>
 
     <div class="main">
-      <p-card header="Роли">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Роли</div>
+            <a class="icon-btn" pTooltip="Добавить">
+              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
+            </a>
+          </div>
+        </ng-template>
         <div class="space__roles">
           @for (role of (roles$ | async); track role.id) {
             <div class="space__role">
@@ -24,7 +32,15 @@
         </div>
       </p-card>
 
-      <p-card header="Категории">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Категории</div>
+            <a class="icon-btn" pTooltip="Добавить">
+              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
+            </a>
+          </div>
+        </ng-template>
         <div class="space__categories">
           @for (category of (categories$ | async); track category.id) {
             <div class="space__category">
@@ -38,7 +54,15 @@
         </div>
       </p-card>
 
-      <p-card header="Форматы">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Форматы</div>
+            <a class="icon-btn" pTooltip="Добавить">
+              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
+            </a>
+          </div>
+        </ng-template>
         <div class="space__formats">
           @for (format of (formats$ | async); track format.id) {
             <div class="space__format">
@@ -52,7 +76,12 @@
         </div>
       </p-card>
 
-      <p-card header="Привилегии пользователей">
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Привилегии пользователей</div>
+          </div>
+        </ng-template>
         <div class="space__users-roles">
           @for (user of (usersRoles$ | async); track user.id) {
             <div class="space__user">

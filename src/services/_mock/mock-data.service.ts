@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {MockUserData} from "../../entities/_mock/mock-user-data.model";
 import {Space} from "../../entities/space.model";
 import {Role} from "../../entities/role.model";
@@ -14,7 +14,9 @@ type DataType =
   'spaces' |
   'users' |
   'knowledgeTree' |
-  'formats'
+  'formats' |
+  'roles' |
+  'categories'
   ;
 
 @Injectable({
@@ -146,7 +148,8 @@ export class MockDataService {
     ]
   };
 
-  constructor() { }
+  constructor() {
+  }
 
   get(dataType: DataType) {
     let result: any = [];
@@ -169,6 +172,12 @@ export class MockDataService {
         break;
       case 'formats':
         result = this.formats;
+        break;
+      case 'roles':
+        result = this.roles;
+        break;
+      case 'categories':
+        result = this.categories;
         break;
     }
 
@@ -200,6 +209,16 @@ export class MockDataService {
           return format.id === id;
         });
         break;
+      case "roles":
+        result = this.roles.find((role) => {
+          return role.id === id;
+        });
+        break;
+      case "categories":
+        result = this.categories.find((category) => {
+          return category.id === id;
+        });
+        break;
     }
 
     return of(result);
@@ -214,28 +233,42 @@ export class MockDataService {
           id: this.organizations[this.organizations.length - 1].id + 1,
           ...data
         });
-        result = this.organizations.find(element => element.id === this.organizations[this.organizations.length - 1].id + 1)
+        result = this.organizations.find(element => element.id === this.organizations[this.organizations.length - 1].id + 1);
         break;
       case "spaces":
         this.spaces.push({
           id: this.spaces[this.spaces.length - 1].id + 1,
           ...data
         });
-        result = this.spaces.find(element => element.id === this.spaces[this.spaces.length - 1].id + 1)
+        result = this.spaces.find(element => element.id === this.spaces[this.spaces.length - 1].id + 1);
         break;
       case "users":
         this.users.push({
           id: this.users[this.users.length - 1].id + 1,
           ...data
         });
-        result = this.users.find(element => element.id === this.users[this.users.length - 1].id + 1)
+        result = this.users.find(element => element.id === this.users[this.users.length - 1].id + 1);
         break;
       case "formats":
         this.formats.push({
           id: this.formats[this.formats.length - 1].id + 1,
           ...data
         });
-        result = this.formats.find(element => element.id === this.formats[this.formats.length - 1].id + 1)
+        result = this.formats.find(element => element.id === this.formats[this.formats.length - 1].id + 1);
+        break;
+      case "roles":
+        this.roles.push({
+          id: this.roles[this.roles.length - 1].id + 1,
+          ...data
+        });
+        result = this.roles.find(element => element.id === this.roles[this.roles.length - 1].id + 1);
+        break;
+      case "categories":
+        this.categories.push({
+          id: this.categories[this.categories.length - 1].id + 1,
+          ...data
+        });
+        result = this.categories.find(element => element.id === this.categories[this.categories.length - 1].id + 1);
         break;
     }
 

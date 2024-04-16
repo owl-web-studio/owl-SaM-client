@@ -1,9 +1,22 @@
 import { Injectable } from '@angular/core';
+import {MockDataService} from "./_mock/mock-data.service";
+import {Observable} from "rxjs";
+import {Role} from "../entities/role.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
 
-  constructor() { }
+  constructor(
+    private readonly mockDataService: MockDataService
+  ) { }
+
+  getRoleInfo(roleId: number) {
+    return this.mockDataService.getById('roles', roleId);
+  }
+
+  getRoles() {
+    return this.mockDataService.get('roles') as Observable<Role[]>;
+  }
 }

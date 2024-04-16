@@ -8,6 +8,9 @@ import {CardModule} from "primeng/card";
 import {UserService} from "../../../services/user.service";
 import {AsyncPipe} from "@angular/common";
 import {SpaceService} from "../../../services/space.service";
+import {RoleService} from "../../../services/role.service";
+import {CategotyService} from "../../../services/categoty.service";
+import {FormatService} from "../../../services/format.service";
 
 @Component({
   selector: 'owl-organization-home-page',
@@ -30,7 +33,10 @@ export class OrganizationHomePageComponent  implements OnInit, OnDestroy {
     public readonly activatedRoute: ActivatedRoute,
     private readonly organizationService: OrganizationService,
     private readonly userService: UserService,
-    private readonly spaceService: SpaceService
+    private readonly spaceService: SpaceService,
+    private readonly roleService: RoleService,
+    private readonly categoryService: CategotyService,
+    private readonly formatService: FormatService
   ) {
   }
 
@@ -53,6 +59,18 @@ export class OrganizationHomePageComponent  implements OnInit, OnDestroy {
 
   get spaces$() {
     return this.spaceService.getSpaces();
+  }
+
+  get roles$() {
+    return this.roleService.getRoles();
+  }
+
+  get categories$() {
+    return this.categoryService.getCategories();
+  }
+
+  get formats$() {
+    return this.formatService.getFormats();
   }
 
   ngOnDestroy(): void {

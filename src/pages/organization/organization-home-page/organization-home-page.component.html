@@ -66,6 +66,48 @@
           }
         </div>
       </p-card>
+
+      <p-card header="Роли">
+        <div class="organization__roles">
+          @for (role of (roles$ | async); track role.id) {
+            <div class="organization__role">
+              <a
+                class="role__name"
+              >
+                {{ role.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <p-card header="Категории">
+        <div class="organization__categories">
+          @for (category of (categories$ | async); track category.id) {
+            <div class="organization__category">
+              <a
+                class="category__name"
+              >
+                {{ category.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <p-card header="Форматы">
+        <div class="organization__formats">
+          @for (format of (formats$ | async); track format.id) {
+            <div class="organization__format">
+              <a
+                class="format__name"
+              >
+                {{ format.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
     </div>
   }
 </section>

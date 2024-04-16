@@ -19,6 +19,7 @@ import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-p
 import {
   EditOrganizationPageComponent
 } from "../pages/organization/edit-organization-page/edit-organization-page.component";
+import {SpaceInfoPageComponent} from "../pages/space-home-page/pages/space-info-page/space-info-page.component";
 
 export const routes: Routes = [
   {
@@ -66,6 +67,11 @@ export const routes: Routes = [
             title: 'Пространство: главная',
             canActivate: [authGuard],
             children: [
+              {
+                path: '',
+                component: SpaceInfoPageComponent,
+                pathMatch: 'full'
+              },
               {
                 path: 'directory',
                 children: [

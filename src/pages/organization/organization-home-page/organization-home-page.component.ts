@@ -8,9 +8,6 @@ import {CardModule} from "primeng/card";
 import {UserService} from "../../../services/user.service";
 import {AsyncPipe} from "@angular/common";
 import {SpaceService} from "../../../services/space.service";
-import {RoleService} from "../../../services/role.service";
-import {CategotyService} from "../../../services/categoty.service";
-import {FormatService} from "../../../services/format.service";
 
 @Component({
   selector: 'owl-organization-home-page',
@@ -24,7 +21,7 @@ import {FormatService} from "../../../services/format.service";
   templateUrl: './organization-home-page.component.html',
   styleUrl: './organization-home-page.component.scss'
 })
-export class OrganizationHomePageComponent  implements OnInit, OnDestroy {
+export class OrganizationHomePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   organization: Organization | undefined;
@@ -34,9 +31,7 @@ export class OrganizationHomePageComponent  implements OnInit, OnDestroy {
     private readonly organizationService: OrganizationService,
     private readonly userService: UserService,
     private readonly spaceService: SpaceService,
-    private readonly roleService: RoleService,
-    private readonly categoryService: CategotyService,
-    private readonly formatService: FormatService
+
   ) {
   }
 
@@ -61,17 +56,7 @@ export class OrganizationHomePageComponent  implements OnInit, OnDestroy {
     return this.spaceService.getSpaces();
   }
 
-  get roles$() {
-    return this.roleService.getRoles();
-  }
 
-  get categories$() {
-    return this.categoryService.getCategories();
-  }
-
-  get formats$() {
-    return this.formatService.getFormats();
-  }
 
   ngOnDestroy(): void {
     this.destroy$.next();

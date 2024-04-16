@@ -1,0 +1,37 @@
+.space {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-05);
+
+  .header {
+    display: flex;
+    gap: var(--spacing-04);
+
+    &__content {
+      display: flex;
+    }
+  }
+
+  .main {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-05);
+  }
+
+  &__members {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__member {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-04);
+  }
+
+  &__spaces {
+    display: flex;
+    flex-direction: column;
+  }
+}

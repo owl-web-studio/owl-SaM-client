@@ -1,0 +1,56 @@
+<section class="space">
+  @if (space) {
+    <div class="space__header header">
+      <div class="header__content">
+        <h1>{{ space.name }}</h1>
+        <a class="icon-btn" pTooltip="Редактировать пространство">
+          <i class="pi pi-pencil" style="font-size: 1.25rem"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="main">
+      <p-card header="Роли">
+        <div class="space__roles">
+          @for (role of (roles$ | async); track role.id) {
+            <div class="space__role">
+              <a
+                class="role__name"
+              >
+                {{ role.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <p-card header="Категории">
+        <div class="space__categories">
+          @for (category of (categories$ | async); track category.id) {
+            <div class="space__category">
+              <a
+                class="category__name"
+              >
+                {{ category.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <p-card header="Форматы">
+        <div class="space__formats">
+          @for (format of (formats$ | async); track format.id) {
+            <div class="space__format">
+              <a
+                class="format__name"
+              >
+                {{ format.name }}
+              </a>
+            </div>
+          }
+        </div>
+      </p-card>
+    </div>
+  }
+</section>

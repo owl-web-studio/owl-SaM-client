@@ -1,14 +1,14 @@
 <div class="page-toolbar">
   <owl-toolbar>
-    <h4>Пространства</h4>
+    <h4>Организации</h4>
 
-    <div class="toolbar-spaces">
-      @for (space of (organizations$ | async); track space.id) {
-        <div class="spaces__element">
+    <div class="toolbar-organizations organizations">
+      @for (organization of (organizations$ | async); track organization.id) {
+        <div class="organizations__element">
           <button
-            (click)="openSpaceCard(space.id)"
+            (click)="openOrganizationCard(organization.id)"
           >
-            {{ space.name }}
+            {{ organization.name }}
           </button>
         </div>
       }

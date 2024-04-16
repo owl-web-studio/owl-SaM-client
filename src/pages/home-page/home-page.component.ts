@@ -51,7 +51,7 @@ export class HomePageComponent implements OnDestroy {
     return this.organizationService.getOrganizations();
   }
 
-  openSpaceCard(organizationId: number) {
+  openOrganizationCard(organizationId: number) {
     this.openOrganization$.next(organizationId);
   }
 

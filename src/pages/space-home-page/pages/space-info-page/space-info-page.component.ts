@@ -2,13 +2,14 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AsyncPipe} from "@angular/common";
 import {CardModule} from "primeng/card";
 import {Subject, switchMap, takeUntil} from "rxjs";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
 import {Space} from "../../../../entities/space.model";
 import {SpaceService} from "../../../../services/space.service";
 import {RoleService} from "../../../../services/role.service";
 import {CategotyService} from "../../../../services/categoty.service";
 import {FormatService} from "../../../../services/format.service";
 import {TooltipModule} from "primeng/tooltip";
+import {UserService} from "../../../../services/user.service";
 
 @Component({
   selector: 'owl-space-info-page',
@@ -16,7 +17,8 @@ import {TooltipModule} from "primeng/tooltip";
   imports: [
     AsyncPipe,
     CardModule,
-    TooltipModule
+    TooltipModule,
+    RouterLink
   ],
   templateUrl: './space-info-page.component.html',
   styleUrl: './space-info-page.component.scss'
@@ -31,7 +33,8 @@ export class SpaceInfoPageComponent implements OnInit, OnDestroy {
     private readonly spaceService: SpaceService,
     private readonly roleService: RoleService,
     private readonly categoryService: CategotyService,
-    private readonly formatService: FormatService
+    private readonly formatService: FormatService,
+    private readonly userService: UserService
   ) {
   }
 
@@ -58,6 +61,10 @@ export class SpaceInfoPageComponent implements OnInit, OnDestroy {
 
   get formats$() {
     return this.formatService.getFormats();
+  }
+
+  get usersRoles$() {
+    return this.userService.getUsers();
   }
 
   ngOnDestroy(): void {

@@ -24,14 +24,19 @@
     flex-direction: column;
   }
 
-  &__member {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--spacing-04);
-  }
-
   &__spaces {
     display: flex;
     flex-direction: column;
+  }
+
+  &__users-roles {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__user {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-04);
   }
 }

@@ -51,6 +51,34 @@
           }
         </div>
       </p-card>
+
+      <p-card header="Привилегии пользователей">
+        <div class="space__users-roles">
+          @for (user of (usersRoles$ | async); track user.id) {
+            <div class="space__user">
+              <a
+                [routerLink]="['users/' + user.id]"
+                [relativeTo]="this.activatedRoute"
+                class="user__name"
+              >
+                {{ user.lastName + ' ' + user.firstName[0] + '.' }}
+                @if (user.patronymic) {
+                  {{ user.patronymic[0] + '.' }}
+                }
+              </a>
+              <span class="user__roles">
+                [
+                @for (role of user.roles; track role.id) {
+                  <span>
+                    {{ role.name }}
+                  </span>
+                }
+                ]
+              </span>
+            </div>
+          }
+        </div>
+      </p-card>
     </div>
   }
 </section>

@@ -1,16 +1,6 @@
-import {Role} from "../role.model";
+import {User} from "../user.model";
 
-export interface MockUserData {
-  id: number;
+export interface MockUserData extends User {
   login: string;
   password: string;
-
-  firstName: string;
-  lastName: string;
-  patronymic: string;
-  email: string;
-  phoneNumber: string;
-  jobTitle: string;
-
-  roles: Role[];
 }

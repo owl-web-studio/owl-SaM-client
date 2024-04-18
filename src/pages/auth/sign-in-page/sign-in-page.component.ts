@@ -6,13 +6,15 @@ import {MessageService} from "primeng/api";
 import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../entities/user.model";
 import {ButtonModule} from "primeng/button";
+import {InputTextModule} from "primeng/inputtext";
 
 @Component({
   selector: 'owl-sign-in-page',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule
   ],
   templateUrl: './sign-in-page.component.html',
   styleUrl: './sign-in-page.component.scss'

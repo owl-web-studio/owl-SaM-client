@@ -8,6 +8,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {FormatService} from "../../../../services/format.service";
 import {Subject, takeUntil} from "rxjs";
 import {Format} from "../../../../entities/format.model";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 @Component({
   selector: 'owl-create-knowledge-page',
@@ -16,7 +17,8 @@ import {Format} from "../../../../entities/format.model";
     ReactiveFormsModule,
     ButtonModule,
     InputTextModule,
-    DropdownModule
+    DropdownModule,
+    InputTextareaModule
   ],
   templateUrl: './create-knowledge-page.component.html',
   styleUrl: './create-knowledge-page.component.scss'
@@ -36,6 +38,7 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
   ) {
     this.createKnowledgeForm = this.formBuilder.group({
       format: '',
+      content: '',
     });
   }
 

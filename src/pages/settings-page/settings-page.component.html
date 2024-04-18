@@ -1,11 +1,25 @@
-<section class="settings">
+<section class="settings-page">
   <h1>Настройки</h1>
 
-  <h3>Язык</h3>
-  <label>
-    {{ 'HOME.SELECT' | translate }}
-  </label>
-  <select #langSelect (change)="translate.use(langSelect.value)">
-    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-  </select>
+  <p-divider></p-divider>
+
+  <div class="chapters">
+    <div class="chapter">
+      <div class="chapter__header">
+        <h2>Резерное копирование</h2>
+      </div>
+      <div class="chapter__content">
+        <p-button label="Выгрузка данных"></p-button>
+      </div>
+    </div>
+  </div>
 </section>
+
+
+<!--  <h3>Язык</h3>-->
+<!--  <label>-->
+<!--    {{ 'HOME.SELECT' | translate }}-->
+<!--  </label>-->
+<!--  <select #langSelect (change)="translate.use(langSelect.value)">-->
+<!--    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>-->
+<!--  </select>-->

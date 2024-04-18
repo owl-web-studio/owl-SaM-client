@@ -1,0 +1,17 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+
+  .chapters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-03);
+
+    .chapter {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-02);
+    }
+  }
+}

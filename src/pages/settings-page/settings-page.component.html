@@ -1,15 +1,19 @@
-<section class="settings-page">
+<section class="settings">
   <h1>Настройки</h1>
 
   <p-divider></p-divider>
 
-  <div class="chapters">
+  <div class="chapter-list">
     <div class="chapter">
       <div class="chapter__header">
         <h2>Резерное копирование</h2>
       </div>
       <div class="chapter__content">
-        <p-button label="Выгрузка данных"></p-button>
+        <p>Вы можете сделать резервную копию базы знаний. Данные будут выгружены в виде zip-архива и могут быть в дальнейшем использоваться для восстановления.</p>
+        <div class="chapter__action-list">
+          <p-button label="Выгрузка слепка данных" icon="pi pi-upload"></p-button>
+          <p-button label="Импорт слепка данных" icon="pi pi-download"></p-button>
+        </div>
       </div>
     </div>
   </div>

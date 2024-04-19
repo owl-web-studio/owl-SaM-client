@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: var(--spacing-04);
 
-  .chapters {
+  .chapter-list {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-03);
@@ -12,6 +12,11 @@
       display: flex;
       flex-direction: column;
       gap: var(--spacing-02);
+
+      &__action-list {
+        display: flex;
+        gap: var(--spacing-03);
+      }
     }
   }
 }

@@ -1,0 +1,61 @@
+<section class="create-user">
+  <h1>Создание пользователя</h1>
+
+  <form
+    [formGroup]="createUserForm"
+    (ngSubmit)="onSubmit()"
+    class="create-form"
+  >
+    <label class="create-form__element">
+      <span>Логин</span>
+      <input pInputText formControlName="login" placeholder="example"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Пароль</span>
+      <input pInputText formControlName="password" placeholder="Пароль" type="password"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Фамилия</span>
+      <input pInputText formControlName="lastName" placeholder="Иванов"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Имя</span>
+      <input pInputText formControlName="firstName" placeholder="Иван"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Отчество</span>
+      <input pInputText formControlName="patronymic" placeholder="Иванович"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Адрес электронной почты</span>
+      <input pInputText formControlName="email" placeholder="example@mail.ru"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Номер телефона</span>
+      <input pInputText formControlName="phoneNumber" placeholder="+79998887766"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Должность</span>
+      <input pInputText formControlName="jobTitle" placeholder="Разработчик"/>
+    </label>
+
+    <div class="create-form__actions">
+      <p-button
+        label="Сохранить"
+        type="submit"
+      ></p-button>
+      <p-button
+        [outlined]="true"
+        (click)="onCancel()"
+        label="Отменить"
+      ></p-button>
+    </div>
+  </form>
+</section>

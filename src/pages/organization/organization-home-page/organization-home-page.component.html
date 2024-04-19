@@ -33,7 +33,7 @@
         <ng-template pTemplate="header">
           <div class="info-card__header">
             <div class="p-card-title">Пользователи</div>
-            <a class="icon-btn" pTooltip="Добавить">
+            <a [routerLink]="['users/create']" class="icon-btn" pTooltip="Добавить">
               <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
             </a>
           </div>
@@ -63,7 +63,7 @@
         <ng-template pTemplate="header">
           <div class="info-card__header">
             <div class="p-card-title">Группы пользователей</div>
-            <a class="icon-btn" pTooltip="Добавить">
+            <a [routerLink]="['groups/create']" class="icon-btn" pTooltip="Добавить">
               <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
             </a>
           </div>

@@ -1,0 +1,33 @@
+<section class="create-group">
+  <h1>Создание группы пользователей</h1>
+
+  <form
+    [formGroup]="createGroupForm"
+    (ngSubmit)="onSubmit()"
+    class="create-form"
+  >
+    <label class="create-form__element">
+      <span>Название</span>
+      <input pInputText formControlName="name" placeholder="example"/>
+    </label>
+
+    <textarea rows="5" pInputTextarea formControlName="description" placeholder="Описание"></textarea>
+
+    <label class="create-form__element">
+      <span>Пользователи</span>
+      <input pInputText formControlName="users"/>
+    </label>
+
+    <div class="create-form__actions">
+      <p-button
+        label="Сохранить"
+        type="submit"
+      ></p-button>
+      <p-button
+        [outlined]="true"
+        (click)="onCancel()"
+        label="Отменить"
+      ></p-button>
+    </div>
+  </form>
+</section>

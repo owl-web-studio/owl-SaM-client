@@ -20,6 +20,8 @@ import {
   EditOrganizationPageComponent
 } from "../pages/organization/edit-organization-page/edit-organization-page.component";
 import {SpaceInfoPageComponent} from "../pages/space-home-page/pages/space-info-page/space-info-page.component";
+import {CreateUserPageComponent} from "../pages/users/create-user-page/create-user-page.component";
+import {CreateUserGroupPageComponent} from "../pages/users/create-user-group-page/create-user-group-page.component";
 
 export const routes: Routes = [
   {
@@ -54,7 +56,18 @@ export const routes: Routes = [
       {
         path: 'users',
         children: [
-          { path:  ':id', component: UserPageComponent}
+          { path: 'create', component: CreateUserPageComponent },
+
+          { path:  ':id', component: UserPageComponent},
+        ],
+        canActivate: [authGuard],
+      },
+      {
+        path: 'groups',
+        children: [
+          { path: 'create', component: CreateUserGroupPageComponent },
+
+          { path:  ':id', component: UserPageComponent},
         ],
         canActivate: [authGuard],
       },

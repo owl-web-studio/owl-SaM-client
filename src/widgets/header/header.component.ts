@@ -12,6 +12,7 @@ import {AuthService} from "../../services/auth.service";
 import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {SearchService} from "../../services/search.service";
+import {BadgeModule} from "primeng/badge";
 
 
 @Component({
@@ -26,6 +27,7 @@ import {SearchService} from "../../services/search.service";
     ButtonModule,
     InputTextModule,
     FormsModule,
+    BadgeModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

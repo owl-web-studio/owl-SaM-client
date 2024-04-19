@@ -3,8 +3,19 @@
 
     <h1>Авторизация</h1>
   </div>
-  <form [formGroup]="authForm" class="auth-form">
-    <input type="text" pInputText formControlName="login" placeholder="Логин"/>
+  <form
+    [formGroup]="authForm"
+    (keydown.enter)="signIn()"
+    class="auth-form"
+  >
+    <input
+      pAutoFocus
+      [autofocus]="true"
+      type="text"
+      pInputText
+      formControlName="login"
+      placeholder="Логин"
+    />
     <input type="password" pInputText formControlName="password" placeholder="Пароль"/>
     <p-button (click)="signIn()" label="Войти"></p-button>
   </form>

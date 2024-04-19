@@ -7,6 +7,7 @@ import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../entities/user.model";
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
+import {AutoFocusModule} from "primeng/autofocus";
 
 @Component({
   selector: 'owl-sign-in-page',
@@ -14,7 +15,8 @@ import {InputTextModule} from "primeng/inputtext";
   imports: [
     ReactiveFormsModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    AutoFocusModule
   ],
   templateUrl: './sign-in-page.component.html',
   styleUrl: './sign-in-page.component.scss'

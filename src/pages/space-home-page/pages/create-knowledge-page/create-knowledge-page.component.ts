@@ -38,6 +38,7 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
   ) {
     this.createKnowledgeForm = this.formBuilder.group({
       format: '',
+      categories: '',
       content: '',
     });
   }

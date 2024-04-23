@@ -43,7 +43,7 @@
           severity="success"
         ></i>
       </a>
-      <a class="icon-btn" pTooltip="Справка">
+      <a [routerLink]="['reference']" class="icon-btn" pTooltip="Справка">
         <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
       </a>
       <a (click)="menu.toggle($event)" class="icon-btn" pTooltip="Профиль">

@@ -22,6 +22,7 @@ import {
 import {SpaceInfoPageComponent} from "../pages/space-home-page/pages/space-info-page/space-info-page.component";
 import {CreateUserPageComponent} from "../pages/users/create-user-page/create-user-page.component";
 import {CreateUserGroupPageComponent} from "../pages/users/create-user-group-page/create-user-group-page.component";
+import {ReferencePageComponent} from "../pages/reference-page/reference-page.component";
 
 export const routes: Routes = [
   {
@@ -105,7 +106,12 @@ export const routes: Routes = [
       },
     ]
   },
-
+  {
+    path: 'reference',
+    component: ReferencePageComponent,
+    title: 'Справка',
+    canActivate: [authGuard],
+  },
   {
     path: 'profile',
     component: ProfilePageComponent,

@@ -10,6 +10,7 @@ export interface User {
   email: string;
   phoneNumber: string;
   jobTitle: string;
-
   roles: Role[];
+
+  avatarUrl?: string;
 }

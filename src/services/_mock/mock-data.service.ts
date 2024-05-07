@@ -58,7 +58,8 @@ export class MockDataService {
       email: 'studiorain27@gmail.com',
       phoneNumber: '+799900000000',
       jobTitle: 'Генеральный директор',
-      roles: [this.roles[1]],
+      roles: [this.roles[0], this.roles[1]],
+      // avatarUrl: 'https://i.ibb.co/nPbJ4Cx/hqdefault.jpg',
     },
   ];
   spaces: Space[] = [

@@ -1,3 +1,52 @@
 <section class="profile">
-  <h1>Профиль пользователя</h1>
+  @if (profileInfo$ | async; as profileInfo) {
+
+    <h1>Профиль пользователя {{ profileInfo.login }}</h1>
+
+    <p-divider></p-divider>
+
+    <div class="avatar">
+      @if (profileInfo.avatarUrl) {
+        <img [src]="profileInfo.avatarUrl" alt="">
+
+      } @else {
+        <img src="https://i.ibb.co/Fx98nVB/default-avatar.png" alt="">
+      }
+    </div>
+
+    <div class="user-data-container">
+      <div class="user-data">
+        <label>ФИО</label>
+        <span>
+          {{ profileInfo.lastName + ' ' + profileInfo.firstName }}
+          @if (profileInfo.patronymic) {
+            {{ ' ' + profileInfo.patronymic }}
+          }
+        </span>
+      </div>
+      <div class="user-data">
+        <label>Электронная почта</label>
+        <a [href]="'mailto:' + profileInfo.email">{{ profileInfo.email }}</a>
+      </div>
+      <div class="user-data">
+        <label>Номер телефона</label>
+        <a [href]="'tel:' + profileInfo.phoneNumber">{{ profileInfo.phoneNumber }}</a>
+      </div>
+      <div class="user-data">
+        <label>Должность</label>
+        <span>{{ profileInfo.jobTitle }}</span>
+      </div>
+      <div class="user-data">
+        <label>Роли</label>
+        <div class="role-container">
+          @for (role of profileInfo.roles; track role.id) {
+            <span>{{ role.name }}</span>
+          } @empty {
+            <span>За пользователем не закреплены роли</span>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
 </section>

@@ -23,6 +23,7 @@ import {SpaceInfoPageComponent} from "../pages/space-home-page/pages/space-info-
 import {CreateUserPageComponent} from "../pages/users/create-user-page/create-user-page.component";
 import {CreateUserGroupPageComponent} from "../pages/users/create-user-group-page/create-user-group-page.component";
 import {ReferencePageComponent} from "../pages/reference-page/reference-page.component";
+import {CreateRolePageComponent} from "../pages/roles/create-role-page/create-role-page.component";
 
 export const routes: Routes = [
   {
@@ -85,6 +86,15 @@ export const routes: Routes = [
                 path: '',
                 component: SpaceInfoPageComponent,
                 pathMatch: 'full'
+              },
+              {
+                path: 'roles',
+                children: [
+                  {
+                    path: 'create',
+                    component: CreateRolePageComponent
+                  }
+                ]
               },
               {
                 path: 'directory',

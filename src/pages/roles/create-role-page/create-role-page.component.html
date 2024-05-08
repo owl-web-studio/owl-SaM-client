@@ -1,1 +1,44 @@
-<p>create-role-page works!</p>
+<section>
+  <h1>Создание роли</h1>
+
+  <form
+    [formGroup]="createRoleForm"
+    (ngSubmit)="onSubmit()"
+    class="create-form"
+  >
+    <label class="create-form__element">
+      <span>Логин</span>
+      <input pInputText formControlName="name" placeholder="example"/>
+    </label>
+
+    <label class="create-form__element">
+      <span>Описание</span>
+      <textarea rows="18" pInputTextarea formControlName="description"></textarea>
+    </label>
+
+    <label class="create-form__element">
+      <span>Цвет отображения</span>
+      <div class="create-form__control-group">
+        <input
+          pInputText
+          (change)="onColorChanged(displayColor)"
+          [(ngModel)]="displayColor.inputBgColor"
+          [ngModelOptions]="{standalone: true}"
+        />
+        <p-colorPicker formControlName="displayColor" #displayColor></p-colorPicker>
+      </div>
+    </label>
+
+    <div class="create-form__actions">
+      <p-button
+        label="Сохранить"
+        type="submit"
+      ></p-button>
+      <p-button
+        [outlined]="true"
+        (click)="onCancel()"
+        label="Отменить"
+      ></p-button>
+    </div>
+  </form>
+</section>

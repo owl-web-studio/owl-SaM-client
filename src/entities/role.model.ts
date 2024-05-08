@@ -3,5 +3,6 @@ export interface Role {
   name: string;
   description: string;
 
+  isAdmin?: boolean;
   displayColor?: string;
 }

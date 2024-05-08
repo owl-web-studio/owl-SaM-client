@@ -23,6 +23,8 @@
           @for (role of (roles$ | async); track role.id) {
             <div class="space__role">
               <a
+                owlRole
+                [role]="role"
                 class="role__name"
               >
                 {{ role.name }}
@@ -101,7 +103,10 @@
               <span class="user__roles">
                 [
                 @for (role of user.roles; track role.id) {
-                  <span>
+                  <span
+                    owlRole
+                    [role]="role"
+                  >
                     {{ role.name }}
                   </span>
                 }

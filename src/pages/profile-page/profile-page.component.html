@@ -40,7 +40,12 @@
         <label>Роли</label>
         <div class="role-container">
           @for (role of profileInfo.roles; track role.id) {
-            <span>{{ role.name }}</span>
+            <span
+              owlRole
+              [role]="role"
+            >
+              {{ role.name }}
+            </span>
           } @empty {
             <span>За пользователем не закреплены роли</span>
           }

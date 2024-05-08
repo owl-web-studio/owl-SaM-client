@@ -19,4 +19,8 @@ export class RoleService {
   getRoles() {
     return this.mockDataService.get('roles') as Observable<Role[]>;
   }
+
+  createRole(data: any): Observable<Role> {
+    return this.mockDataService.post('roles', data);
+  }
 }

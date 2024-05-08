@@ -32,7 +32,8 @@ export class MockDataService {
     {
       id: 999,
       name: 'Суперпользователь',
-      description: 'Роль с неограниченными правами'
+      description: 'Роль с неограниченными правами',
+      isAdmin: true
     }
   ]
   users: MockUserData[] = [

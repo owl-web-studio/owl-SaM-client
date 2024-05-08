@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, NgStyle} from "@angular/common";
 import {CardModule} from "primeng/card";
 import {Subject, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
@@ -10,6 +10,7 @@ import {CategotyService} from "../../../../services/categoty.service";
 import {FormatService} from "../../../../services/format.service";
 import {TooltipModule} from "primeng/tooltip";
 import {UserService} from "../../../../services/user.service";
+import {RoleDirective} from "../../../../directives/role.directive";
 
 @Component({
   selector: 'owl-space-info-page',
@@ -18,7 +19,9 @@ import {UserService} from "../../../../services/user.service";
     AsyncPipe,
     CardModule,
     TooltipModule,
-    RouterLink
+    RouterLink,
+    NgStyle,
+    RoleDirective
   ],
   templateUrl: './space-info-page.component.html',
   styleUrl: './space-info-page.component.scss'

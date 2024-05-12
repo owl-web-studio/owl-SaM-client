@@ -49,7 +49,10 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
             label: path.name,
             routerLink: ['../../directory/' + path.id]
           }
-        })
+        });
+        this.items.push({
+          label: this.knowledge.name
+        });
       });
 
 

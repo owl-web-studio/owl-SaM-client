@@ -75,20 +75,11 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
       });
   }
 
-  openFolder(knowledgeId: number) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Клик',
-      detail: 'Клик'
-    })
+  openFolder(directoryId: number) {
+    this.router.navigate(['directory/' + directoryId], {relativeTo: this.activatedRoute});
   }
 
   openKnowledge(knowledgeId: number) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Событие',
-      detail: 'Открыто знание'
-    });
     this.router.navigate(['knowledge/' + knowledgeId], {relativeTo: this.activatedRoute});
   }
 

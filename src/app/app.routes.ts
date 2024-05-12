@@ -24,6 +24,7 @@ import {CreateUserPageComponent} from "../pages/users/create-user-page/create-us
 import {CreateUserGroupPageComponent} from "../pages/users/create-user-group-page/create-user-group-page.component";
 import {ReferencePageComponent} from "../pages/reference-page/reference-page.component";
 import {CreateRolePageComponent} from "../pages/roles/create-role-page/create-role-page.component";
+import {DirectoryPageComponent} from "../pages/space-home-page/pages/directory-page/directory-page.component";
 
 export const routes: Routes = [
   {
@@ -99,7 +100,9 @@ export const routes: Routes = [
               {
                 path: 'directory',
                 children: [
-                  { path: 'create', component: CreateDirectoryPageComponent }
+                  { path: 'create', component: CreateDirectoryPageComponent },
+
+                  { path: ':id', component: DirectoryPageComponent }
                 ]
               },
               {

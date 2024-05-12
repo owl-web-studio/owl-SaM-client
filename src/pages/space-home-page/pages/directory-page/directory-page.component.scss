@@ -1,0 +1,28 @@
+.child-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px);
+  grid-template-rows: auto;
+  justify-content: space-between;
+}
+
+.child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-02);
+  cursor: pointer;
+
+  i {
+    color: var(--gray-600);
+  }
+
+  span {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  &:hover {
+    border-radius: 4px;
+    background-color: rgba(126, 255, 148, 0.09);
+  }
+}

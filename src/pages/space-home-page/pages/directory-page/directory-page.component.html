@@ -1,1 +1,29 @@
-<p>directory-page works!</p>
+<div class="directory">
+  <p-breadcrumb
+    class="max-w-full"
+    [model]="items"
+    [home]="home"
+  />
+
+  @if (directory) {
+
+    <div class="child-container">
+      @for (element of directory.children; track element.id) {
+        @if(isDirectory(element)) {
+          <a [routerLink]="['../../directory/' + element.id]" class="child">
+            <i class="pi pi-folder" style="font-size: 5rem"></i>
+
+            <span>{{ element.name }}</span>
+          </a>
+        } @else {
+          <a [routerLink]="['../../knowledge/' + element.id]" class="child">
+            <i class="pi pi-file" style="font-size: 5rem"></i>
+
+            <span>{{ element.name }}</span>
+          </a>
+        }
+
+      }
+    </div>
+  }
+</div>

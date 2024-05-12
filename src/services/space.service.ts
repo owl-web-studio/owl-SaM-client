@@ -77,4 +77,12 @@ export class SpaceService {
         })
       );
   }
+
+  addDirectory(data: any, rootDirectoryId: number) {
+
+  }
+
+  addKnowledge(data: any, rootDirectoryId: number) {
+
+  }
 }

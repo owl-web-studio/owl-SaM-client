@@ -1,22 +1,33 @@
 <div class="directory">
   <p-breadcrumb
     class="max-w-full"
-    [model]="items"
+    [model]="breadcrumbItems"
     [home]="home"
   />
 
   @if (directory) {
 
-    <div class="child-container">
+    <div
+      (contextmenu)="onContextMenu($event)"
+      class="child-container"
+    >
       @for (element of directory.children; track element.id) {
-        @if(isDirectory(element)) {
-          <a [routerLink]="['../../directory/' + element.id]" class="child">
+        @if (isDirectory(element)) {
+          <a
+            [routerLink]="['../../directory/' + element.id]"
+            (contextmenu)="onContextMenu($event, element)"
+            class="child"
+          >
             <i class="pi pi-folder" style="font-size: 5rem"></i>
 
             <span>{{ element.name }}</span>
           </a>
         } @else {
-          <a [routerLink]="['../../knowledge/' + element.id]" class="child">
+          <a
+            [routerLink]="['../../knowledge/' + element.id]"
+            (contextmenu)="onContextMenu($event, element)"
+            class="child"
+          >
             <i class="pi pi-file" style="font-size: 5rem"></i>
 
             <span>{{ element.name }}</span>
@@ -25,5 +36,13 @@
 
       }
     </div>
+    <p-contextMenu
+      #cm
+      [model]="menuItems"
+      (onHide)="onHide()"
+    ></p-contextMenu>
+
+
+    <!--    <p-contextMenu [target]="container" [model]="containerMenuItems"></p-contextMenu>-->
   }
 </div>

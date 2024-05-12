@@ -9,26 +9,30 @@
         droppableScope="self"
       >
         <ng-template let-node pTemplate="directory">
-          <a
-            #treeDirectory
-            (click)="openFolder(node.data)"
-          >
-            {{ node.label }}
-          </a>
-          <p-contextMenu [target]="treeDirectory" [model]="treeDirectoryMenuItems"></p-contextMenu>
+          <div class="element">
+            <a
+              #treeDirectory
+              (click)="openFolder(node.data)"
+            >
+              {{ node.label }}
+            </a>
+            <p-contextMenu [target]="treeDirectory" [model]="treeDirectoryMenuItems"></p-contextMenu>
+          </div>
         </ng-template>
         <ng-template
           let-node
           pTemplate="knowledge"
           class="text-700 hover:text-primary"
         >
-          <a
-            #treeKnowledge
-            (click)="openKnowledge(node.data)"
-          >
-            {{ node.label }}
-          </a>
-          <p-contextMenu [target]="treeKnowledge" [model]="treeKnowledgeMenuItems"></p-contextMenu>
+          <div class="element">
+            <a
+              #treeKnowledge
+              (click)="openKnowledge(node.data)"
+            >
+              {{ node.label }}
+            </a>
+            <p-contextMenu [target]="treeKnowledge" [model]="treeKnowledgeMenuItems"></p-contextMenu>
+          </div>
         </ng-template>
       </p-tree>
 

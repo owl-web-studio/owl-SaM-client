@@ -1,15 +1,18 @@
 .child-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 100px);
+  grid-template-columns: repeat(auto-fill, 120px);
   grid-template-rows: auto;
   justify-content: space-between;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: var(--spacing-04);
 }
 
 .child {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-02);
+  gap: var(--spacing-03);
   cursor: pointer;
 
   i {
@@ -17,8 +20,9 @@
   }
 
   span {
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
+    color: var(--gray-600);
   }
 
   &:hover {

@@ -138,7 +138,19 @@ export class MockDataService {
       },
       {
         id: 2,
-        name: 'Информация о компания',
+        name: 'Информация о компании',
+        description: 'Основная информация о компании',
+        content: 'Компания была основана в 2023 году',
+        format: this.formats[0],
+        createTime: new Date(),
+        updateTime: new Date(),
+        categories: [
+          this.categories[0]
+        ]
+      },
+      {
+        id: 5,
+        name: 'Информация о компании - копия',
         description: 'Основная информация о компании',
         content: 'Компания была основана в 2023 году',
         format: this.formats[0],

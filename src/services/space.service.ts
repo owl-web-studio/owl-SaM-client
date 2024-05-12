@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MockDataService} from "./_mock/mock-data.service";
 import {Space} from "../entities/space.model";
-import {Observable, of, switchMap} from "rxjs";
+import {map, Observable, of, switchMap} from "rxjs";
 import {Directory} from "../entities/directory.model";
 import {Knowledge} from "../entities/knowledge.model";
 import {TreeNode} from "primeng/api";
@@ -55,5 +55,26 @@ export class SpaceService {
     }
 
     return treeNode;
+  }
+
+  getElementById(root: Directory, id: number, path: { id: number, name: string }[] = []): { node: Directory | undefined, path: { id: number, name: string }[] } {
+    if (root.id === id) return { node: root, path };
+    if (root.children) {
+      for (let i = 0; i < root.children.length; i++) {
+        path.push({id: root.id, name: root.name})
+        const found = this.getElementById(root.children[i], id, path);
+        if (found.node) return found;
+      }
+    }
+    return { node: undefined, path: [] };
+  }
+
+  getKnowledgeById(id: number) {
+    return this.getData()
+      .pipe(
+        map(root => {
+          return this.getElementById(root, id)
+        })
+      );
   }
 }

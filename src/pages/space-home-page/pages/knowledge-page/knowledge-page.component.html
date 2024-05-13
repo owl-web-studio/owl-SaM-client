@@ -1,13 +1,23 @@
 <div class="knowledge">
   <p-breadcrumb
     class="max-w-full"
-    [model]="items"
+    [model]="breadcrumbMenuItems"
     [home]="home"
   />
 
-  @if (knowledge) {
-    <p-splitter class="editor">
-      <ng-template pTemplate>
+  @if (editKnowledgeForm) {
+    <form [formGroup]="editKnowledgeForm">
+      @if (categories$ | async; as categories) {
+        <p-multiSelect
+          [options]="categories"
+
+          optionLabel="name"
+          placeholder="Категории"
+        />
+      }
+
+      <p-splitter class="editor">
+        <ng-template pTemplate>
       <textarea
         pInputTextarea
         [autoResize]="true"
@@ -15,26 +25,27 @@
         rows="15"
         class="editor__input"
       ></textarea>
-      </ng-template>
-      <ng-template pTemplate>
-        <markdown
-          lineNumbers
-          [start]="5"
-          [data]="markdownContent"
-          class="editor__output"
-        ></markdown>
-      </ng-template>
-    </p-splitter>
-  }
+        </ng-template>
+        <ng-template pTemplate>
+          <markdown
+            lineNumbers
+            [start]="5"
+            [data]="markdownContent"
+            class="editor__output"
+          ></markdown>
+        </ng-template>
+      </p-splitter>
 
-  <div class="actions">
-    <p-button
-      label="Сохранить"
-      icon="pi pi-upload"
-    ></p-button>
-    <p-button
-      [outlined]="true"
-      label="Отменить"
-    ></p-button>
-  </div>
+      <div class="actions">
+        <p-button
+          label="Сохранить"
+          icon="pi pi-upload"
+        ></p-button>
+        <p-button
+          [outlined]="true"
+          label="Отменить"
+        ></p-button>
+      </div>
+    </form>
+  }
 </div>

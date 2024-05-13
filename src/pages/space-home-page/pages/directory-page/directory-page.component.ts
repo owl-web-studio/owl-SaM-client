@@ -65,13 +65,13 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.spaceService.getKnowledgeById(Number(params.get('id')));
+          return this.spaceService.getDirectoryById(Number(params.get('id')));
         }),
       )
       .subscribe((v) => {
-        console.log(v)
+        const {treeNode, path} = v;
 
-        this.directory = v.node;
+        this.directory = treeNode;
         this.breadcrumbItems = v.path.map(path => {
           return {
             label: path.name,

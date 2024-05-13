@@ -62,28 +62,44 @@ export class SpaceService {
     id: number,
     path: { id: number, name: string }[] = []
   ): {
-    node: Directory | undefined,
+    treeNode: Directory | Knowledge | undefined,
     path: { id: number, name: string }[]
   } {
-    if (root.id === id) return { node: root, path };
+    if (root.id === id) return { treeNode: root, path };
     if (root.children) {
       for (let i = 0; i < root.children.length; i++) {
         // path.push({id: root.id, name: root.name})
         const found = this.getElementById(root.children[i], id, [...path, {id: root.id, name: root.name}]);
-        if (found.node) return found;
+        if (found.treeNode) return found;
       }
     }
-    return { node: undefined, path: [] };
+    return { treeNode: undefined, path: [] };
   }
 
   getKnowledgeById(id: number) {
     return this.getData()
       .pipe(
         map(root => {
-          return this.getElementById(root, id)
+          return this.getElementById(root, id) as {
+            treeNode: Knowledge,
+            path: { id: number, name: string }[]
+          }
         })
       );
   }
+
+  getDirectoryById(id: number) {
+    return this.getData()
+      .pipe(
+        map(root => {
+          return this.getElementById(root, id) as {
+            treeNode: Directory,
+            path: { id: number, name: string }[]
+          }
+        })
+      );
+  }
+
 
   addDirectory(data: any, rootDirectoryId: number) {
 

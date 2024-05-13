@@ -9,7 +9,10 @@ import {SpaceService} from "../../../../services/space.service";
 import {SplitterModule} from "primeng/splitter";
 import {MarkdownComponent} from "ngx-markdown";
 import {InputTextareaModule} from "primeng/inputtextarea";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MultiSelectModule} from "primeng/multiselect";
+import {CategoryService} from "../../../../services/category.service";
+import {AsyncPipe} from "@angular/common";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -21,24 +24,27 @@ import {FormsModule} from "@angular/forms";
     SplitterModule,
     MarkdownComponent,
     InputTextareaModule,
-    FormsModule
+    FormsModule,
+    MultiSelectModule,
+    AsyncPipe,
+    ReactiveFormsModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
 })
 export class KnowledgePageComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
-  knowledge: Knowledge | undefined;
 
-  items: MenuItem[] | undefined;
-
+  breadcrumbMenuItems: MenuItem[] | undefined;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '../../' };
 
-  content: string | undefined;
+  editKnowledgeForm: FormGroup | undefined;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly spaceService: SpaceService
+    private readonly formBuilder: FormBuilder,
+    private readonly spaceService: SpaceService,
+    private readonly categoryService: CategoryService
   ) {
   }
 
@@ -51,27 +57,37 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe((v) => {
-        console.log(v)
+        const {treeNode, path} = v;
 
-        this.knowledge = v.node as Knowledge;
-        this.items = v.path.map(path => {
+        this.editKnowledgeForm = this.formBuilder.group({
+          id: [{ value: treeNode!.id, disabled: true }],
+          name: treeNode!.name,
+          categories: treeNode.categories,
+          content: treeNode.content
+        });
+
+        this.breadcrumbMenuItems = path.map(path => {
           return {
             label: path.name,
             routerLink: ['../../directory/' + path.id]
           }
         });
-        this.items.push({
-          label: this.knowledge.name
+        this.breadcrumbMenuItems.push({
+          label: treeNode.name
         });
       });
   }
 
+  get categories$() {
+    return this.categoryService.getCategories();
+  }
+
   get markdownContent() {
-    return this.knowledge!.content
+    return this.editKnowledgeForm!.controls["content"].getRawValue();
   }
 
   set markdownContent(value) {
-    this.knowledge!.content = value;
+    this.editKnowledgeForm!.controls["content"].setValue(value);
   }
 
   ngOnDestroy(): void {

@@ -6,7 +6,7 @@ import {Category} from "../entities/category.model";
 @Injectable({
   providedIn: 'root'
 })
-export class CategotyService {
+export class CategoryService {
 
   constructor(
     private readonly mockDataService: MockDataService

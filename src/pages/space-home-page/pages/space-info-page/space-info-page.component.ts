@@ -6,7 +6,7 @@ import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
 import {Space} from "../../../../entities/space.model";
 import {SpaceService} from "../../../../services/space.service";
 import {RoleService} from "../../../../services/role.service";
-import {CategotyService} from "../../../../services/categoty.service";
+import {CategoryService} from "../../../../services/category.service";
 import {FormatService} from "../../../../services/format.service";
 import {TooltipModule} from "primeng/tooltip";
 import {UserService} from "../../../../services/user.service";
@@ -35,7 +35,7 @@ export class SpaceInfoPageComponent implements OnInit, OnDestroy {
     public readonly activatedRoute: ActivatedRoute,
     private readonly spaceService: SpaceService,
     private readonly roleService: RoleService,
-    private readonly categoryService: CategotyService,
+    private readonly categoryService: CategoryService,
     private readonly formatService: FormatService,
     private readonly userService: UserService
   ) {

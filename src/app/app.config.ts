@@ -9,6 +9,7 @@ import {AuthService} from "../services/auth.service";
 import {MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {LanguageService} from "../services/language.service";
+import {provideMarkdown} from "ngx-markdown";
 
 
 // AoT requires an exported function for factories
@@ -51,6 +52,7 @@ export const appConfig: ApplicationConfig = {
         }
       })
     ),
+    provideMarkdown(),
     MessageService
   ]
 };

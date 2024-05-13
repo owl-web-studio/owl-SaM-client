@@ -6,6 +6,10 @@ import {of, Subject, switchMap, takeUntil} from "rxjs";
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {MenuItem} from "primeng/api";
 import {SpaceService} from "../../../../services/space.service";
+import {SplitterModule} from "primeng/splitter";
+import {MarkdownComponent} from "ngx-markdown";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -13,7 +17,11 @@ import {SpaceService} from "../../../../services/space.service";
   imports: [
     ButtonModule,
     RouterLink,
-    BreadcrumbModule
+    BreadcrumbModule,
+    SplitterModule,
+    MarkdownComponent,
+    InputTextareaModule,
+    FormsModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
@@ -25,6 +33,8 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
   items: MenuItem[] | undefined;
 
   home: MenuItem = { icon: 'pi pi-home', routerLink: '../../' };
+
+  content: string | undefined;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,

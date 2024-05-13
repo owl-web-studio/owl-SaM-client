@@ -5,4 +5,23 @@
     [home]="home"
   />
 
+  <p-splitter class="editor">
+    <ng-template pTemplate>
+      <textarea
+        pInputTextarea
+        [autoResize]="true"
+        [(ngModel)]="content"
+        rows="15"
+        class="editor__input"
+      ></textarea>
+    </ng-template>
+    <ng-template pTemplate>
+      <markdown
+        lineNumbers
+        [start]="5"
+        [data]="content"
+        class="editor__output"
+      ></markdown>
+    </ng-template>
+  </p-splitter>
 </div>

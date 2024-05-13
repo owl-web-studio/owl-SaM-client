@@ -5,23 +5,36 @@
     [home]="home"
   />
 
-  <p-splitter class="editor">
-    <ng-template pTemplate>
+  @if (knowledge) {
+    <p-splitter class="editor">
+      <ng-template pTemplate>
       <textarea
         pInputTextarea
         [autoResize]="true"
-        [(ngModel)]="content"
+        [(ngModel)]="markdownContent"
         rows="15"
         class="editor__input"
       ></textarea>
-    </ng-template>
-    <ng-template pTemplate>
-      <markdown
-        lineNumbers
-        [start]="5"
-        [data]="content"
-        class="editor__output"
-      ></markdown>
-    </ng-template>
-  </p-splitter>
+      </ng-template>
+      <ng-template pTemplate>
+        <markdown
+          lineNumbers
+          [start]="5"
+          [data]="markdownContent"
+          class="editor__output"
+        ></markdown>
+      </ng-template>
+    </p-splitter>
+  }
+
+  <div class="actions">
+    <p-button
+      label="Сохранить"
+      icon="pi pi-upload"
+    ></p-button>
+    <p-button
+      [outlined]="true"
+      label="Отменить"
+    ></p-button>
+  </div>
 </div>

@@ -64,8 +64,14 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
           label: this.knowledge.name
         });
       });
+  }
 
+  get markdownContent() {
+    return this.knowledge!.content
+  }
 
+  set markdownContent(value) {
+    this.knowledge!.content = value;
   }
 
   ngOnDestroy(): void {

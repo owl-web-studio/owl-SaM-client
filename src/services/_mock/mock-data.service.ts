@@ -137,6 +137,30 @@ export class MockDataService {
         ],
       },
       {
+        id: 6,
+        name: 'Полезные материалы',
+        description: '',
+        createTime: new Date(),
+        updateTime: new Date(),
+        children: [
+          {
+            id: 7,
+            name: 'Акт выполнения лялял',
+            description: 'Основная информация о компании',
+            content: 'лялялялял',
+            format: this.formats[0],
+            createTime: new Date(),
+            updateTime: new Date(),
+            categories: [
+              this.categories[0]
+            ]
+          }
+        ],
+        categories: [
+          this.categories[1]
+        ],
+      },
+      {
         id: 2,
         name: 'Информация о компании',
         description: 'Основная информация о компании',

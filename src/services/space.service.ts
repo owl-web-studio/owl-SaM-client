@@ -57,12 +57,19 @@ export class SpaceService {
     return treeNode;
   }
 
-  getElementById(root: Directory, id: number, path: { id: number, name: string }[] = []): { node: Directory | undefined, path: { id: number, name: string }[] } {
+  getElementById(
+    root: Directory,
+    id: number,
+    path: { id: number, name: string }[] = []
+  ): {
+    node: Directory | undefined,
+    path: { id: number, name: string }[]
+  } {
     if (root.id === id) return { node: root, path };
     if (root.children) {
       for (let i = 0; i < root.children.length; i++) {
-        path.push({id: root.id, name: root.name})
-        const found = this.getElementById(root.children[i], id, path);
+        // path.push({id: root.id, name: root.name})
+        const found = this.getElementById(root.children[i], id, [...path, {id: root.id, name: root.name}]);
         if (found.node) return found;
       }
     }

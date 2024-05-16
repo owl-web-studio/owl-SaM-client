@@ -42,7 +42,7 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
     {
       label: 'Создать запись',
       icon: 'pi pi-file-plus',
-      routerLink: ['knowledge/create']
+      routerLink: ['../../knowledge/create']
     },
     {
       label: 'Создать директорию',

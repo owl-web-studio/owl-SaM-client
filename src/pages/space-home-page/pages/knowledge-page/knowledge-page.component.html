@@ -20,13 +20,14 @@
 
       <p-splitter class="editor">
         <ng-template pTemplate>
-      <textarea
-        pInputTextarea
-        [autoResize]="true"
-        [(ngModel)]="markdownContent"
-        rows="15"
-        class="editor__input"
-      ></textarea>
+          <textarea
+            pInputTextarea
+            [autoResize]="true"
+            [(ngModel)]="markdownContent"
+            [ngModelOptions]="{standalone: true}"
+            rows="15"
+            class="editor__input"
+          ></textarea>
         </ng-template>
         <ng-template pTemplate>
           <markdown

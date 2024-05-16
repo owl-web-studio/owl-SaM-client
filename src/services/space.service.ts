@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MockDataService} from "./_mock/mock-data.service";
 import {Space} from "../entities/space.model";
-import {map, Observable, of, switchMap} from "rxjs";
+import {map, Observable, of, Subject, switchMap, tap} from "rxjs";
 import {Directory} from "../entities/directory.model";
 import {Knowledge} from "../entities/knowledge.model";
 import {TreeNode} from "primeng/api";
@@ -10,6 +10,9 @@ import {TreeNode} from "primeng/api";
   providedIn: 'root'
 })
 export class SpaceService {
+  onUpdatedSpaceTree$ = new Subject<void>();
+
+  newEntityIdCount = 10;
 
   constructor(
     private readonly mockDataService: MockDataService
@@ -106,6 +109,22 @@ export class SpaceService {
   }
 
   addKnowledge(data: any, rootDirectoryId: number) {
+    return this.getDirectoryById(rootDirectoryId)
+      .pipe(
+        tap(_ => {
+          const {treeNode, path} = _;
 
+          treeNode.children?.push({
+            id: this.newEntityIdCount,
+            ...data
+          })
+          this.newEntityIdCount++;
+
+        }),
+        map(_ => 1)
+      ).subscribe(_ => {
+        console.log('sub')
+        this.onUpdatedSpaceTree$.next();
+      })
   }
 }

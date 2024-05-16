@@ -6,9 +6,9 @@ export interface Knowledge {
   id: number;
   name: string;
   description: string;
-  content: string; // TODO
+  content: string | File;
   format: Format;
   createTime: Date;
-  updateTime: Date;
+  updateTime?: Date;
   categories?: Category[],
 }

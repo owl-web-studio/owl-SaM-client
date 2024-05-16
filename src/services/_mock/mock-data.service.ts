@@ -89,7 +89,26 @@ export class MockDataService {
     {
       id: 1,
       name: 'Текст',
-      extensions: ['.md']
+      extensions: ['.md'],
+      type: 'markdown'
+    },
+    {
+      id: 2,
+      name: 'Документ PDF',
+      extensions: ['.pdf'],
+      type: 'pdf'
+    },
+    {
+      id: 3,
+      name: 'Документ word',
+      extensions: ['.docx'],
+      type: 'file'
+    },
+    {
+      id: 4,
+      name: 'Изображение',
+      extensions: ['.png', '.jpeg', '.jpg'],
+      type: 'image'
     }
   ];
   categories: Category[] = [

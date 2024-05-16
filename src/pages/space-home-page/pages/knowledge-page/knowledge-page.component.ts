@@ -90,6 +90,10 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
     this.editKnowledgeForm!.controls["content"].setValue(value);
   }
 
+  onClearFormat() {
+    this.editKnowledgeForm!.controls["format"].reset();
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

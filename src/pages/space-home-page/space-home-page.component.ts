@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {ButtonModule} from "primeng/button";
 import {ActivatedRoute, ParamMap, Router, RouterLink} from "@angular/router";
 import {SpaceService} from "../../services/space.service";
-import {Subject, switchMap, takeUntil} from "rxjs";
+import {map, Subject, switchMap, takeUntil, withLatestFrom} from "rxjs";
 import {Space} from "../../entities/space.model";
 import {TooltipModule} from "primeng/tooltip";
 import {AsyncPipe} from "@angular/common";
@@ -52,7 +52,6 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
     private readonly activatedRoute: ActivatedRoute,
     private readonly spaceService: SpaceService,
     private readonly knowledgeStructureService: KnowledgeStructureService,
-
     private readonly messageService: MessageService
   ) {
   }
@@ -73,6 +72,16 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
       .subscribe(value => {
         this.files = value;
       });
+
+    this.spaceService.onUpdatedSpaceTree$
+      .pipe(
+        takeUntil(this.destroy$),
+        withLatestFrom(this.spaceService.getFileTree())
+      )
+      .subscribe(([_, v]) => {
+        console.log(v)
+        this.files = v;
+      })
   }
 
   openFolder(directoryId: number) {

@@ -94,7 +94,6 @@ button {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-04);
-  max-width: 800px;
 
   &__element {
     display: grid;
@@ -103,7 +102,7 @@ button {
     align-items: center;
     gap: var(--spacing-06);
 
-    span {
+    & > span {
       font-size: 18px;
       font-weight: 500;
     }

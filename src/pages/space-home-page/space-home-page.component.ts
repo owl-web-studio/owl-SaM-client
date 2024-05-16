@@ -57,6 +57,7 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log('ngOnInit')
     this.activatedRoute.paramMap
       .pipe(
         takeUntil(this.destroy$),
@@ -76,9 +77,11 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
     this.spaceService.onUpdatedSpaceTree$
       .pipe(
         takeUntil(this.destroy$),
-        withLatestFrom(this.spaceService.getFileTree())
+        switchMap(_ => {
+          return this.spaceService.getFileTree()
+        })
       )
-      .subscribe(([_, v]) => {
+      .subscribe((v) => {
         console.log(v)
         this.files = v;
       })

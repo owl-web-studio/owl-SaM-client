@@ -26,11 +26,12 @@ export class SpaceService {
     return this.mockDataService.get('spaces') as Observable<Space[]>;
   }
 
-  getData() {
+  private getData() {
     return this.mockDataService.get('knowledgeTree') as Observable<Directory>;
   }
 
   getFileTree() {
+    console.log('getFileTree')
     return this.getData()
       .pipe(
         switchMap(rootDirectory => {
@@ -60,7 +61,7 @@ export class SpaceService {
     return treeNode;
   }
 
-  getElementById(
+  private getElementById(
     root: Directory,
     id: number,
     path: { id: number, name: string }[] = []
@@ -123,7 +124,7 @@ export class SpaceService {
         }),
         map(_ => 1)
       ).subscribe(_ => {
-        console.log('sub')
+        console.log('sub', this.mockDataService.knowledgeTree)
         this.onUpdatedSpaceTree$.next();
       })
   }

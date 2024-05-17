@@ -58,12 +58,21 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
       )
       .subscribe((v) => {
         const {treeNode, path} = v;
+        console.log(treeNode)
 
         this.editKnowledgeForm = this.formBuilder.group({
           id: [{ value: treeNode!.id, disabled: true }],
           name: treeNode!.name,
-          categories: treeNode.categories,
-          content: treeNode.content
+          categories: '',
+          content: treeNode.content,
+          description: treeNode.description,
+          format: treeNode.format,
+        } as {
+          name: '',
+          format: any,
+          categories: any,
+          content: any,
+          description: any
         });
 
         this.breadcrumbMenuItems = path.map(path => {
@@ -75,6 +84,8 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
         this.breadcrumbMenuItems.push({
           label: treeNode.name
         });
+
+        this.editKnowledgeForm?.controls['categories'].setValue((treeNode as Knowledge).categories);
       });
   }
 
@@ -92,6 +103,10 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
 
   onClearFormat() {
     this.editKnowledgeForm!.controls["format"].reset();
+  }
+
+  onSubmit() {
+    console.log(this.editKnowledgeForm?.value)
   }
 
   ngOnDestroy(): void {

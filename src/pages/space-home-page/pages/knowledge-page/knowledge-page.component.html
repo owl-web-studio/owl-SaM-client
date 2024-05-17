@@ -6,10 +6,11 @@
   />
 
   @if (editKnowledgeForm) {
-    <form [formGroup]="editKnowledgeForm">
+    <form [formGroup]="editKnowledgeForm" (ngSubmit)="onSubmit()">
       @if (categories$ | async; as categories) {
         <p-multiSelect
           [options]="categories"
+          formControlName="categories"
           optionLabel="name"
           placeholder="Категории"
           [style]="{
@@ -39,10 +40,10 @@
         </ng-template>
       </p-splitter>
 
-      <div class="actions">
+      <div class="create-form__actions">
         <p-button
           label="Сохранить"
-          icon="pi pi-upload"
+          type="submit"
         ></p-button>
         <p-button
           [outlined]="true"

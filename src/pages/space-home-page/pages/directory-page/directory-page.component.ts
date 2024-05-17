@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Subject, switchMap, takeUntil} from "rxjs";
+import {BehaviorSubject, Subject, switchMap, takeUntil} from "rxjs";
 import {Knowledge} from "../../../../entities/knowledge.model";
 import {MenuItem} from "primeng/api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
@@ -28,16 +28,6 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
 
   menuItems: MenuItem[] = [];
 
-  knowledgeMenuItems = [
-    {label: 'Открыть', icon: 'pi pi-arrow-up-right'},
-    {label: 'Переименовать', icon: 'pi pi-search'},
-    {label: 'Удалить', icon: 'pi pi-trash'}
-  ];
-  directoryMenuItems = [
-    {label: 'Открыть', icon: 'pi pi-arrow-up-right'},
-    {label: 'Переименовать', icon: 'pi pi-file-edit'},
-    {label: 'Удалить', icon: 'pi pi-trash'}
-  ];
   containerMenuItems = [
     {
       label: 'Создать запись',
@@ -47,7 +37,7 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
     {
       label: 'Создать директорию',
       icon: 'pi pi-folder-plus',
-      routerLink: ['directory/create']
+      routerLink: ['../../directory/create']
     }
   ];
 
@@ -81,10 +71,7 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
         this.breadcrumbItems.push({
           label: this.directory?.name
         })
-        console.log(this.directory)
       });
-
-
   }
 
   isDirectory(element: any) {
@@ -93,9 +80,17 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
 
   onContextMenu(event: any, element?: any) {
     if (element && this.isDirectory(element)) {
-      this.menuItems = this.directoryMenuItems;
+      this.menuItems = [
+        {label: 'Открыть', icon: 'pi pi-arrow-up-right', routerLink: ['../../directory/' + element.id]},
+        {label: 'Переименовать', icon: 'pi pi-file-edit'},
+        {label: 'Удалить', icon: 'pi pi-trash'}
+      ];
     } else if (element && !this.isDirectory(element)) {
-      this.menuItems = this.knowledgeMenuItems;
+      this.menuItems = [
+        {label: 'Открыть', icon: 'pi pi-arrow-up-right', routerLink: ['../../knowledge/' + element.id]},
+        {label: 'Переименовать', icon: 'pi pi-search'},
+        {label: 'Удалить', icon: 'pi pi-trash'}
+      ];
     } else {
       this.menuItems = this.containerMenuItems;
     }

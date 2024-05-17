@@ -1,0 +1,55 @@
+<div class="knowledge">
+  <p-breadcrumb
+    class="max-w-full"
+    [model]="breadcrumbMenuItems"
+    [home]="home"
+  />
+
+  @if (editKnowledgeForm) {
+    <form [formGroup]="editKnowledgeForm" (ngSubmit)="onSubmit()">
+      @if (categories$ | async; as categories) {
+        <p-multiSelect
+          [options]="categories"
+          formControlName="categories"
+          optionLabel="name"
+          placeholder="Категории"
+          [style]="{
+            width: '250px'
+          }"
+        />
+      }
+
+      <p-splitter class="editor">
+        <ng-template pTemplate>
+          <textarea
+            pInputTextarea
+            [autoResize]="true"
+            [(ngModel)]="markdownContent"
+            [ngModelOptions]="{standalone: true}"
+            rows="15"
+            class="editor__input"
+          ></textarea>
+        </ng-template>
+        <ng-template pTemplate>
+          <markdown
+            lineNumbers
+            [start]="5"
+            [data]="markdownContent"
+            class="editor__output"
+          ></markdown>
+        </ng-template>
+      </p-splitter>
+
+      <div class="create-form__actions">
+        <p-button
+          label="Сохранить"
+          type="submit"
+        ></p-button>
+        <p-button
+          [outlined]="true"
+          label="Отменить"
+        ></p-button>
+      </div>
+    </form>
+  }
+</div>

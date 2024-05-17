@@ -15,7 +15,7 @@ import {
 import {
   CreateDirectoryPageComponent
 } from "../pages/space-home-page/pages/create-directory-page/create-directory-page.component";
-import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-page/knowledge-page.component";
+import {EditKnowledgePageComponent} from "../pages/space-home-page/pages/edit-knowledge-page/edit-knowledge-page.component";
 import {
   EditOrganizationPageComponent
 } from "../pages/organization/edit-organization-page/edit-organization-page.component";
@@ -25,6 +25,7 @@ import {CreateUserGroupPageComponent} from "../pages/users/create-user-group-pag
 import {ReferencePageComponent} from "../pages/reference-page/reference-page.component";
 import {CreateRolePageComponent} from "../pages/roles/create-role-page/create-role-page.component";
 import {DirectoryPageComponent} from "../pages/space-home-page/pages/directory-page/directory-page.component";
+import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-page/knowledge-page.component";
 
 export const routes: Routes = [
   {
@@ -110,7 +111,8 @@ export const routes: Routes = [
                 children: [
                   { path: 'create', component: CreateKnowledgePageComponent },
 
-                  { path: ':id', component: KnowledgePageComponent},
+                  { path: ':id', component: KnowledgePageComponent, pathMatch: 'full'},
+                  { path: ':id/edit', component: EditKnowledgePageComponent},
                 ]
               }
             ]

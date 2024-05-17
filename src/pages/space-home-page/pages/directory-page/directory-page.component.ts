@@ -82,13 +82,13 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
     if (element && this.isDirectory(element)) {
       this.menuItems = [
         {label: 'Открыть', icon: 'pi pi-arrow-up-right', routerLink: ['../../directory/' + element.id]},
-        {label: 'Переименовать', icon: 'pi pi-file-edit'},
+        {label: 'Редактировать', icon: 'pi pi-edit', routerLink: ['../../directory/' + element.id + '/edit']},
         {label: 'Удалить', icon: 'pi pi-trash'}
       ];
     } else if (element && !this.isDirectory(element)) {
       this.menuItems = [
         {label: 'Открыть', icon: 'pi pi-arrow-up-right', routerLink: ['../../knowledge/' + element.id]},
-        {label: 'Переименовать', icon: 'pi pi-search'},
+        {label: 'Редактировать', icon: 'pi pi-file', routerLink: ['../../knowledge/' + element.id + '/edit']},
         {label: 'Удалить', icon: 'pi pi-trash'}
       ];
     } else {

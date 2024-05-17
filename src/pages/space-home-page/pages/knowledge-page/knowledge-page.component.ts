@@ -1,48 +1,33 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ButtonModule} from "primeng/button";
-import {ActivatedRoute, ParamMap, RouterLink} from "@angular/router";
-import {Knowledge} from "../../../../entities/knowledge.model";
-import {of, Subject, switchMap, takeUntil} from "rxjs";
+import {Component, OnInit} from '@angular/core';
 import {BreadcrumbModule} from "primeng/breadcrumb";
+import {Subject, switchMap, takeUntil} from "rxjs";
 import {MenuItem} from "primeng/api";
+import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SpaceService} from "../../../../services/space.service";
-import {SplitterModule} from "primeng/splitter";
-import {MarkdownComponent} from "ngx-markdown";
-import {InputTextareaModule} from "primeng/inputtextarea";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MultiSelectModule} from "primeng/multiselect";
 import {CategoryService} from "../../../../services/category.service";
-import {AsyncPipe} from "@angular/common";
+import {Knowledge} from "../../../../entities/knowledge.model";
+import {MarkdownComponent} from "ngx-markdown";
 
 @Component({
   selector: 'owl-knowledge-page',
   standalone: true,
   imports: [
-    ButtonModule,
-    RouterLink,
     BreadcrumbModule,
-    SplitterModule,
-    MarkdownComponent,
-    InputTextareaModule,
-    FormsModule,
-    MultiSelectModule,
-    AsyncPipe,
-    ReactiveFormsModule
+    MarkdownComponent
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
 })
-export class KnowledgePageComponent implements OnInit, OnDestroy {
+export class KnowledgePageComponent implements OnInit {
   private destroy$ = new Subject<void>();
+
+  knowledge: Knowledge | undefined;
 
   breadcrumbMenuItems: MenuItem[] | undefined;
   home: MenuItem = { icon: 'pi pi-home', routerLink: '../../' };
 
-  editKnowledgeForm: FormGroup | undefined;
-
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly formBuilder: FormBuilder,
     private readonly spaceService: SpaceService,
     private readonly categoryService: CategoryService
   ) {
@@ -60,21 +45,6 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
         const {treeNode, path} = v;
         console.log(treeNode)
 
-        this.editKnowledgeForm = this.formBuilder.group({
-          id: [{ value: treeNode!.id, disabled: true }],
-          name: treeNode!.name,
-          categories: '',
-          content: treeNode.content,
-          description: treeNode.description,
-          format: treeNode.format,
-        } as {
-          name: '',
-          format: any,
-          categories: any,
-          content: any,
-          description: any
-        });
-
         this.breadcrumbMenuItems = path.map(path => {
           return {
             label: path.name,
@@ -85,32 +55,7 @@ export class KnowledgePageComponent implements OnInit, OnDestroy {
           label: treeNode.name
         });
 
-        this.editKnowledgeForm?.controls['categories'].setValue((treeNode as Knowledge).categories);
+        this.knowledge = treeNode
       });
-  }
-
-  get categories$() {
-    return this.categoryService.getCategories();
-  }
-
-  get markdownContent() {
-    return this.editKnowledgeForm!.controls["content"].getRawValue();
-  }
-
-  set markdownContent(value) {
-    this.editKnowledgeForm!.controls["content"].setValue(value);
-  }
-
-  onClearFormat() {
-    this.editKnowledgeForm!.controls["format"].reset();
-  }
-
-  onSubmit() {
-    console.log(this.editKnowledgeForm?.value)
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }

@@ -20,7 +20,7 @@ import {Knowledge} from "../../../../entities/knowledge.model";
 import {SpaceService} from "../../../../services/space.service";
 
 @Component({
-  selector: 'owl-create-knowledge-page',
+  selector: 'owl-create-edit-knowledge-page',
   standalone: true,
   imports: [
     ReactiveFormsModule,

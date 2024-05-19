@@ -11,6 +11,7 @@ import {RatingModule, RatingRateEvent} from "primeng/rating";
 import {FormsModule} from "@angular/forms";
 import {DecimalPipe} from "@angular/common";
 import {AuthService} from "../../../../services/auth.service";
+import {ButtonModule} from "primeng/button";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -20,7 +21,8 @@ import {AuthService} from "../../../../services/auth.service";
     MarkdownComponent,
     RatingModule,
     FormsModule,
-    DecimalPipe
+    DecimalPipe,
+    ButtonModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'

@@ -12,7 +12,7 @@ import {InputTextareaModule} from "primeng/inputtextarea";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MultiSelectModule} from "primeng/multiselect";
 import {CategoryService} from "../../../../services/category.service";
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, Location} from "@angular/common";
 
 @Component({
   selector: 'owl-edit-knowledge-page',
@@ -42,6 +42,7 @@ export class EditKnowledgePageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+    private readonly location: Location,
     private readonly formBuilder: FormBuilder,
     private readonly spaceService: SpaceService,
     private readonly categoryService: CategoryService
@@ -107,6 +108,10 @@ export class EditKnowledgePageComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     console.log(this.editKnowledgeForm?.value)
+  }
+
+  cancel() {
+    this.location.back();
   }
 
   ngOnDestroy(): void {

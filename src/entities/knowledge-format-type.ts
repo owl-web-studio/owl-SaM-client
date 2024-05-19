@@ -2,5 +2,7 @@ export type KnowledgeFormatType =
   'markdown' |
   'file'     |
   'pdf'      |
-  'image'
+  'image'    |
+  '3d'       |
+  'code'
 ;

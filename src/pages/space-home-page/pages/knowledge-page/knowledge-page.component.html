@@ -29,12 +29,19 @@
     </div>
   }
 
-  <div class="rating">
-    <span>Информация оказалась полезной?</span>
-    <p-rating
-      [cancel]="false"
-      [(ngModel)]="userRating"
-      (onRate)="onRate($event)"
-    />
+  <div class="actions">
+    <div class="rating">
+      <span>Информация оказалась полезной?</span>
+      <p-rating
+        [cancel]="false"
+        [(ngModel)]="userRating"
+        (onRate)="onRate($event)"
+      />
+    </div>
+    <p-button
+      [routerLink]="['edit']"
+      label="Редактировать"
+      size="small"
+    ></p-button>
   </div>
 </div>

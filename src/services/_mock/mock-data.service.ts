@@ -110,6 +110,18 @@ export class MockDataService {
       name: 'Изображение',
       extensions: ['.png', '.jpeg', '.jpg'],
       type: 'image'
+    },
+    {
+      id: 5,
+      name: 'Трёхмерная модель ',
+      extensions: ['.glb', '.gltf'],
+      type: '3d'
+    },
+    {
+      id: 6,
+      name: 'Программный код',
+      extensions: ['.js', '.ts', '.html', '.css', '.scss', '.java', '.cpp', '.h', '.py'],
+      type: 'code'
     }
   ];
   categories: Category[] = [

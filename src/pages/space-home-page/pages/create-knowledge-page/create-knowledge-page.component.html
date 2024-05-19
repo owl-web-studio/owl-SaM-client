@@ -102,6 +102,22 @@
           accept="image/*"
         />
       }
+      @case ('3d') {
+        <p-fileUpload
+          [maxFileSize]="1000000"
+          (onUpload)="onUpload($event)"
+          [fileLimit]="1"
+          mode="basic"
+          chooseLabel="Выбрать 3D-модель для загрузки"
+          chooseIcon="pi pi-upload"
+          name="demo[]"
+          url="https://www.primefaces.org/cdn/api/upload.php"
+          accept=".glb, .gltf"
+        />
+      }
+      @case ('code') {
+
+      }
     }
 
     <div class="create-form__actions">

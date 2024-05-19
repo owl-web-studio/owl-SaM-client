@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header__side">
     <a [routerLink]="['/']" class="header__logo">
-      <span>3D</span>SaM
+      <span>S</span>aM
     </a>
     <div class="header__title">
       <span>{{ title$ | async }}</span>
@@ -30,6 +30,8 @@
                 <div class="element__header">{{ searchElement.name }}</div>
                 <div class="element__type">{{ searchElement.type }}</div>
               </a>
+            } @empty {
+              <p-progressSpinner ariaLabel="loading" />
             }
           </div>
         }

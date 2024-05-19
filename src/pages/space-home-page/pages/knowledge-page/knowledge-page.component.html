@@ -7,11 +7,34 @@
 
 
   @if(knowledge) {
-    <markdown
-      lineNumbers
-      [start]="5"
-      [data]="knowledge.content + ''"
-      class="editor__output"
-    ></markdown>
+    <div class="knowledge__header">
+
+      <div class="rating">
+        <span>Рейтинг:</span>
+        <label>
+          <p-rating [(ngModel)]="knowledgeRating" [readonly]="true" [cancel]="false" />
+
+          <span>{{ knowledgeRating | number: '1.0-2' }}</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="knowledge__content">
+      <markdown
+        lineNumbers
+        [start]="5"
+        [data]="knowledge.content + ''"
+        class="editor__output"
+      ></markdown>
+    </div>
   }
+
+  <div class="rating">
+    <span>Информация оказалась полезной?</span>
+    <p-rating
+      [cancel]="false"
+      [(ngModel)]="userRating"
+      (onRate)="onRate($event)"
+    />
+  </div>
 </div>

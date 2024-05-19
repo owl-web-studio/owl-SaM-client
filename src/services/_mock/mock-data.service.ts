@@ -16,7 +16,8 @@ type DataType =
   'knowledgeTree' |
   'formats' |
   'roles' |
-  'categories'
+  'categories' |
+  'rating'
   ;
 
 @Injectable({
@@ -35,7 +36,7 @@ export class MockDataService {
       description: 'Роль с неограниченными правами',
       isAdmin: true
     }
-  ]
+  ];
   users: MockUserData[] = [
     {
       id: 1,
@@ -205,6 +206,140 @@ export class MockDataService {
       }
     ]
   };
+  knowledgeRating = [
+    {
+      knowledgeId: 2,
+      userRating: [
+        {
+          userId: 1,
+          rating: 5
+        },
+        {
+          userId: 2,
+          rating: 4
+        },
+        {
+          userId: 3,
+          rating: 3
+        },
+        {
+          userId: 4,
+          rating: 4
+        },
+        {
+          userId: 5,
+          rating: 1
+        },
+        {
+          userId: 6,
+          rating: 4
+        },
+        {
+          userId: 7,
+          rating: 5
+        }
+      ]
+    },
+    {
+      knowledgeId: 4,
+      userRating: [
+        {
+          userId: 1,
+          rating: 2
+        },
+        {
+          userId: 2,
+          rating: 3
+        },
+        {
+          userId: 3,
+          rating: 3
+        },
+        {
+          userId: 4,
+          rating: 3
+        },
+        {
+          userId: 5,
+          rating: 2
+        },
+        {
+          userId: 6,
+          rating: 4
+        },
+        {
+          userId: 7,
+          rating: 1
+        }
+      ]
+    },
+    {
+      knowledgeId: 5,
+      userRating: [
+        {
+          userId: 1,
+          rating: 3
+        },
+        {
+          userId: 2,
+          rating: 3
+        },
+        {
+          userId: 3,
+          rating: 2
+        },
+        {
+          userId: 4,
+          rating: 5
+        },
+        {
+          userId: 5,
+          rating: 5
+        },
+        {
+          userId: 6,
+          rating: 4
+        },
+        {
+          userId: 7,
+          rating: 3
+        }
+      ]
+    },
+    {
+      knowledgeId: 7,
+      userRating: [
+        {
+          userId: 1,
+          rating: 5
+        },
+        {
+          userId: 2,
+          rating: 4
+        },
+        {
+          userId: 3,
+          rating: 3
+        },
+        {
+          userId: 4,
+          rating: 4
+        },
+        {
+          userId: 5,
+          rating: 1
+        },
+        {
+          userId: 6,
+          rating: 4
+        },
+        {
+          userId: 7,
+          rating: 5
+        }
+      ]
+    }
+  ];
 
   constructor() {
   }
@@ -236,6 +371,9 @@ export class MockDataService {
         break;
       case 'categories':
         result = this.categories;
+        break;
+      case "rating":
+        result = this.knowledgeRating;
         break;
     }
 
@@ -277,6 +415,10 @@ export class MockDataService {
           return category.id === id;
         });
         break;
+      case "rating":
+        result = this.knowledgeRating.find((userRating) => {
+          return userRating.knowledgeId === id;
+        })
     }
 
     return of(result);
@@ -327,6 +469,19 @@ export class MockDataService {
           ...data
         });
         result = this.categories.find(element => element.id === this.categories[this.categories.length - 1].id + 1);
+        break;
+      case "rating":
+        const userRatings = this.knowledgeRating.find(userRating => {
+          return data.knowledgeId === userRating.knowledgeId;
+        });
+
+        if (userRatings) {
+          userRatings.userRating = data.userRating;
+        } else {
+          this.knowledgeRating.push(data);
+        }
+
+        result = this.knowledgeRating.find(element => element.knowledgeId === data.knowledgeId);
         break;
     }
 

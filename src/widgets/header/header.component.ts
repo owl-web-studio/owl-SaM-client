@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/c
 import {TooltipModule} from "primeng/tooltip";
 import {DividerModule} from "primeng/divider";
 import {BreadcrumbService} from "../../services/breadcrumb.service";
-import {BehaviorSubject, debounceTime, Subject, switchMap, takeUntil, tap} from "rxjs";
+import {BehaviorSubject, debounceTime, delay, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {MenuModule} from "primeng/menu";
@@ -13,6 +13,7 @@ import {InputTextModule} from "primeng/inputtext";
 import {FormsModule} from "@angular/forms";
 import {SearchService} from "../../services/search.service";
 import {BadgeModule} from "primeng/badge";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 
 @Component({
@@ -28,6 +29,7 @@ import {BadgeModule} from "primeng/badge";
     InputTextModule,
     FormsModule,
     BadgeModule,
+    ProgressSpinnerModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -37,7 +39,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   title$: BehaviorSubject<string>;
   searchBarValue = '';
-  private searchSubject = new Subject<string>();
+  private searchSubject$ = new Subject<string>();
   private readonly debounceTimeMs = 300;
   showSearchResult$ = new BehaviorSubject<boolean>(false);
   searchResult$ = new BehaviorSubject<any[]>([])
@@ -82,8 +84,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.searchSubject
+    this.searchSubject$
       .pipe(
+        tap(_ => {
+          this.searchResult$.next([]);
+        }),
         takeUntil(this.destroy$),
         debounceTime(this.debounceTimeMs),
         tap(searchValue => {
@@ -107,7 +112,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSearch() {
-    this.searchSubject.next(this.searchBarValue);
+    this.searchSubject$.next(this.searchBarValue);
   }
 
   onClickedSearchResult() {

@@ -26,7 +26,7 @@ export class SpaceService {
     return this.mockDataService.get('spaces') as Observable<Space[]>;
   }
 
-  private getData() {
+  getData() {
     return this.mockDataService.get('knowledgeTree') as Observable<Directory>;
   }
 
@@ -127,5 +127,46 @@ export class SpaceService {
         console.log('sub', this.mockDataService.knowledgeTree)
         this.onUpdatedSpaceTree$.next();
       })
+  }
+
+  getKnowledgeRating(id: number) {
+    return this.mockDataService.getById('rating', id);
+  }
+
+  setUserRate(knowledgeId: number, userId: number, rate: number) {
+    return this.mockDataService.getById('rating', knowledgeId)
+      .pipe(
+        map(v => {
+          if (v) {
+            const userRate = v.userRating.find((userRate: any) => {
+              return userRate.userId === userId;
+            });
+
+            if (userRate) {
+              userRate.rating = rate;
+            } else {
+              v.push({
+                userId: userId,
+                rating: rate
+              })
+            }
+
+            this.mockDataService.getById('rating', knowledgeId)
+              .subscribe(v => { console.log(v) })
+
+            return 1;
+          } else {
+            return this.mockDataService.post('rating', {
+              knowledgeId: knowledgeId,
+              userRating: [
+                {
+                  userId: userId,
+                  rating: rate
+                }
+              ]
+            })
+          }
+        })
+      )
   }
 }

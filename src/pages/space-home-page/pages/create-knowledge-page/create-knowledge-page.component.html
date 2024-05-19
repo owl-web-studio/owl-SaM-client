@@ -12,6 +12,18 @@
     </label>
 
     <label class="create-form__element">
+      <span>Тип интеллектуальной собственности</span>
+      <p-dropdown
+        [options]="intellectualPropertyOptions"
+        [showClear]="true"
+        (onClear)="onClearFormat()"
+        formControlName="intPropType"
+        optionLabel="name"
+        placeholder="Выберите тип инт. соб."
+      ></p-dropdown>
+    </label>
+
+    <label class="create-form__element">
       <span>Формат</span>
       <p-dropdown
         [options]="availableFormats"

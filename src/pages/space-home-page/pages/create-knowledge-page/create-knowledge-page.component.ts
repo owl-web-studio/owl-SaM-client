@@ -46,6 +46,30 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
 
   uploadedFile: File | undefined;
 
+  intellectualPropertyOptions = [
+    {
+      name: 'Документ, связанный с программами для электронных вычислительных машин (программы для ЭВМ)',
+    },
+    {
+      name: 'Документ о базах данных',
+    },
+    {
+      name: 'Изобретение',
+    },
+    {
+      name: 'Полезная модель',
+    },
+    {
+      name: 'Секрет производства (ноу-хау)'
+    },
+    {
+      name: 'Фирменное наименование'
+    },
+    {
+      name: 'Товарный знак/знак обслуживания'
+    },
+  ];
+
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
@@ -60,13 +84,15 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
       format: '',
       categories: '',
       content: '',
-      description: ''
+      description: '',
+      intPropType: ''
     } as {
       name: '',
       format: any,
       categories: any,
       content: any,
-      description: any
+      description: any,
+      intPropType: any
     });
   }
 

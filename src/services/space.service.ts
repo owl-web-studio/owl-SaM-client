@@ -5,6 +5,8 @@ import {map, Observable, of, Subject, switchMap, tap} from "rxjs";
 import {Directory} from "../entities/directory.model";
 import {Knowledge} from "../entities/knowledge.model";
 import {TreeNode} from "primeng/api";
+import {Comment} from "@angular/compiler";
+import {KnowledgeComment} from "../entities/knowledge-comment.model";
 
 @Injectable({
   providedIn: 'root'
@@ -168,5 +170,9 @@ export class SpaceService {
           }
         })
       )
+  }
+
+  getKnowledgeComments(knowledgeId: number) {
+    return this.mockDataService.getById('knowledgeComments', knowledgeId);
   }
 }

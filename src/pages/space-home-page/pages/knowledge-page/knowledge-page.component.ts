@@ -8,7 +8,7 @@ import {CategoryService} from "../../../../services/category.service";
 import {Knowledge} from "../../../../entities/knowledge.model";
 import {MarkdownComponent} from "ngx-markdown";
 import {RatingModule, RatingRateEvent} from "primeng/rating";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DecimalPipe} from "@angular/common";
 import {AuthService} from "../../../../services/auth.service";
 import {ButtonModule} from "primeng/button";
@@ -17,6 +17,8 @@ import {PdfJsViewerModule} from "ng2-pdfjs-viewer";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {AmbientLight, Color, PerspectiveCamera, Scene, WebGLRenderer} from "three";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
+import {KnowledgeComment} from "../../../../entities/knowledge-comment.model";
+import {AvatarModule} from "primeng/avatar";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -29,13 +31,17 @@ import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
     DecimalPipe,
     ButtonModule,
     CardModule,
-    PdfJsViewerModule
+    PdfJsViewerModule,
+    ReactiveFormsModule,
+    AvatarModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
 })
 export class KnowledgePageComponent implements OnInit, AfterViewInit {
   private destroy$ = new Subject<void>();
+
+  knowledge: Knowledge | undefined;
 
   // 3d model
   @ViewChild('rendererContainer', {static: true}) rendererContainer!: ElementRef;
@@ -45,13 +51,16 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
   public controls: OrbitControls | undefined;
   public renderer: WebGLRenderer | undefined;
 
-  knowledge: Knowledge | undefined;
-
+  // Navigation
   breadcrumbMenuItems: MenuItem[] | undefined;
   home: MenuItem = {icon: 'pi pi-home', routerLink: '../../'};
 
+  // Rating
   knowledgeRating: number | undefined;
   userRating: number | undefined;
+
+  // Comments
+  comments: KnowledgeComment[] | undefined;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -98,10 +107,29 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
                 }
               })
             )
+        }),
+        switchMap(v => {
+          return this.spaceService.getKnowledgeComments(v.treeNode.id)
+            .pipe(
+              map((comments) => {
+                console.log(comments.comments)
+
+                return {
+                  ...v,
+                  comments: comments.comments as KnowledgeComment[]
+                }
+              })
+            )
         })
       )
       .subscribe((v) => {
-        const {treeNode, path, averageRating, userRating} = v;
+        const {
+          treeNode,
+          path,
+          averageRating,
+          userRating,
+          comments
+        } = v;
         console.log(treeNode)
 
         this.breadcrumbMenuItems = path.map(path => {
@@ -119,6 +147,7 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
         this.knowledgeRating = averageRating;
 
         this.userRating = userRating;
+        this.comments = comments;
 
         console.log(this.knowledge)
       });

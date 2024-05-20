@@ -8,16 +8,19 @@ import {Directory} from "../../entities/directory.model";
 import {Format} from "../../entities/format.model";
 import {Knowledge} from "../../entities/knowledge.model";
 import {Category} from "../../entities/category.model";
+import {KnowledgeComment} from "../../entities/knowledge-comment.model";
+import {User} from "../../entities/user.model";
 
 type DataType =
-  'organizations' |
-  'spaces' |
-  'users' |
-  'knowledgeTree' |
-  'formats' |
-  'roles' |
-  'categories' |
-  'rating'
+  'organizations'     |
+  'spaces'            |
+  'users'             |
+  'knowledgeTree'     |
+  'formats'           |
+  'roles'             |
+  'categories'        |
+  'rating'            |
+  'knowledgeComments'
   ;
 
 @Injectable({
@@ -62,6 +65,42 @@ export class MockDataService {
       jobTitle: 'Генеральный директор',
       roles: [this.roles[0], this.roles[1]],
       // avatarUrl: 'https://i.ibb.co/nPbJ4Cx/hqdefault.jpg',
+    },
+    {
+      id: 3,
+      login: 'nikulin.v',
+      password: 'test',
+      firstName: 'Василий',
+      lastName: 'Никулин',
+      patronymic: 'Петрович',
+      email: 'nikulin.v@mail.ru',
+      phoneNumber: '+79872142523',
+      jobTitle: 'Инженер-разработчик',
+      roles: [this.roles[0]],
+    },
+    {
+      id: 4,
+      login: 'vershinin.a',
+      password: 'test',
+      firstName: 'Алексей',
+      lastName: 'Вершинин',
+      patronymic: 'Геннадьевич',
+      email: 'vershinin.a@mail.ru',
+      phoneNumber: '+79992410018',
+      jobTitle: 'Аналитик',
+      roles: [this.roles[0]],
+    },
+    {
+      id: 5,
+      login: 'hametov.k',
+      password: 'test',
+      firstName: 'Константин',
+      lastName: 'Хаметов',
+      patronymic: 'Иванович',
+      email: 'hametov.k@mail.ru',
+      phoneNumber: '+79259100012',
+      jobTitle: 'Инженер QA',
+      roles: [this.roles[0]],
     },
   ];
   spaces: Space[] = [
@@ -194,7 +233,7 @@ export class MockDataService {
       },
       {
         id: 2,
-        name: 'Информация о компании',
+        name: 'Главные бизнес-процессы',
         description: 'Основная информация о компании',
         content: 'Компания была основана в 2023 году',
         format: this.formats[0],
@@ -206,7 +245,7 @@ export class MockDataService {
       },
       {
         id: 5,
-        name: 'Информация о компании - копия',
+        name: 'Информация о компании',
         description: 'Основная информация о компании',
         content: 'Компания была основана в 2023 году',
         format: this.formats[0],
@@ -352,6 +391,49 @@ export class MockDataService {
       ]
     }
   ];
+  knowledgeComments: {
+    knowledgeId: number,
+    comments: KnowledgeComment[]
+  }[] = [
+    {
+      knowledgeId: 2,
+      comments: [
+        {
+          id: 1,
+          content: 'Полезный документ!',
+          author: this.users[2],
+          createDate: new Date(),
+          updateDate: new Date(),
+        },
+        {
+          id: 2,
+          content: 'Не совсем понятен пункт 1',
+          author: this.users[3],
+          createDate: new Date(),
+          updateDate: new Date(),
+        },
+        {
+          id: 3,
+          content: 'Что такое "Интеграция с шиной?"',
+          author: this.users[4],
+          createDate: new Date(),
+          updateDate: new Date(),
+        }
+      ]
+    },
+    {
+      knowledgeId: 3,
+      comments: []
+    },
+    {
+      knowledgeId: 5,
+      comments: []
+    },
+    {
+      knowledgeId: 7,
+      comments: []
+    }
+  ];
 
   constructor() {
   }
@@ -386,6 +468,9 @@ export class MockDataService {
         break;
       case "rating":
         result = this.knowledgeRating;
+        break;
+      case "knowledgeComments":
+        result = this.knowledgeComments;
         break;
     }
 
@@ -430,7 +515,13 @@ export class MockDataService {
       case "rating":
         result = this.knowledgeRating.find((userRating) => {
           return userRating.knowledgeId === id;
-        })
+        });
+        break;
+      case "knowledgeComments":
+        result = this.knowledgeComments.find((knowledgeComments) => {
+          return knowledgeComments.knowledgeId === id;
+        });
+        break;
     }
 
     return of(result);
@@ -494,6 +585,19 @@ export class MockDataService {
         }
 
         result = this.knowledgeRating.find(element => element.knowledgeId === data.knowledgeId);
+        break;
+      case "knowledgeComments":
+        const knowledgesComments = this.knowledgeComments.find(knowledgeComments => {
+          return data.knowledgeId === knowledgeComments.knowledgeId;
+        });
+
+        if (knowledgesComments) {
+          knowledgesComments.comments = data.comments;
+        } else {
+          this.knowledgeComments.push(data);
+        }
+
+        result = this.knowledgeComments.find(element => element.knowledgeId === data.knowledgeId);
         break;
     }
 

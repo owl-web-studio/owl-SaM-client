@@ -76,7 +76,7 @@
     <div #rendererContainer id="canvas-box"></div>
   </p-card>
 
-  <div class="actions">
+  <p-card class="actions" header="Действия">
     <div class="rating">
       <span>Информация оказалась полезной?</span>
       <p-rating
@@ -90,5 +90,35 @@
       label="Редактировать"
       size="small"
     ></p-button>
-  </div>
+  </p-card>
+
+  <p-card class="comments" header="Комментарии">
+    <div class="comment-list">
+      @for (comment of comments; track comment.id) {
+        <p-card class="comment">
+          <ng-template pTemplate="title">
+            <div class="author">
+              <p-avatar
+                [image]="comment.author.avatarUrl ? comment.author.avatarUrl : 'https://i.ibb.co/Fx98nVB/default-avatar.png'"
+                shape="circle"
+              />
+              <div class="author__info">
+                <a class="author__name">{{ comment.author.lastName }} {{ comment.author.firstName }} {{ comment.author.patronymic }}</a>
+                <span class="author__job-title">{{ comment.author.jobTitle }}</span>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="content">{{ comment.content }}</ng-template>
+          <ng-template pTemplate="footer">
+            {{ comment.createDate }}
+            {{ comment.updateDate }}
+          </ng-template>
+        </p-card>
+      } @empty {
+        <span>У этого документа пока нет комментариев!</span>
+      }
+    </div>
+
+    <form class="comment-form"></form>
+  </p-card>
 </div>

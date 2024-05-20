@@ -1,4 +1,4 @@
-.knowledge-container {
+.knowledge {
   display: flex;
   flex-direction: column;
 
@@ -7,8 +7,24 @@
     flex-direction: column;
   }
 
+  &__rating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-03);
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
+
+    img.content {
+      border: 1px solid #dbdbdb;
+      max-height: 600px;
+      object-fit: contain;
+    }
+
+    .pdf-viewer {
+      height: 100vh;
+    }
   }
 }

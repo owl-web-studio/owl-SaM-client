@@ -84,7 +84,9 @@
       @case ('pdf') {
         @if (uploadedFile) {
           <p>Файл: {{ uploadedFile.name }}</p>
+          <a [href]="uploadedFile" target="_blank">Просмотреть загруженный файл</a>
         }
+
         <p-fileUpload
           [maxFileSize]="5242880"
           (onUpload)="onUpload($event)"

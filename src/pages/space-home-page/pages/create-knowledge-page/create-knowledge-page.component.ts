@@ -44,7 +44,7 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
   createKnowledgeForm;
   availableFormats: Format[] = [];
 
-  uploadedFile: File | undefined;
+  uploadedFile: any | undefined;
 
   intellectualPropertyOptions = [
     {
@@ -154,12 +154,21 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
 
   onUpload($event: FileUploadEvent) {
     console.log($event);
-    this.uploadedFile = $event.files[0];
+    const file = $event.files[0];
+    const objectURL = URL.createObjectURL(file);
+    this.uploadedFile = file; // Сохраняем файл и его URL
+    this.uploadedFile.objectUrl = objectURL;
     this.createKnowledgeForm.controls['content'].setValue(this.uploadedFile);
+    console.log(this.createKnowledgeForm);
+    console.log(objectURL); // Выводим URL для проверки
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+
+    // if (this.uploadedFile?.objectURL) {
+    //   URL.revokeObjectURL(this.uploadedFile.objectURL);
+    // }
   }
 }

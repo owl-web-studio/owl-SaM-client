@@ -6,27 +6,68 @@
   />
 
 
-  @if(knowledge) {
-    <div class="knowledge__header">
+  @if (knowledge) {
 
-      <div class="rating">
-        <span>Рейтинг:</span>
-        <label>
-          <p-rating [(ngModel)]="knowledgeRating" [readonly]="true" [cancel]="false" />
+    <p-card [header]="knowledge.name">
+      <div class="knowledge__header">
 
-          <span>{{ knowledgeRating | number: '1.0-2' }}</span>
-        </label>
+        <div class="knowledge__rating">
+          <span>Рейтинг:</span>
+          <p-rating [(ngModel)]="knowledgeRating" [readonly]="true" [cancel]="false"/>
+          <span> ({{ knowledgeRating | number: '1.0-2' }})</span>
+        </div>
       </div>
-    </div>
 
-    <div class="knowledge__content">
-      <markdown
-        lineNumbers
-        [start]="5"
-        [data]="knowledge.content + ''"
-        class="editor__output"
-      ></markdown>
-    </div>
+      <div class="knowledge__content">
+        @switch (formatType) {
+          @case ('markdown') {
+            <markdown
+              lineNumbers
+              [start]="5"
+              [data]="knowledge.content + ''"
+              class="content"
+            ></markdown>
+
+          }
+          @case ('file') {
+            file preview
+          }
+          @case ('pdf') {
+            pdf preview
+              <!--            <pdf-viewer-->
+              <!--              [src]="pdfSrc"-->
+              <!--              [render-text]="true"-->
+              <!--              [original-size]="false"-->
+              <!--              style="width: 400px; height: 500px"-->
+              <!--            ></pdf-viewer>-->
+            <ng2-pdfjs-viewer
+              [pdfSrc]="pdfSrc"
+              zoom="80"
+              class="pdf-viewer"
+            ></ng2-pdfjs-viewer>
+          }
+          @case ('image') {
+            <div class="content-container">
+              <img
+                [src]="imageSrc"
+                class="content"
+              >
+            </div>
+
+          }
+          @case ('3d') {
+            threejs 3d model preview
+          }
+          @case ('code') {
+            code preview
+          }
+          @default {
+            default
+          }
+        }
+      </div>
+
+    </p-card>
   }
 
   <div class="actions">

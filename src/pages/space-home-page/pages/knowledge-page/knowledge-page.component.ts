@@ -12,6 +12,8 @@ import {FormsModule} from "@angular/forms";
 import {DecimalPipe} from "@angular/common";
 import {AuthService} from "../../../../services/auth.service";
 import {ButtonModule} from "primeng/button";
+import {CardModule} from "primeng/card";
+import {PdfJsViewerModule} from "ng2-pdfjs-viewer";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -22,7 +24,9 @@ import {ButtonModule} from "primeng/button";
     RatingModule,
     FormsModule,
     DecimalPipe,
-    ButtonModule
+    ButtonModule,
+    CardModule,
+    PdfJsViewerModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
@@ -102,9 +106,39 @@ export class KnowledgePageComponent implements OnInit {
         this.knowledgeRating = averageRating;
 
         this.userRating = userRating;
+
+        console.log(this.knowledge)
       });
   }
 
+  get formatType() {
+    if (this.knowledge && this.knowledge.format && this.knowledge.format.type) {
+      return this.knowledge!.format.type;
+    } else {
+      return ''
+    }
+  }
+
+  get pdfSrc() {
+    let result = null;
+    if (this.knowledge && this.formatType === 'pdf') {
+      console.log('pdfSrc:', this.knowledge.content)
+      result = (this.knowledge.content as any);
+      result.url = result.objectURL;
+    }
+
+    return result;
+    // return 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
+  }
+
+  get imageSrc() {
+    if (this.knowledge && this.formatType === 'image') {
+      console.log('imageSrc:', this.knowledge.content)
+      return (this.knowledge.content as any).objectURL;
+    } else {
+      return ''
+    }
+  }
 
   onRate($event: RatingRateEvent) {
     console.log('onRate', $event);

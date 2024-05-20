@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {map, Subject, switchMap, takeUntil, withLatestFrom} from "rxjs";
-import {MenuItem} from "primeng/api";
+import {MenuItem, MessageService} from "primeng/api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SpaceService} from "../../../../services/space.service";
 import {CategoryService} from "../../../../services/category.service";
@@ -14,6 +14,9 @@ import {AuthService} from "../../../../services/auth.service";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
 import {PdfJsViewerModule} from "ng2-pdfjs-viewer";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import {AmbientLight, Color, PerspectiveCamera, Scene, WebGLRenderer} from "three";
+import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -31,8 +34,16 @@ import {PdfJsViewerModule} from "ng2-pdfjs-viewer";
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
 })
-export class KnowledgePageComponent implements OnInit {
+export class KnowledgePageComponent implements OnInit, AfterViewInit {
   private destroy$ = new Subject<void>();
+
+  // 3d model
+  @ViewChild('rendererContainer', {static: true}) rendererContainer!: ElementRef;
+  public loader: GLTFLoader | undefined;
+  public scene: Scene | undefined;
+  public camera: PerspectiveCamera | undefined;
+  public controls: OrbitControls | undefined;
+  public renderer: WebGLRenderer | undefined;
 
   knowledge: Knowledge | undefined;
 
@@ -44,10 +55,12 @@ export class KnowledgePageComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+    private readonly messageService: MessageService,
     private readonly spaceService: SpaceService,
     private readonly categoryService: CategoryService,
     private readonly authService: AuthService
   ) {
+    this.loader = new GLTFLoader();
   }
 
   ngOnInit(): void {
@@ -109,6 +122,55 @@ export class KnowledgePageComponent implements OnInit {
 
         console.log(this.knowledge)
       });
+  }
+
+  ngAfterViewInit() {
+    if (this.formatType === '3d') {
+      this.load3dModel();
+    }
+  }
+
+  load3dModel() {
+    this.scene = new Scene();
+    this.scene.background = new Color(0xffffff);
+
+    this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.position.set(-1.8, 0.6, 2.7);
+
+    this.renderer = new WebGLRenderer({antialias: true});
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.rendererContainer.nativeElement.appendChild(this.renderer.domElement);
+
+    this.controls = new OrbitControls(this.camera!, this.renderer.domElement);
+    this.controls.addEventListener('change', () => {
+      this.renderer!.render(this.scene!, this.camera!);
+    });
+    this.controls.enableZoom = true
+    this.controls.update();
+
+    this.loader!.load(
+      // (this.knowledge!.content as any).objectURL,
+      '/assets/3d/car.glb',
+      (gltf) => {
+        const model = gltf.scene;
+        model.position.set(0, 1, 0);
+        this.scene!.add(model);
+
+        const ambientLight = new AmbientLight(0xffffff);
+        this.scene!.add(ambientLight);
+
+
+      },
+      undefined,
+      (error) => {
+        console.error('Error loading GLTF:', error);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Ошибка',
+          detail: 'Возникла ошибка при загрузке модели!'
+        })
+      }
+    )
   }
 
   get formatType() {

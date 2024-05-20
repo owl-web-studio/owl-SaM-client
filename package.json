@@ -22,11 +22,13 @@
     "@angular/router": "^17.3.3",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@types/three": "^0.164.0",
     "ng2-pdfjs-viewer": "^17.0.3",
     "ngx-markdown": "^17.2.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.3.2",
     "rxjs": "~7.8.0",
+    "three": "^0.164.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

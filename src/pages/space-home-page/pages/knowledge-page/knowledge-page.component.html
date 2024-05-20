@@ -57,6 +57,7 @@
           }
           @case ('3d') {
             threejs 3d model preview
+
           }
           @case ('code') {
             code preview
@@ -67,8 +68,13 @@
         }
       </div>
 
+
     </p-card>
   }
+
+  <p-card [hidden]="formatType !== '3d'" header="3D-визуализация">
+    <div #rendererContainer id="canvas-box"></div>
+  </p-card>
 
   <div class="actions">
     <div class="rating">

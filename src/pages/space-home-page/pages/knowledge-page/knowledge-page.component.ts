@@ -134,11 +134,12 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
     this.scene = new Scene();
     this.scene.background = new Color(0xffffff);
 
-    this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.set(-1.8, 0.6, 2.7);
+    this.camera = new PerspectiveCamera(75, (window.innerWidth  * 0.7) / (window.innerHeight * 0.8), 0.1, 1000);
+    this.camera.position.set(-1.8, 0.6, 5);
 
     this.renderer = new WebGLRenderer({antialias: true});
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(window.innerWidth * 0.7, window.innerHeight * 0.8);
     this.rendererContainer.nativeElement.appendChild(this.renderer.domElement);
 
     this.controls = new OrbitControls(this.camera!, this.renderer.domElement);

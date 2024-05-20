@@ -148,9 +148,13 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
     this.controls.enableZoom = true
     this.controls.update();
 
+    console.log('3d model URL: ',  this.knowledge)
+    console.log('3d model URL: ',  this.knowledge!.content)
+    console.log('3d model URL: ',  (this.knowledge!.content as any).objectURL)
+
     this.loader!.load(
-      // (this.knowledge!.content as any).objectURL,
-      '/assets/3d/car.glb',
+      (this.knowledge!.content as any).objectURL,
+      // '/assets/3d/car.glb',
       (gltf) => {
         const model = gltf.scene;
         model.position.set(0, 1, 0);

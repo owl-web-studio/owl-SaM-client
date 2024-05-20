@@ -157,7 +157,7 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
     const file = $event.files[0];
     const objectURL = URL.createObjectURL(file);
     this.uploadedFile = file; // Сохраняем файл и его URL
-    this.uploadedFile.objectUrl = objectURL;
+    this.uploadedFile.objectURL = objectURL;
     this.createKnowledgeForm.controls['content'].setValue(this.uploadedFile);
     console.log(this.createKnowledgeForm);
     console.log(objectURL); // Выводим URL для проверки

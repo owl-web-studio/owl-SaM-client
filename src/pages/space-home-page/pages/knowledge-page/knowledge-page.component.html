@@ -99,13 +99,19 @@
           <p-card class="comment">
             <ng-template pTemplate="title">
               <div class="author">
-                <p-avatar
-                  [image]="comment.author.avatarUrl ? comment.author.avatarUrl : 'https://i.ibb.co/Fx98nVB/default-avatar.png'"
-                  shape="circle"
-                />
+                <a [routerLink]="['../../../../users/' + comment.author.id]">
+                  <p-avatar
+                    [image]="comment.author.avatarUrl ? comment.author.avatarUrl : 'https://i.ibb.co/Fx98nVB/default-avatar.png'"
+                    shape="circle"
+                  />
+                </a>
                 <div class="author__info">
                   <a
-                    class="author__name">{{ comment.author.lastName }} {{ comment.author.firstName }} {{ comment.author.patronymic }}</a>
+                    [routerLink]="['../../../../users/' + comment.author.id]"
+                    class="author__name"
+                  >
+                    {{ comment.author.lastName }} {{ comment.author.firstName }} {{ comment.author.patronymic }}
+                  </a>
                   <span class="author__job-title">{{ comment.author.jobTitle }}</span>
                 </div>
               </div>

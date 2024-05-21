@@ -19,6 +19,8 @@ import {AmbientLight, Color, PerspectiveCamera, Scene, WebGLRenderer} from "thre
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
 import {KnowledgeComment} from "../../../../entities/knowledge-comment.model";
 import {AvatarModule} from "primeng/avatar";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {DividerModule} from "primeng/divider";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -34,7 +36,9 @@ import {AvatarModule} from "primeng/avatar";
     PdfJsViewerModule,
     ReactiveFormsModule,
     AvatarModule,
-    DatePipe
+    DatePipe,
+    InputTextareaModule,
+    DividerModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'

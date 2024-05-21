@@ -92,33 +92,50 @@
     ></p-button>
   </p-card>
 
-  <p-card class="comments" header="Комментарии">
-    <div class="comment-list">
-      @for (comment of comments; track comment.id) {
-        <p-card class="comment">
-          <ng-template pTemplate="title">
-            <div class="author">
-              <p-avatar
-                [image]="comment.author.avatarUrl ? comment.author.avatarUrl : 'https://i.ibb.co/Fx98nVB/default-avatar.png'"
-                shape="circle"
-              />
-              <div class="author__info">
-                <a class="author__name">{{ comment.author.lastName }} {{ comment.author.firstName }} {{ comment.author.patronymic }}</a>
-                <span class="author__job-title">{{ comment.author.jobTitle }}</span>
+  <p-card header="Комментарии">
+    <div class="comments">
+      <div class="comment-list">
+        @for (comment of comments; track comment.id) {
+          <p-card class="comment">
+            <ng-template pTemplate="title">
+              <div class="author">
+                <p-avatar
+                  [image]="comment.author.avatarUrl ? comment.author.avatarUrl : 'https://i.ibb.co/Fx98nVB/default-avatar.png'"
+                  shape="circle"
+                />
+                <div class="author__info">
+                  <a
+                    class="author__name">{{ comment.author.lastName }} {{ comment.author.firstName }} {{ comment.author.patronymic }}</a>
+                  <span class="author__job-title">{{ comment.author.jobTitle }}</span>
+                </div>
               </div>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="content">{{ comment.content }}</ng-template>
-          <ng-template pTemplate="footer">
-            {{ comment.createDate | date:'dd.MM.yyyy' }}
-            {{ comment.updateDate | date:'dd.MM.yyyy' }}
-          </ng-template>
-        </p-card>
-      } @empty {
-        <span>У этого документа пока нет комментариев!</span>
-      }
-    </div>
+            </ng-template>
+            <ng-template pTemplate="content">{{ comment.content }}</ng-template>
+            <ng-template pTemplate="footer">
+              {{ comment.createDate | date:'dd.MM.yyyy' }}
+              {{ comment.updateDate | date:'dd.MM.yyyy' }}
+            </ng-template>
+          </p-card>
+        } @empty {
+          <span>У этого документа пока нет комментариев!</span>
+        }
+      </div>
 
-    <form class="comment-form"></form>
+      <p-divider></p-divider>
+
+      <form class="comment-form">
+        <textarea
+          pInputTextarea
+          [autoResize]="true"
+          rows="3"
+          class="editor__input"
+          placeholder="Введите комментарий"
+        ></textarea>
+        <p-button
+          label="Отправить комментарий"
+          type="submit"
+        ></p-button>
+      </form>
+    </div>
   </p-card>
 </div>

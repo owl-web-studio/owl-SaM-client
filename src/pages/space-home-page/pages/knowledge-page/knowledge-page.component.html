@@ -110,8 +110,8 @@
           </ng-template>
           <ng-template pTemplate="content">{{ comment.content }}</ng-template>
           <ng-template pTemplate="footer">
-            {{ comment.createDate }}
-            {{ comment.updateDate }}
+            {{ comment.createDate | date:'dd.MM.yyyy' }}
+            {{ comment.updateDate | date:'dd.MM.yyyy' }}
           </ng-template>
         </p-card>
       } @empty {

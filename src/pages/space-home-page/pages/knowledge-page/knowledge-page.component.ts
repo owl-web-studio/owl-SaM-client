@@ -9,7 +9,7 @@ import {Knowledge} from "../../../../entities/knowledge.model";
 import {MarkdownComponent} from "ngx-markdown";
 import {RatingModule, RatingRateEvent} from "primeng/rating";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {DecimalPipe} from "@angular/common";
+import {DatePipe, DecimalPipe} from "@angular/common";
 import {AuthService} from "../../../../services/auth.service";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
@@ -33,7 +33,8 @@ import {AvatarModule} from "primeng/avatar";
     CardModule,
     PdfJsViewerModule,
     ReactiveFormsModule,
-    AvatarModule
+    AvatarModule,
+    DatePipe
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'
@@ -112,11 +113,17 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
           return this.spaceService.getKnowledgeComments(v.treeNode.id)
             .pipe(
               map((comments) => {
-                console.log(comments.comments)
 
-                return {
-                  ...v,
-                  comments: comments.comments as KnowledgeComment[]
+                if (comments) {
+                  return {
+                    ...v,
+                    comments: comments.comments as KnowledgeComment[]
+                  }
+                } else {
+                  return {
+                    ...v,
+                    comments: []
+                  }
                 }
               })
             )
@@ -131,6 +138,7 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
           comments
         } = v;
         console.log(treeNode)
+        console.log(comments)
 
         this.breadcrumbMenuItems = path.map(path => {
           return {

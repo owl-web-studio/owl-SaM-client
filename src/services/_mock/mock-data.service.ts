@@ -235,7 +235,34 @@ export class MockDataService {
         id: 2,
         name: 'Главные бизнес-процессы',
         description: 'Основная информация о компании',
-        content: 'Компания была основана в 2023 году',
+        content: '# Abstrahor verterit\n' +
+          '\n' +
+          '## Cur deum\n' +
+          '\n' +
+          'Lorem markdownum facies Festa sua pallor *facilis sit buxi* dextraque novorum\n' +
+          'nescio intellectam tibi dixit opes auctorem inguine sponte, dum! Ille anus deos\n' +
+          '[aspicit](http://placeat.com/), cursuque parens; vidit aras.\n' +
+          '\n' +
+          '1. Omnes datis genua\n' +
+          '2. Iuvenum voragine\n' +
+          '3. Alas caruit graminis\n' +
+          '4. Collo subsequitur Orchamus caelum unam posset veniam\n' +
+          '5. Reclusis haec cupidine deducit\n' +
+          '\n' +
+          '## Sentit crescere\n' +
+          '\n' +
+          'Non debita corpore precantem paratior celat quaterque ut voto umquam: tenuaverat\n' +
+          'flamma. Vultus non patulis digitis: guttis genetrix veste, *nec* Siqua terga\n' +
+          'dedisse **genitor conplecti**.\n' +
+          '\n' +
+          '    supercomputerCopyright = gigo_directx + vistaMenu;\n' +
+          '    browser(465897, mashupAccess.yahoo_system(-4, 4, 862125) + 432722 + 94,\n' +
+          '            fontFileRegistry);\n' +
+          '    if (skin_subnet_registry.network.programMemory(floatingGate, data)) {\n' +
+          '        json_web(spreadsheetBeta, 1 + 2);\n' +
+          '        it.opacity -= cacheSaasCharacter;\n' +
+          '    }\n' +
+          '    prompt = hardConfiguration;',
         format: this.formats[0],
         createTime: new Date(),
         updateTime: new Date(),

@@ -8,9 +8,11 @@
 
   @if (knowledge) {
 
-    <p-card [header]="knowledge.name">
+    <p-card>
+      <ng-template pTemplate="title">
+        <span class="p-overlay-badge" pBadge value="Актуально" severity="success" >{{knowledge.name}}</span>
+      </ng-template>
       <div class="knowledge__header">
-
         <div class="knowledge__rating">
           <span>Рейтинг:</span>
           <p-rating [(ngModel)]="knowledgeRating" [readonly]="true" [cancel]="false"/>

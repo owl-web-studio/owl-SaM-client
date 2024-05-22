@@ -21,6 +21,7 @@ import {KnowledgeComment} from "../../../../entities/knowledge-comment.model";
 import {AvatarModule} from "primeng/avatar";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {DividerModule} from "primeng/divider";
+import {BadgeModule} from "primeng/badge";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -38,7 +39,8 @@ import {DividerModule} from "primeng/divider";
     AvatarModule,
     DatePipe,
     InputTextareaModule,
-    DividerModule
+    DividerModule,
+    BadgeModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'

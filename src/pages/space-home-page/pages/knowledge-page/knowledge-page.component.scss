@@ -6,6 +6,7 @@
   &__header {
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-03);
   }
 
   &__rating {

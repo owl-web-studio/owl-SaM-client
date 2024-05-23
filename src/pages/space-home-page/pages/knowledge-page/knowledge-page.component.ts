@@ -22,6 +22,7 @@ import {AvatarModule} from "primeng/avatar";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {DividerModule} from "primeng/divider";
 import {BadgeModule} from "primeng/badge";
+import {ChipModule} from "primeng/chip";
 
 @Component({
   selector: 'owl-knowledge-page',
@@ -40,7 +41,8 @@ import {BadgeModule} from "primeng/badge";
     DatePipe,
     InputTextareaModule,
     DividerModule,
-    BadgeModule
+    BadgeModule,
+    ChipModule
   ],
   templateUrl: './knowledge-page.component.html',
   styleUrl: './knowledge-page.component.scss'

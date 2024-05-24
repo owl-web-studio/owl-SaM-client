@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {delay, map, of} from "rxjs";
+import {delay, map, of, tap} from "rxjs";
 import {SpaceService} from "./space.service";
 import {Directory} from "../entities/directory.model";
 import {Knowledge} from "../entities/knowledge.model";
@@ -24,19 +24,26 @@ export class SearchService {
     root: Directory,
     result: Knowledge[] = []
   ): Knowledge[] {
-    if (root.name === text) return [root as unknown as Knowledge];
+    console.log(`Searching in: ${root.name}`);
+
+    if (root.name.includes(text)) {
+      console.log(`Match found: ${root.name}`);
+      result.push(root as unknown as Knowledge);
+    }
+
     if (root.children) {
       for (let i = 0; i < root.children.length; i++) {
-        // path.push({id: root.id, name: root.name})
-        const found = this.getKnowledgesByText(text, root.children[i], [...result, root as unknown as Knowledge]);
-        if (found) return found;
+        this.getKnowledgesByText(text, root.children[i], result);
       }
     }
-    return [];
+
+    return result;
   }
 
   search(query: string) {
-    this.spaceService.getData()
+    const randomDelay = 1000 + Math.random() * 2000;
+
+    return this.spaceService.getData()
       .pipe(
         map(rootDirectory => {
           return this.getKnowledgesByText(
@@ -46,30 +53,9 @@ export class SearchService {
           )
         })
       )
-      .subscribe(_ => {
-        console.log(_)
-      })
-
-    console.log('search')
-    return of([
-      {
-        name: 'Лалла',
-        type: 'Текст',
-        routerLink: '',
-      },
-      {
-        name: 'Лалла',
-        type: 'Текст',
-        routerLink: '',
-      },
-      {
-        name: 'Лалла',
-        type: 'Текст',
-        routerLink: '',
-      }
-    ])
       .pipe(
-        delay(1000),
+        delay(randomDelay),
+        tap(v => console.log('found', v))
       )
   }
 }

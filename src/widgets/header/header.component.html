@@ -28,7 +28,12 @@
                 class="result__element"
               >
                 <div class="element__header">{{ searchElement.name }}</div>
-                <div class="element__type">{{ searchElement.type }}</div>
+
+                @if(searchElement.children) {
+                  <div class="element__type">Директория</div>
+                } @else {
+                  <div class="element__type">{{ searchElement.format.name }}</div>
+                }
               </a>
             } @empty {
               <p-progressSpinner ariaLabel="loading" />

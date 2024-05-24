@@ -27,8 +27,17 @@ export class SearchService {
     console.log(`Searching in: ${root.name}`);
 
     if (root.name.includes(text)) {
-      console.log(`Match found: ${root.name}`);
-      result.push(root as unknown as Knowledge);
+      console.log(`Match name found: ${root.name}`);
+      result.push(root as any);
+    }
+
+    if (
+      'content' in root &&
+      (root as Knowledge).format.type === 'markdown' &&
+      ((root as Knowledge).content as string).includes(text)
+    ) {
+      console.log(`Match content found: ${root.name}`);
+      result.push(root as Knowledge);
     }
 
     if (root.children) {

@@ -35,8 +35,9 @@
 
                 @if(searchElement.type === 'Директория') {
                   <div class="element__type">Директория</div>
-                } @else {
-                  <div class="element__type">{{ searchElement.format.name }}</div>
+                }
+                @else {
+                  <div class="element__type">{{ searchElement.type }}</div>
                 }
               </a>
             } @empty {

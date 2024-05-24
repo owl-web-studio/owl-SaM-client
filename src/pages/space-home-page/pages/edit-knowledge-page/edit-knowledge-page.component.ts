@@ -54,12 +54,11 @@ export class EditKnowledgePageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.spaceService.getKnowledgeById(Number(params.get('id')));
+          return this.spaceService.getKnowledgeById(Number(params.get('knowledgeId')));
         }),
       )
       .subscribe((v) => {
         const {treeNode, path} = v;
-        console.log(treeNode)
 
         this.editKnowledgeForm = this.formBuilder.group({
           id: [{ value: treeNode!.id, disabled: true }],

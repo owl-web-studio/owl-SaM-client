@@ -36,7 +36,6 @@ export class SpaceService {
     return this.getData()
       .pipe(
         switchMap(rootDirectory => {
-          console.log(this.convertToTreeNode(rootDirectory));
           return of([this.convertToTreeNode(rootDirectory)]);
         })
       )
@@ -125,7 +124,6 @@ export class SpaceService {
         }),
         map(_ => 1)
       ).subscribe(_ => {
-        console.log('sub', this.mockDataService.knowledgeTree)
         this.onUpdatedSpaceTree$.next();
       })
   }

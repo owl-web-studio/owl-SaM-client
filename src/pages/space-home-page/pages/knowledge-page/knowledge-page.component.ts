@@ -86,13 +86,12 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.spaceService.getKnowledgeById(Number(params.get('id')));
+          return this.spaceService.getKnowledgeById(Number(params.get('knowledgeId')));
         }),
         switchMap(v => {
           return this.spaceService.getKnowledgeRating(v.treeNode.id)
             .pipe(
               map(rating => {
-                console.log('onInit:', rating)
                 let averageRating = 0;
                 let userRating = 0;
 
@@ -145,8 +144,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
           userRating,
           comments
         } = v;
-        console.log(treeNode)
-        console.log(comments)
 
         this.breadcrumbMenuItems = path.map(path => {
           return {
@@ -164,8 +161,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
 
         this.userRating = userRating;
         this.comments = comments;
-
-        console.log(this.knowledge)
       });
   }
 
@@ -193,10 +188,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
     });
     this.controls.enableZoom = true
     this.controls.update();
-
-    console.log('3d model URL: ',  this.knowledge)
-    console.log('3d model URL: ',  this.knowledge!.content)
-    console.log('3d model URL: ',  (this.knowledge!.content as any).objectURL)
 
     this.loader!.load(
       (this.knowledge!.content as any).objectURL,
@@ -234,7 +225,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
   get pdfSrc() {
     let result = null;
     if (this.knowledge && this.formatType === 'pdf') {
-      console.log('pdfSrc:', this.knowledge.content)
       result = (this.knowledge.content as any);
       result.url = result.objectURL;
     }
@@ -245,7 +235,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
 
   get imageSrc() {
     if (this.knowledge && this.formatType === 'image') {
-      console.log('imageSrc:', this.knowledge.content)
       return (this.knowledge.content as any).objectURL;
     } else {
       return ''
@@ -253,7 +242,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
   }
 
   onRate($event: RatingRateEvent) {
-    console.log('onRate', $event);
     this.spaceService.setUserRate(
       this.knowledge!.id,
       this.authService.currentUser$.value!.id,

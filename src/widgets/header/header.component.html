@@ -21,15 +21,19 @@
         />
         @if (showSearchResult$ | async) {
           <div class="search__result">
-            @for (searchElement of (searchResult$ | async); track 1) {
+            @for (searchElement of (searchResult$ | async); track searchElement.id) {
               <a
-                [routerLink]="[searchElement.routerLink]"
+                [routerLink]="
+                  searchElement.type === 'Директория' ?
+                  ['/organizations/1/spaces/1/directory/' + searchElement.id] :
+                  ['/organizations/1/spaces/1/knowledge/' + searchElement.id]
+                "
                 (click)="onClickedSearchResult()"
                 class="result__element"
               >
                 <div class="element__header">{{ searchElement.name }}</div>
 
-                @if(searchElement.children) {
+                @if(searchElement.type === 'Директория') {
                   <div class="element__type">Директория</div>
                 } @else {
                   <div class="element__type">{{ searchElement.format.name }}</div>

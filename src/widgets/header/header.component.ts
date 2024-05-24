@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, inject, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TooltipModule} from "primeng/tooltip";
 import {DividerModule} from "primeng/divider";
 import {BreadcrumbService} from "../../services/breadcrumb.service";
-import {BehaviorSubject, debounceTime, delay, Subject, switchMap, takeUntil, tap} from "rxjs";
+import {BehaviorSubject, debounceTime, delay, filter, of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {AsyncPipe} from "@angular/common";
-import {Router, RouterLink} from "@angular/router";
+import {ActivatedRoute, ActivationEnd, NavigationStart, ParamMap, Router, RouterLink} from "@angular/router";
 import {MenuModule} from "primeng/menu";
 import {ButtonModule} from "primeng/button";
 import {MenuItem} from "primeng/api";
@@ -14,6 +14,7 @@ import {FormsModule} from "@angular/forms";
 import {SearchService} from "../../services/search.service";
 import {BadgeModule} from "primeng/badge";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {Space} from "../../entities/space.model";
 
 
 @Component({
@@ -42,7 +43,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private searchSubject$ = new Subject<string>();
   private readonly debounceTimeMs = 300;
   showSearchResult$ = new BehaviorSubject<boolean>(false);
-  searchResult$ = new BehaviorSubject<any[]>([])
+  searchResult$ = new BehaviorSubject<any[]>([]);
+
+  currentOrganization: number | undefined;
+  currentSpace: number | undefined;
+  currentDirectory: number | undefined;
+  currentKnowledge: number | undefined;
 
   accountMenuItems: MenuItem[] = [
     {
@@ -70,18 +76,18 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   ];
 
+  private activatedRoute = inject(ActivatedRoute);
+
   constructor(
     private readonly router: Router,
     private readonly breadcrumbService: BreadcrumbService,
     private readonly authService: AuthService,
     private readonly searchService: SearchService
   ) {
-    this.title$ = breadcrumbService.title$;
+    this.title$ = this.breadcrumbService.title$;
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.searchSubject$

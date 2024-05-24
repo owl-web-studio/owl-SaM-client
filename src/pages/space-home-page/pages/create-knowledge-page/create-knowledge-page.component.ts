@@ -136,8 +136,6 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
       summary: 'Успешно!',
       detail: 'Запись была успешно создана!'
     });
-    // this.clientsService.createClient(this.createClientForm.value)
-    console.log(this.createKnowledgeForm.value)
     const knowledge = {
       ...this.createKnowledgeForm.value,
       createTime: new Date(),
@@ -153,14 +151,11 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
   }
 
   onUpload($event: FileUploadEvent) {
-    console.log($event);
     const file = $event.files[0];
     const objectURL = URL.createObjectURL(file);
     this.uploadedFile = file; // Сохраняем файл и его URL
     this.uploadedFile.objectURL = objectURL;
     this.createKnowledgeForm.controls['content'].setValue(this.uploadedFile);
-    console.log(this.createKnowledgeForm);
-    console.log(objectURL); // Выводим URL для проверки
   }
 
   ngOnDestroy() {

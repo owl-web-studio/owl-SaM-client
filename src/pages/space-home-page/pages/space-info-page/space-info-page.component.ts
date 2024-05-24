@@ -46,7 +46,7 @@ export class SpaceInfoPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.spaceService.getSpaceInfo(Number(params.get('id')))
+          return this.spaceService.getSpaceInfo(Number(params.get('spaceId')))
         })
       )
       .subscribe((organization: Space) => {

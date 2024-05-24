@@ -40,7 +40,7 @@ export class OrganizationHomePageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.organizationService.getOrganizationInfo(Number(params.get('id')))
+          return this.organizationService.getOrganizationInfo(Number(params.get('organizationId')))
         })
       )
       .subscribe((organization: Organization) => {

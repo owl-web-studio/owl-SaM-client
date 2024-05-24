@@ -51,6 +51,15 @@ export class SearchService {
             rootDirectory,
             []
           )
+        }),
+        map(foundElements => {
+          return foundElements.map(element => {
+            return {
+              id: element.id,
+              name: element.name,
+              type: (element as unknown as any).children ? 'Директория' : element.format.name,
+            }
+          })
         })
       )
       .pipe(

@@ -55,7 +55,7 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.spaceService.getDirectoryById(Number(params.get('id')));
+          return this.spaceService.getDirectoryById(Number(params.get('directoryId')));
         }),
       )
       .subscribe((v) => {

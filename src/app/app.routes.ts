@@ -44,7 +44,7 @@ export const routes: Routes = [
   },
 
   {
-    path: 'organizations/:id',
+    path: 'organizations/:organizationId',
     children: [
       {
         path: '',
@@ -62,7 +62,7 @@ export const routes: Routes = [
         children: [
           { path: 'create', component: CreateUserPageComponent },
 
-          { path:  ':id', component: UserPageComponent},
+          { path:  ':userId', component: UserPageComponent},
         ],
         canActivate: [authGuard],
       },
@@ -71,12 +71,12 @@ export const routes: Routes = [
         children: [
           { path: 'create', component: CreateUserGroupPageComponent },
 
-          { path:  ':id', component: UserPageComponent},
+          { path:  ':userGroupId', component: UserPageComponent},
         ],
         canActivate: [authGuard],
       },
       {
-        path: 'spaces/:id',
+        path: 'spaces/:spaceId',
         children: [
           {
             path: '',
@@ -103,7 +103,7 @@ export const routes: Routes = [
                 children: [
                   { path: 'create', component: CreateDirectoryPageComponent },
 
-                  { path: ':id', component: DirectoryPageComponent }
+                  { path: ':directoryId', component: DirectoryPageComponent }
                 ]
               },
               {
@@ -111,8 +111,8 @@ export const routes: Routes = [
                 children: [
                   { path: 'create', component: CreateKnowledgePageComponent },
 
-                  { path: ':id', component: KnowledgePageComponent, pathMatch: 'full'},
-                  { path: ':id/edit', component: EditKnowledgePageComponent},
+                  { path: ':knowledgeId', component: KnowledgePageComponent, pathMatch: 'full'},
+                  { path: ':knowledgeId/edit', component: EditKnowledgePageComponent},
                 ]
               }
             ]

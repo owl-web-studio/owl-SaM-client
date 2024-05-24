@@ -33,7 +33,6 @@ export class SpaceService {
   }
 
   getFileTree() {
-    console.log('getFileTree')
     return this.getData()
       .pipe(
         switchMap(rootDirectory => {

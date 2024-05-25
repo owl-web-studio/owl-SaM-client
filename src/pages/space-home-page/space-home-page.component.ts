@@ -35,16 +35,33 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
   files: TreeNode[] | undefined;
 
   treeKnowledgeMenuItems = [
-    { label: 'Переименовать', icon: 'pi pi-fw pi-search' },
-    { label: 'Удалить', icon: 'pi pi-fw pi-trash' }
+    {
+      label: 'Пометить неактуальным',
+      icon: 'pi pi-fw pi-trash'
+    },
+    {
+      label: 'Изменить права доступа',
+      icon: 'pi pi-fw pi-lock'
+    }
   ];
   treeDirectoryMenuItems = [
     {
-      label: 'Создать запись',
+      label: 'Создать документ',
       icon: 'pi pi-fw pi-file-edit',
       routerLink: ['knowledge/create']
     },
-    { label: 'Создать директорию', icon: 'pi pi-fw pi-folder-open' }
+    {
+      label: 'Создать директорию',
+      icon: 'pi pi-fw pi-folder-open'
+    },
+    {
+      label: 'Удалить директорию',
+      icon: 'pi pi-fw pi-trash'
+    },
+    {
+      label: 'Изменить права доступа',
+      icon: 'pi pi-fw pi-lock'
+    }
   ];
 
   constructor(

@@ -35,6 +35,7 @@ export class BreadcrumbService {
         })
       )
       .subscribe((title: string) => {
+        console.log('route:', title)
         if (title) {
           this.title$.next(title);
         }

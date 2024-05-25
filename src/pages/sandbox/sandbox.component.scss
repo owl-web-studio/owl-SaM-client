@@ -1,0 +1,16 @@
+section.sandbox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-04);
+}
+
+.alala {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-03);
+}
+
+.access-rule-list {
+  display: flex;
+  gap: var(--spacing-03);
+}

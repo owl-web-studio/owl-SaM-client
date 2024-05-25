@@ -1,8 +1,8 @@
-<section class="create-group">
-  <h1>Создание группы пользователей</h1>
+<section class="create-category">
+  <h1>Создание категории</h1>
 
   <form
-    [formGroup]="createGroupForm"
+    [formGroup]="createCategoryForm"
     (ngSubmit)="onSubmit()"
     class="create-form"
   >
@@ -14,11 +14,6 @@
     <label class="create-form__element">
       <span>Описание</span>
       <textarea rows="5" pInputTextarea formControlName="description" placeholder="Описание"></textarea>
-    </label>
-
-    <label class="create-form__element">
-      <span>Пользователи</span>
-      <input pInputText formControlName="users"/>
     </label>
 
     <div class="create-form__actions">

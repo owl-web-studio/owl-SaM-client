@@ -1,0 +1,154 @@
+<section class="sandbox">
+  <h1>Изменение прав доступа</h1>
+
+
+  <form
+    class="create-form"
+  >
+    <p-card>
+      <div class="alala">
+        <label class="create-form__element">
+          <span>Тип селектора</span>
+
+          <p-selectButton
+            [options]="selectorTypeOptions"
+            formControlName="value"
+            optionLabel="name"
+            optionValue="value" />
+        </label>
+        <label class="create-form__element">
+          <span>Селектор</span>
+
+          @if (users$ | async; as users) {
+            <p-dropdown
+              [options]="selectorOptions"
+              formControlName="intPropType"
+              optionLabel="name"
+              placeholder="Пользователь"
+            >
+            </p-dropdown>
+          }
+        </label>
+
+        <div class="access-rule-list">
+          <p-triStateCheckbox
+            label="Просмотр"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Просмотр рейтинга"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Оценка"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Просмотр комментариев"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Добавление комментария"
+            name="pizza"
+            value="Cheese"
+          />
+        </div>
+        <p-button
+          label="Удалить"
+          icon="pi pi-trash"
+          type="submit"
+        ></p-button>
+      </div>
+    </p-card>
+    <p-divider></p-divider>
+
+    <p-card>
+      <div class="alala">
+        <label class="create-form__element">
+          <span>Тип селектора</span>
+
+          <p-selectButton
+            [options]="selectorTypeOptions"
+            formControlName="value"
+            optionLabel="name"
+            optionValue="value" />
+        </label>
+        <label class="create-form__element">
+          <span>Селектор</span>
+
+          @if (users$ | async; as users) {
+            <p-dropdown
+              [options]="users"
+              formControlName="intPropType"
+              optionLabel="lastName"
+              placeholder="Пользователь"
+            >
+              <ng-template let-user pTemplate="item">
+                <span>{{ user.lastName + ' ' + user.firstName[0] + '. ' + user.patronymic[0] + '.' }}</span>
+              </ng-template>
+            </p-dropdown>
+          }
+        </label>
+
+        <div class="access-rule-list">
+          <p-triStateCheckbox
+            label="Просмотр"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Просмотр рейтинга"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Оценка"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Просмотр комментариев"
+            name="pizza"
+            value="Cheese"
+          />
+          <p-triStateCheckbox
+            label="Добавление комментария"
+            name="pizza"
+            value="Cheese"
+          />
+        </div>
+        <p-button
+          label="Удалить"
+          icon="pi pi-trash"
+          type="submit"
+        ></p-button>
+      </div>
+    </p-card>
+    <p-divider></p-divider>
+
+    <p-button
+      label="Добавить селектор"
+      type="submit"
+    ></p-button>
+
+    <p-divider></p-divider>
+
+    <p-card class="actions" header="Действия">
+      <div class="create-form__actions">
+        <p-button
+          label="Сохранить"
+          type="submit"
+        ></p-button>
+        <p-button
+          [outlined]="true"
+          label="Отменить"
+        ></p-button>
+      </div>
+    </p-card>
+
+  </form>
+</section>

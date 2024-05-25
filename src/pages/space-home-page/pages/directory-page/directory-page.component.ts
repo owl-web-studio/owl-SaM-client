@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BehaviorSubject, Subject, switchMap, takeUntil} from "rxjs";
 import {Knowledge} from "../../../../entities/knowledge.model";
-import {MenuItem} from "primeng/api";
+import {MenuItem, MessageService} from "primeng/api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {SpaceService} from "../../../../services/space.service";
 import {Directory} from "../../../../entities/directory.model";
@@ -30,7 +30,7 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
 
   containerMenuItems = [
     {
-      label: 'Создать запись',
+      label: 'Создать документ',
       icon: 'pi pi-file-plus',
       routerLink: ['../../knowledge/create']
     },
@@ -38,7 +38,11 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
       label: 'Создать директорию',
       icon: 'pi pi-folder-plus',
       routerLink: ['../../directory/create']
-    }
+    },
+    {
+      label: 'Удалить директорию',
+      icon: 'pi pi-fw pi-trash'
+    },
   ];
 
   breadcrumbItems: MenuItem[] | undefined;
@@ -46,6 +50,8 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+
+    private readonly messageService: MessageService,
     private readonly spaceService: SpaceService
   ) {
   }

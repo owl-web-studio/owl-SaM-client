@@ -244,6 +244,11 @@ export class MockDataService {
       name: 'BPMN',
       description: ''
     },
+    {
+      id: 3,
+      name: 'Модели автомобилей',
+      description: ''
+    },
   ];
   knowledgeTree: Directory = {
     id: 1,
@@ -286,7 +291,7 @@ export class MockDataService {
         children: [
           {
             id: 7,
-            name: 'Акт выполнения лялял',
+            name: 'Акт выполнения процесса №21',
             description: 'Основная информация о компании',
             content: 'лялялялял',
             format: this.formats[0],

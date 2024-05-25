@@ -27,6 +27,10 @@ import {CreateRolePageComponent} from "../pages/roles/create-role-page/create-ro
 import {DirectoryPageComponent} from "../pages/space-home-page/pages/directory-page/directory-page.component";
 import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-page/knowledge-page.component";
 import {EditProfilePageComponent} from "../pages/profile/edit-profile-page/edit-profile-page.component";
+import {
+  CreateCategoryPageComponent
+} from "../pages/space-home-page/pages/create-category-page/create-category-page.component";
+import {SandboxComponent} from "../pages/sandbox/sandbox.component";
 
 export const routes: Routes = [
   {
@@ -100,20 +104,29 @@ export const routes: Routes = [
                 ]
               },
               {
+                path: 'categories',
+                children: [
+                  {
+                    path: 'create',
+                    component: CreateCategoryPageComponent
+                  }
+                ]
+              },
+              {
                 path: 'directory',
                 children: [
-                  { path: 'create', component: CreateDirectoryPageComponent },
+                  { path: 'create', component: CreateDirectoryPageComponent, title: 'Пространство: создания директории' },
 
-                  { path: ':directoryId', component: DirectoryPageComponent }
+                  { path: ':directoryId', component: DirectoryPageComponent, title: 'Пространство: просмотр директории' }
                 ]
               },
               {
                 path: 'knowledge',
                 children: [
-                  { path: 'create', component: CreateKnowledgePageComponent },
+                  { path: 'create', component: CreateKnowledgePageComponent, title: 'Пространство: создание документа' },
 
-                  { path: ':knowledgeId', component: KnowledgePageComponent, pathMatch: 'full'},
-                  { path: ':knowledgeId/edit', component: EditKnowledgePageComponent},
+                  { path: ':knowledgeId', component: KnowledgePageComponent, pathMatch: 'full', title: 'Пространство: просмотр документа'},
+                  { path: ':knowledgeId/edit', component: EditKnowledgePageComponent, title: 'Пространство: редактирование документа'},
                 ]
               }
             ]
@@ -151,6 +164,12 @@ export const routes: Routes = [
     component: SettingsPageComponent,
     title: 'Настройки',
     canActivate: [authGuard],
+  },
+
+  {
+    path: 'sandbox',
+    component: SandboxComponent,
+    title: 'Настройка прав доступа'
   },
 
   { path: '**', component: NotFoundPageComponent, title: 'Страница 404' }

@@ -18,6 +18,8 @@
   &__content {
     display: flex;
     flex-direction: column;
+    padding-top: var(--spacing-04);
+    padding-bottom: var(--spacing-03);
 
     img.content {
       border: 1px solid #dbdbdb;
@@ -28,6 +30,14 @@
     .pdf-viewer {
       height: 100vh;
     }
+  }
+}
+
+.actions {
+
+  &__buttons {
+    display: flex;
+    gap: var(--spacing-03);
   }
 }
 

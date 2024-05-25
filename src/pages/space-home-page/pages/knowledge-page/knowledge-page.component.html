@@ -93,11 +93,17 @@
         (onRate)="onRate($event)"
       />
     </div>
-    <p-button
-      [routerLink]="['edit']"
-      label="Редактировать"
-      size="small"
-    ></p-button>
+    <div class="actions__buttons">
+      <p-button
+        [routerLink]="['edit']"
+        label="Редактировать"
+        size="small"
+      ></p-button>
+      <p-button
+        label="Пометить неактуальным"
+        size="small"
+      ></p-button>
+    </div>
   </p-card>
 
   <p-card header="Комментарии">

@@ -68,7 +68,47 @@
             </a>
           </div>
         </ng-template>
-        <!-- TODO -->
+        <div class="organization__groups">
+          @for (userGroup of (userGroups$ | async); track userGroup.id) {
+            <div class="organization__group">
+              <a
+                [routerLink]="['user-groups/' + userGroup.id]"
+                [relativeTo]="this.activatedRoute"
+                class="group__name"
+              >
+                {{ userGroup.name }}
+              </a>
+              <span class="group__members">
+                {{ userGroup.users.length }}
+                <span class="pi pi-users"></span>
+              </span>
+            </div>
+          }
+        </div>
+      </p-card>
+
+      <p-card>
+        <ng-template pTemplate="header">
+          <div class="info-card__header">
+            <div class="p-card-title">Роли</div>
+            <a [routerLink]="['roles/create']" class="icon-btn" pTooltip="Добавить">
+              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
+            </a>
+          </div>
+        </ng-template>
+        <div class="space__roles">
+          @for (role of (roles$ | async); track role.id) {
+            <div class="space__role">
+              <a
+                owlRole
+                [role]="role"
+                class="role__name"
+              >
+                {{ role.name }}
+              </a>
+            </div>
+          }
+        </div>
       </p-card>
 
       <p-card>

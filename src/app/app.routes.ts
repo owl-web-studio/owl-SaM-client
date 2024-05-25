@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import {HomePageComponent} from "../pages/home-page/home-page.component";
 import {NotFoundPageComponent} from "../pages/not-found-page/not-found-page.component";
-import {ProfilePageComponent} from "../pages/profile-page/profile-page.component";
+import {ProfilePageComponent} from "../pages/profile/profile-page/profile-page.component";
 import {SignInPageComponent} from "../pages/auth/sign-in-page/sign-in-page.component";
 import {SignUpPageComponent} from "../pages/auth/sign-up-page/sign-up-page.component";
 import {authGuard} from "../guards/auth.guard";
@@ -26,6 +26,7 @@ import {ReferencePageComponent} from "../pages/reference-page/reference-page.com
 import {CreateRolePageComponent} from "../pages/roles/create-role-page/create-role-page.component";
 import {DirectoryPageComponent} from "../pages/space-home-page/pages/directory-page/directory-page.component";
 import {KnowledgePageComponent} from "../pages/space-home-page/pages/knowledge-page/knowledge-page.component";
+import {EditProfilePageComponent} from "../pages/profile/edit-profile-page/edit-profile-page.component";
 
 export const routes: Routes = [
   {
@@ -129,9 +130,20 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfilePageComponent,
-    title: 'Профиль',
-    data: {title: 'ssss'},
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: ProfilePageComponent,
+        title: 'Профиль',
+        data: {title: 'ssss'},
+      },
+      {
+        path: 'edit',
+        component: EditProfilePageComponent,
+        title: 'Редактирование профиля'
+      }
+    ],
     canActivate: [authGuard],
   },
   {

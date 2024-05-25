@@ -13,30 +13,6 @@
       <p-card>
         <ng-template pTemplate="header">
           <div class="info-card__header">
-            <div class="p-card-title">Роли</div>
-            <a [routerLink]="['roles/create']" class="icon-btn" pTooltip="Добавить">
-              <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>
-            </a>
-          </div>
-        </ng-template>
-        <div class="space__roles">
-          @for (role of (roles$ | async); track role.id) {
-            <div class="space__role">
-              <a
-                owlRole
-                [role]="role"
-                class="role__name"
-              >
-                {{ role.name }}
-              </a>
-            </div>
-          }
-        </div>
-      </p-card>
-
-      <p-card>
-        <ng-template pTemplate="header">
-          <div class="info-card__header">
             <div class="p-card-title">Категории</div>
             <a class="icon-btn" pTooltip="Добавить">
               <i class="pi pi-plus-circle" style="font-size: 1.25rem"></i>

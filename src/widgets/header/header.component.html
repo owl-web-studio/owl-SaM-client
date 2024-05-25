@@ -21,43 +21,48 @@
         />
         @if (showSearchResult$ | async) {
           <div class="search__result">
-            @for (searchElement of (searchResult$ | async); track searchElement.id) {
-              <a
-                [routerLink]="
+            @if(isLoading) {
+              <p-progressSpinner ariaLabel="loading" />
+            } @else {
+              @for (searchElement of (searchResult$ | async); track searchElement.id) {
+                <a
+                  [routerLink]="
                   searchElement.type === 'Директория' ?
                   ['/organizations/1/spaces/1/directory/' + searchElement.id] :
                   ['/organizations/1/spaces/1/knowledge/' + searchElement.id]
                 "
-                (click)="onClickedSearchResult()"
-                class="result__element"
-              >
+                  (click)="onClickedSearchResult()"
+                  class="result__element"
+                >
                 <div class="element__header">{{ searchElement.name }}</div>
 
-                @if(searchElement.type === 'Директория') {
-                  <div class="element__type">Директория</div>
-                }
-                @else {
-                  <div class="element__type">{{ searchElement.type }}</div>
-                }
+                  @if(searchElement.type === 'Директория') {
+                    <div class="element__type">Директория</div>
+                  }
+                  @else {
+                    <div class="element__type">{{ searchElement.type }}</div>
+                  }
               </a>
-            } @empty {
-              <p-progressSpinner ariaLabel="loading" />
+              } @empty {
+                Ничего не найдено!
+              }
             }
+
           </div>
         }
       </span>
-      <a class="icon-btn" pTooltip="Уведомления">
-        <i
-          class="pi pi-bell"
-          style="font-size: 1.25rem"
-          pBadge
-          value="2"
-          severity="success"
-        ></i>
-      </a>
-      <a [routerLink]="['reference']" class="icon-btn" pTooltip="Справка">
-        <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>
-      </a>
+<!--      <a class="icon-btn" pTooltip="Уведомления">-->
+<!--        <i-->
+<!--          class="pi pi-bell"-->
+<!--          style="font-size: 1.25rem"-->
+<!--          pBadge-->
+<!--          value="2"-->
+<!--          severity="success"-->
+<!--        ></i>-->
+<!--      </a>-->
+<!--      <a [routerLink]="['reference']" class="icon-btn" pTooltip="Справка">-->
+<!--        <i class="pi pi-question-circle" style="font-size: 1.25rem"></i>-->
+<!--      </a>-->
       <a (click)="menu.toggle($event)" class="icon-btn" pTooltip="Профиль">
         <i class="pi pi-user" style="font-size: 1.25rem"></i>
       </a>

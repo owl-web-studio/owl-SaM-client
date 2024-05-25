@@ -10,11 +10,13 @@ import {Knowledge} from "../../entities/knowledge.model";
 import {Category} from "../../entities/category.model";
 import {KnowledgeComment} from "../../entities/knowledge-comment.model";
 import {User} from "../../entities/user.model";
+import {UserGroup} from "../../entities/user-group.model";
 
 type DataType =
   'organizations'     |
   'spaces'            |
   'users'             |
+  'userGroups'        |
   'knowledgeTree'     |
   'formats'           |
   'roles'             |
@@ -35,7 +37,7 @@ export class MockDataService {
     },
     {
       id: 999,
-      name: 'Суперпользователь',
+      name: 'Администратор',
       description: 'Роль с неограниченными правами',
       isAdmin: true
     }
@@ -102,6 +104,60 @@ export class MockDataService {
       jobTitle: 'Инженер QA',
       roles: [this.roles[0]],
     },
+    {
+      id: 6,
+      login: 'lipovetskiy.k',
+      password: 'test',
+      firstName: 'Кирилл',
+      lastName: 'Липовецкий',
+      patronymic: 'Валерьевич',
+      email: 'lipovetskiy.k@mail.ru',
+      phoneNumber: '+79259100012',
+      jobTitle: 'Ведущий инженер-разработчик',
+      roles: [this.roles[0]],
+    },
+    {
+      id: 7,
+      login: 'ivanov.n',
+      password: 'test',
+      firstName: 'Николай',
+      lastName: 'Иванов',
+      patronymic: 'Константинович',
+      email: 'ivanov.n@mail.ru',
+      phoneNumber: '+79259100012',
+      jobTitle: 'Инжненер-разработчик',
+      roles: [this.roles[0]],
+    },
+  ];
+  userGroups: UserGroup[] = [
+    {
+      id: 1,
+      name: 'Аналитики',
+      description: 'Группа для аналитиктов',
+      users: [
+        this.users[1],
+        this.users[3],
+      ]
+    },
+    {
+      id: 2,
+      name: 'Разработчики',
+      description: 'Группа для разработчиков',
+      users: [
+        this.users[1],
+        this.users[2],
+        this.users[5],
+        this.users[6],
+      ]
+    },
+    {
+      id: 2,
+      name: 'Тестировщики',
+      description: 'Группа для тестировщиков',
+      users: [
+        this.users[4]
+      ]
+    }
   ];
   spaces: Space[] = [
     {
@@ -119,11 +175,25 @@ export class MockDataService {
   organizations: Organization[] = [
     {
       id: 1,
-      name: 'Блины и галошницы',
+      name: 'Типовая ИТ-компания',
+      description: '\n' +
+        'Типовая ИТ-компания — , специализирующаяся на разработке программного обеспечения с использованием трёхмерных моделей. Основное направление деятельности компании включает создание 3D-приложений для различных отраслей, таких как архитектура, медицина и развлечения. Команда высококвалифицированных разработчиков и дизайнеров обеспечивает инновационные решения, сочетающие передовые технологии и креативный подход.',
+      leader: this.users[1]
+    },
+    {
+      id: 2,
+      name: 'ООО "Хельги Лаб',
       description: '\n' +
         '"Блины и галошницы" - это не просто организация, это наша страсть, наше призвание создавать уют и радость для каждого нашего гостя. Мы верим в силу традиций и качества, поэтому каждый блин, который мы приготовляем, и каждая пара галош, которую мы предлагаем, являются результатом тщательно сохраняемых рецептов и высокого мастерства. Наша команда с любовью и вниманием уделяет каждой детали, чтобы создать атмосферу уюта и удовольствия для наших посетителей. Добро пожаловать в мир "Блинов и галошниц" - место, где вкус встречается с комфортом!',
       leader: this.users[1]
-    }
+    },
+    {
+      id: 3,
+      name: 'ООО "СОВЫ ВЕБ"',
+      description: '\n' +
+        '"Блины и галошницы" - это не просто организация, это наша страсть, наше призвание создавать уют и радость для каждого нашего гостя. Мы верим в силу традиций и качества, поэтому каждый блин, который мы приготовляем, и каждая пара галош, которую мы предлагаем, являются результатом тщательно сохраняемых рецептов и высокого мастерства. Наша команда с любовью и вниманием уделяет каждой детали, чтобы создать атмосферу уюта и удовольствия для наших посетителей. Добро пожаловать в мир "Блинов и галошниц" - место, где вкус встречается с комфортом!',
+      leader: this.users[1]
+    },
   ];
   formats: Format[] = [
     {
@@ -235,34 +305,9 @@ export class MockDataService {
         id: 2,
         name: 'Главные бизнес-процессы',
         description: 'Основная информация о компании',
-        content: '# Abstrahor verterit\n' +
+        content: 'Бизнес-процессы являются основой любого предприятия, обеспечивая последовательность и координацию действий для достижения стратегических целей. Главные бизнес-процессы включают **управление цепочками поставок**, **производственные операции**, **управление клиентскими отношениями** и **финансовый менеджмент**. **Управление цепочками поставок** охватывает весь путь продукта от поставщиков до конечного потребителя, обеспечивая своевременное и эффективное перемещение товаров и услуг. **Производственные операции** включают в себя планирование, управление и контроль за производственным процессом, обеспечивая выпуск продукции в соответствии с заданными стандартами качества.\n' +
           '\n' +
-          '## Cur deum\n' +
-          '\n' +
-          'Lorem markdownum facies Festa sua pallor *facilis sit buxi* dextraque novorum\n' +
-          'nescio intellectam tibi dixit opes auctorem inguine sponte, dum! Ille anus deos\n' +
-          '[aspicit](http://placeat.com/), cursuque parens; vidit aras.\n' +
-          '\n' +
-          '1. Omnes datis genua\n' +
-          '2. Iuvenum voragine\n' +
-          '3. Alas caruit graminis\n' +
-          '4. Collo subsequitur Orchamus caelum unam posset veniam\n' +
-          '5. Reclusis haec cupidine deducit\n' +
-          '\n' +
-          '## Sentit crescere\n' +
-          '\n' +
-          'Non debita corpore precantem paratior celat quaterque ut voto umquam: tenuaverat\n' +
-          'flamma. Vultus non patulis digitis: guttis genetrix veste, *nec* Siqua terga\n' +
-          'dedisse **genitor conplecti**.\n' +
-          '\n' +
-          '    supercomputerCopyright = gigo_directx + vistaMenu;\n' +
-          '    browser(465897, mashupAccess.yahoo_system(-4, 4, 862125) + 432722 + 94,\n' +
-          '            fontFileRegistry);\n' +
-          '    if (skin_subnet_registry.network.programMemory(floatingGate, data)) {\n' +
-          '        json_web(spreadsheetBeta, 1 + 2);\n' +
-          '        it.opacity -= cacheSaasCharacter;\n' +
-          '    }\n' +
-          '    prompt = hardConfiguration;',
+          '**Управление клиентскими отношениями** направлено на создание и поддержание долгосрочных взаимоотношений с клиентами, удовлетворение их потребностей и повышение лояльности. **Финансовый менеджмент** охватывает все аспекты управления финансами компании, включая **планирование бюджета**, **учет и контроль затрат**, **управление доходами и инвестициями**. Каждый из этих процессов требует внимательного подхода и использования современных технологий и инструментов для повышения эффективности и конкурентоспособности предприятия. В совокупности, эти бизнес-процессы позволяют компании достигать поставленных целей и обеспечивать устойчивое развитие в долгосрочной перспективе.',
         format: this.formats[0],
         createTime: new Date(),
         updateTime: new Date(),
@@ -481,6 +526,9 @@ export class MockDataService {
           return user
         });
         break;
+      case "userGroups":
+        result = this.userGroups;
+        break;
       case 'knowledgeTree':
         result = this.knowledgeTree;
         break;
@@ -523,6 +571,11 @@ export class MockDataService {
           return user.id === id;
         });
         delete (result as any).password
+        break;
+      case "userGroups":
+        result = this.userGroups.find((userGroup) => {
+          return userGroup.id === id;
+        });
         break;
       case "formats":
         result = this.formats.find((format) => {

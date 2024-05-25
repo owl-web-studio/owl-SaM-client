@@ -8,6 +8,8 @@ import {CardModule} from "primeng/card";
 import {UserService} from "../../../services/user.service";
 import {AsyncPipe} from "@angular/common";
 import {SpaceService} from "../../../services/space.service";
+import {RoleService} from "../../../services/role.service";
+import {RoleDirective} from "../../../directives/role.directive";
 
 @Component({
   selector: 'owl-organization-home-page',
@@ -16,7 +18,8 @@ import {SpaceService} from "../../../services/space.service";
     TooltipModule,
     RouterLink,
     CardModule,
-    AsyncPipe
+    AsyncPipe,
+    RoleDirective
   ],
   templateUrl: './organization-home-page.component.html',
   styleUrl: './organization-home-page.component.scss'
@@ -31,7 +34,7 @@ export class OrganizationHomePageComponent implements OnInit, OnDestroy {
     private readonly organizationService: OrganizationService,
     private readonly userService: UserService,
     private readonly spaceService: SpaceService,
-
+    private readonly roleService: RoleService
   ) {
   }
 
@@ -50,6 +53,14 @@ export class OrganizationHomePageComponent implements OnInit, OnDestroy {
 
   get users$() {
     return this.userService.getUsers();
+  }
+
+  get userGroups$() {
+    return this.userService.getUserGroups();
+  }
+
+  get roles$() {
+    return this.roleService.getRoles();
   }
 
   get spaces$() {

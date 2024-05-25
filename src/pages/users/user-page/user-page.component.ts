@@ -23,7 +23,7 @@ export class UserPageComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         switchMap((params: ParamMap) => {
-          return this.userService.getUserInfo(Number(params.get('userGroupId')));
+          return this.userService.getUserInfo(Number(params.get('userId')));
         }),
       )
       .subscribe(user => {

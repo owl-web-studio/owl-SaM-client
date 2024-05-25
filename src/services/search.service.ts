@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {delay, forkJoin, map, Observable, of, switchMap, tap} from "rxjs";
+import {catchError, delay, forkJoin, map, Observable, of, switchMap, tap, timeout} from "rxjs";
 import {SpaceService} from "./space.service";
 import {Directory} from "../entities/directory.model";
 import {Knowledge} from "../entities/knowledge.model";
@@ -93,9 +93,16 @@ export class SearchService {
             rootDirectory,
             []
           )
+          console.log('foundElements', foundElements)
+          if (foundElements.length === 0) {
+
+            console.log('no')
+            return of([]);
+          }
 
           return forkJoin(
             foundElements.map(element => {
+              console.log('forkJoin')
               return this.calculateP(element, query)
                 .pipe(
                   map(rating => {
@@ -109,7 +116,14 @@ export class SearchService {
           )
         }),
         map(foundElementsWithP => {
+          console.log('no match')
+
           return foundElementsWithP
+            .filter((element, index, self) =>
+                index === self.findIndex((t) => (
+                  t.id === element.id
+                ))
+            )
             .sort((a, b) => b.P - a.P)
             .map((element: any) => {
               return {
@@ -118,9 +132,8 @@ export class SearchService {
                 type: (element as unknown as any).children ? 'Директория' : element.format.name,
               }
             })
-        })
-      )
-      .pipe(
+        }),
+        tap(_ => {console.log('tap', _)}),
         delay(randomDelay),
       )
   }

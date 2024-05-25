@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BreadcrumbModule} from "primeng/breadcrumb";
 import {map, Subject, switchMap, takeUntil, withLatestFrom} from "rxjs";
 import {MenuItem, MessageService} from "primeng/api";
@@ -73,6 +73,7 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
+    private readonly cd: ChangeDetectorRef,
     private readonly messageService: MessageService,
     private readonly spaceService: SpaceService,
     private readonly categoryService: CategoryService,
@@ -246,9 +247,40 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
       this.knowledge!.id,
       this.authService.currentUser$.value!.id,
       $event.value
+    ).pipe(
+      takeUntil(this.destroy$),
+      switchMap(_ => {
+        return this.spaceService.getKnowledgeRating(this.knowledge!.id)
+          .pipe(
+            map(rating => {
+              let averageRating = 0;
+              let userRating = 0;
+
+              if (rating) {
+                averageRating = rating.userRating.reduce(
+                  (acc: number, cv: any) => {
+                    return acc + cv.rating;
+                  },
+                  0
+                ) / rating.userRating.length;
+
+                userRating = rating.userRating.find((rating: any) => {
+                  return this.authService.currentUser$.value!.id === rating.userId;
+                }).rating;
+              }
+
+              return {
+                averageRating: averageRating,
+                userRating: userRating
+              }
+            })
+          )
+      })
     )
       .subscribe(v => {
         console.log(v);
+        this.knowledgeRating = v.averageRating;
+        this.userRating = v.userRating;
       })
   }
 }

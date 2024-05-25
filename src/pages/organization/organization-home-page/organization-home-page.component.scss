@@ -47,6 +47,18 @@
     gap: var(--spacing-04);
   }
 
+  &__group {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-04);
+
+    .group__members {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-02);
+    }
+  }
+
   &__spaces {
     display: flex;
     flex-direction: column;

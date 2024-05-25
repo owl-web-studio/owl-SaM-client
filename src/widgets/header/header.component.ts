@@ -2,7 +2,19 @@ import {AfterViewInit, Component, inject, Input, OnDestroy, OnInit, ViewChild} f
 import {TooltipModule} from "primeng/tooltip";
 import {DividerModule} from "primeng/divider";
 import {BreadcrumbService} from "../../services/breadcrumb.service";
-import {BehaviorSubject, debounceTime, delay, filter, of, Subject, switchMap, takeUntil, tap} from "rxjs";
+import {
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  delay,
+  filter,
+  of,
+  Subject,
+  switchMap,
+  takeUntil,
+  tap,
+  timeout
+} from "rxjs";
 import {AsyncPipe} from "@angular/common";
 import {ActivatedRoute, ActivationEnd, NavigationStart, ParamMap, Router, RouterLink} from "@angular/router";
 import {MenuModule} from "primeng/menu";
@@ -44,6 +56,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   private readonly debounceTimeMs = 300;
   showSearchResult$ = new BehaviorSubject<boolean>(false);
   searchResult$ = new BehaviorSubject<any[]>([]);
+  isLoading: boolean = false;
 
   currentOrganization: number | undefined;
   currentSpace: number | undefined;
@@ -58,13 +71,13 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.router.navigate(['/profile']);
       }
     },
-    {
-      label: 'Настройки',
-      icon: 'pi pi-cog',
-      command: () => {
-        this.router.navigate(['/settings']);
-      },
-    },
+    // {
+    //   label: 'Настройки',
+    //   icon: 'pi pi-cog',
+    //   command: () => {
+    //     this.router.navigate(['/settings']);
+    //   },
+    // },
     {
       label: 'Выйти из аккаунта',
       icon: 'pi pi-sign-out',
@@ -94,6 +107,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(
         tap(_ => {
           this.searchResult$.next([]);
+          this.isLoading = true;
         }),
         takeUntil(this.destroy$),
         debounceTime(this.debounceTimeMs),
@@ -105,10 +119,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }),
         switchMap(searchValue => {
-          return this.searchService.search(searchValue);
+          return this.searchService.search(searchValue)
         })
       )
       .subscribe(result => {
+        console.log('sub res', result)
+        this.isLoading = false;
         this.searchResult$.next(result);
       })
   }

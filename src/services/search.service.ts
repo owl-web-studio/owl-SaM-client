@@ -25,9 +25,7 @@ export class SearchService {
     const N = (query.length / element.name.length) * 100;
 
     if ((element as any).children) {
-      const P = N * 0.6;
-      console.log(`${element.name} P=${P}, N=${N}`)
-      return of(P);
+      return of(N * 0.6);
     } else {
       return this.spaceService.getKnowledgeRating(element.id)
         .pipe(
@@ -49,13 +47,9 @@ export class SearchService {
               (element as Knowledge).format.type === 'markdown'
             ) {
               const C = (content.match(regex) || []).length;
-              const P = ((N * 0.6) + (C * 0.4) + (R * 0.2))
-              console.log(`${element.name} P=${P}, N=${N}, R=${R}, C=${C}`)
-              return P;
+              return (N * 0.6 + C * 0.4 + R * 0.2);
             } else {
-              const P = (N * 0.6 + R * 0.2);
-              console.log(`${element.name} P=${P}, N=${N}, R=${R}`)
-              return P;
+              return (N * 0.6 + R * 0.2);
             }
           })
         );
@@ -67,10 +61,7 @@ export class SearchService {
     root: Directory,
     result: Knowledge[] = []
   ): Knowledge[] {
-    console.log(`Searching in: ${root.name}`);
-
     if (root.name.includes(text)) {
-      console.log(`Match name found: ${root.name}`);
       result.push(root as any);
     }
 
@@ -79,7 +70,6 @@ export class SearchService {
       (root as Knowledge).format.type === 'markdown' &&
       ((root as Knowledge).content as string).includes(text)
     ) {
-      console.log(`Match content found: ${root.name}`);
       result.push(root as Knowledge);
     }
 
@@ -118,9 +108,6 @@ export class SearchService {
             })
           )
         }),
-        tap(foundElementsWithP => {
-          console.log(foundElementsWithP.map(el => console.log(el.P)))
-        }),
         map(foundElementsWithP => {
           return foundElementsWithP
             .sort((a, b) => b.P - a.P)
@@ -135,7 +122,6 @@ export class SearchService {
       )
       .pipe(
         delay(randomDelay),
-        tap(v => console.log('found', v))
       )
   }
 }

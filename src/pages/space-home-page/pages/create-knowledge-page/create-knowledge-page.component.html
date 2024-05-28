@@ -12,6 +12,36 @@
     </label>
 
     <label class="create-form__element">
+      <span>Департамент</span>
+      <p-dropdown
+        [options]="departmentOptions"
+        [showClear]="true"
+        (onClear)="onClearFormat()"
+        formControlName="department"
+        optionLabel="name"
+        placeholder="Департамент"
+      ></p-dropdown>
+    </label>
+
+    <label class="create-form__element">
+      <span>Предложивший сотрудник</span>
+      @if(users$ | async; as users) {
+        <p-dropdown
+          [options]="users"
+          [showClear]="true"
+          (onClear)="onClearFormat()"
+          formControlName="userSuggested"
+          optionLabel="lastName"
+          placeholder="Предложивший сотрудник"
+        >
+          <ng-template let-user pTemplate="item">
+            <span>{{ user.lastName + ' ' + user.firstName[0] + '. ' + user.patronymic[0] + '.' }}</span>
+          </ng-template>
+        </p-dropdown>
+      }
+    </label>
+
+    <label class="create-form__element">
       <span>Тип интеллектуальной собственности</span>
       <p-dropdown
         [options]="intellectualPropertyOptions"

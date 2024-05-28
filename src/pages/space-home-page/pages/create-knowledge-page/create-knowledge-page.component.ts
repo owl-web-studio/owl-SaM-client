@@ -18,6 +18,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {CategoryService} from "../../../../services/category.service";
 import {Knowledge} from "../../../../entities/knowledge.model";
 import {SpaceService} from "../../../../services/space.service";
+import {UserService} from "../../../../services/user.service";
 
 @Component({
   selector: 'owl-create-edit-knowledge-page',
@@ -45,6 +46,24 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
   availableFormats: Format[] = [];
 
   uploadedFile: any | undefined;
+
+  departmentOptions = [
+    {
+      name: 'Отдел по подбора персонала'
+    },
+    {
+      name: 'Отдел бухгалтерии'
+    },
+    {
+      name: 'Отдел маркетинга'
+    },
+    {
+      name: 'Департамент информационных технологий'
+    },
+    {
+      name: 'Юридический отдел'
+    },
+  ]
 
   intellectualPropertyOptions = [
     {
@@ -78,6 +97,7 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
     private readonly formatService: FormatService,
     private readonly categoryService: CategoryService,
     private readonly spaceService: SpaceService,
+    private readonly userService: UserService
   ) {
     this.createKnowledgeForm = this.formBuilder.group({
       name: '',
@@ -85,6 +105,8 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
       categories: '',
       content: '',
       description: '',
+      department: '',
+      userSuggested: '',
       intPropType: ''
     } as {
       name: '',
@@ -102,6 +124,10 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
       .subscribe(formats => {
         this.availableFormats = formats as Format[];
       });
+  }
+
+  get users$() {
+    return this.userService.getUsers();
   }
 
   get categories$() {

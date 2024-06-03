@@ -1,6 +1,7 @@
 import {Format} from "./format.model";
 import {Category} from "./category.model";
 
+export type KnowledgeStatus = 'Актуально' | 'Неактуально';
 
 export interface Knowledge {
   id: number;
@@ -11,4 +12,5 @@ export interface Knowledge {
   createTime: Date;
   updateTime?: Date;
   categories?: Category[],
+  status: KnowledgeStatus
 }

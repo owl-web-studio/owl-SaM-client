@@ -128,6 +128,30 @@ export class MockDataService {
       jobTitle: 'Инжненер-разработчик',
       roles: [this.roles[0]],
     },
+    {
+      id: 8,
+      login: 'vasilchuk.d',
+      password: 'test',
+      firstName: 'Демид',
+      lastName: 'Васильчук',
+      patronymic: 'Алексеевич',
+      email: 'vasilchuk.d@mail.ru',
+      phoneNumber: '+79148519901',
+      jobTitle: 'Архитектор решений',
+      roles: [this.roles[0]],
+    },
+    {
+      id: 9,
+      login: 'gavrilov.a',
+      password: 'test',
+      firstName: 'Александр',
+      lastName: 'Гаврилов',
+      patronymic: 'Юрьевич',
+      email: 'gavrilov.a@mail.ru',
+      phoneNumber: '+79128589011',
+      jobTitle: 'Менеджер проектов',
+      roles: [this.roles[0], this.roles[1]],
+    },
   ];
   userGroups: UserGroup[] = [
     {
@@ -151,11 +175,21 @@ export class MockDataService {
       ]
     },
     {
-      id: 2,
+      id: 3,
       name: 'Тестировщики',
       description: 'Группа для тестировщиков',
       users: [
         this.users[4]
+      ]
+    },
+    {
+      id: 4,
+      name: 'Руководство',
+      description: 'Группа для руководителей',
+      users: [
+        this.users[1],
+        this.users[7],
+        this.users[8]
       ]
     }
   ];
@@ -267,15 +301,29 @@ export class MockDataService {
         children: [
           {
             id: 4,
-            name: 'Управление знаниями',
-            description: 'Основная информация о компании',
-            content: 'https://i.ibb.co/BCSRKXY/image.png',
-            format: this.formats[0],
+            name: 'Управление хранением документов  (as is)',
+            description: 'Модель бизнес-процесса "Управление хранением документов в нотации BPMN 2.0',
+            content: 'https://i.ibb.co/0Yp3nHJ/as-is.png',
+            format: this.formats[3],
             createTime: new Date(),
             updateTime: new Date(),
             categories: [
               this.categories[0]
-            ]
+            ],
+            status: 'Неактуально'
+          },
+          {
+            id: 7,
+            name: 'Управление хранением документов  (to be)',
+            description: 'Модель бизнес-процесса "Управление хранением документов в нотации BPMN 2.0',
+            content: 'https://i.ibb.co/zPZfNDK/to-be.png',
+            format: this.formats[3],
+            createTime: new Date(),
+            updateTime: new Date(),
+            categories: [
+              this.categories[0]
+            ],
+            status: 'Актуально'
           }
         ],
         categories: [
@@ -299,7 +347,8 @@ export class MockDataService {
             updateTime: new Date(),
             categories: [
               this.categories[0]
-            ]
+            ],
+            status: 'Актуально'
           }
         ],
         categories: [
@@ -318,7 +367,8 @@ export class MockDataService {
         updateTime: new Date(),
         categories: [
           this.categories[0]
-        ]
+        ],
+        status: 'Актуально'
       },
       {
         id: 5,
@@ -330,7 +380,8 @@ export class MockDataService {
         updateTime: new Date(),
         categories: [
           this.categories[0]
-        ]
+        ],
+        status: 'Актуально'
       }
     ]
   };

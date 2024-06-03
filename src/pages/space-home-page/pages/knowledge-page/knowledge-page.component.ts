@@ -235,11 +235,19 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
   }
 
   get imageSrc() {
-    if (this.knowledge && this.formatType === 'image') {
+    if (this.knowledge && this.formatType === 'image' && (this.knowledge.content as any).objectURL) {
       return (this.knowledge.content as any).objectURL;
-    } else {
+    }
+    else if (this.knowledge && this.formatType === 'image') {
+      return this.knowledge.content
+    }
+    else {
       return ''
     }
+  }
+
+  get status() {
+    return this.knowledge!.status == 'Актуально' ? 'success' : 'danger'
   }
 
   onRate($event: RatingRateEvent) {

@@ -13,7 +13,6 @@ import {DatePipe, DecimalPipe} from "@angular/common";
 import {AuthService} from "../../../../services/auth.service";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
-import {PdfJsViewerModule} from "ng2-pdfjs-viewer";
 import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 import {AmbientLight, Color, PerspectiveCamera, Scene, WebGLRenderer} from "three";
 import {OrbitControls} from "three/examples/jsm/controls/OrbitControls";
@@ -35,7 +34,6 @@ import {ChipModule} from "primeng/chip";
     DecimalPipe,
     ButtonModule,
     CardModule,
-    PdfJsViewerModule,
     ReactiveFormsModule,
     AvatarModule,
     DatePipe,
@@ -221,17 +219,6 @@ export class KnowledgePageComponent implements OnInit, AfterViewInit {
     } else {
       return ''
     }
-  }
-
-  get pdfSrc() {
-    let result = null;
-    if (this.knowledge && this.formatType === 'pdf') {
-      result = (this.knowledge.content as any);
-      result.url = result.objectURL;
-    }
-
-    return result;
-    // return 'https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf';
   }
 
   get imageSrc() {

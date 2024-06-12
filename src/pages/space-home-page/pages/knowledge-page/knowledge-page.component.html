@@ -47,20 +47,6 @@
           @case ('file') {
             file preview
           }
-          @case ('pdf') {
-            pdf preview
-              <!--            <pdf-viewer-->
-              <!--              [src]="pdfSrc"-->
-              <!--              [render-text]="true"-->
-              <!--              [original-size]="false"-->
-              <!--              style="width: 400px; height: 500px"-->
-              <!--            ></pdf-viewer>-->
-            <ng2-pdfjs-viewer
-              [pdfSrc]="pdfSrc"
-              zoom="80"
-              class="pdf-viewer"
-            ></ng2-pdfjs-viewer>
-          }
           @case ('image') {
             <div class="content-container">
               <img

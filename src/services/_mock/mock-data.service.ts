@@ -237,12 +237,6 @@ export class MockDataService {
       type: 'markdown'
     },
     {
-      id: 2,
-      name: 'Документ PDF',
-      extensions: ['.pdf'],
-      type: 'pdf'
-    },
-    {
       id: 3,
       name: 'Документ word',
       extensions: ['.docx'],

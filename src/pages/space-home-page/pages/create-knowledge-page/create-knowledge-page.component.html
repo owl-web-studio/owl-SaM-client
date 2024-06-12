@@ -111,25 +111,6 @@
       @case ('file') {
         file input
       }
-      @case ('pdf') {
-        @if (uploadedFile) {
-          <p>Файл: {{ uploadedFile.name }}</p>
-          <a [href]="uploadedFile" target="_blank">Просмотреть загруженный файл</a>
-        }
-
-        <p-fileUpload
-          [maxFileSize]="5242880"
-          (onUpload)="onUpload($event)"
-          [fileLimit]="1"
-          invalidFileSizeMessageDetail="Максимальный размер загрузки файла {0}!"
-          mode="basic"
-          chooseLabel="Выбрать файл для загрузки"
-          chooseIcon="pi pi-upload"
-          name="demo[]"
-          url="https://www.primefaces.org/cdn/api/upload.php"
-          accept=".pdf"
-        />
-      }
       @case ('image') {
         @if (uploadedFile) {
           <p>Картинка: {{ uploadedFile.name }}</p>

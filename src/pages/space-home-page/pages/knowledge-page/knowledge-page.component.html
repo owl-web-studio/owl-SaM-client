@@ -5,7 +5,6 @@
     [home]="home"
   />
 
-
   @if (knowledge) {
 
     <p-card>
@@ -24,11 +23,6 @@
           @for(category of knowledge.categories; track category.id) {
             <p-chip [label]="category.name"/>
           }
-        </div>
-        <div class="knowledge__rating">
-          <span>Рейтинг:</span>
-          <p-rating [(ngModel)]="knowledgeRating" [readonly]="true" [cancel]="false"/>
-          <span> ({{ knowledgeRating | number: '1.0-2' }})</span>
         </div>
         <p-divider></p-divider>
       </div>
@@ -78,14 +72,6 @@
   </p-card>
 
   <p-card class="actions" header="Действия">
-    <div class="rating">
-      <span>Информация оказалась полезной?</span>
-      <p-rating
-        [cancel]="false"
-        [(ngModel)]="userRating"
-        (onRate)="onRate($event)"
-      />
-    </div>
     <div class="actions__buttons">
       <p-button
         [routerLink]="['edit']"
@@ -93,62 +79,9 @@
         size="small"
       ></p-button>
       <p-button
-        label="Пометить неактуальным"
+        label="Удалить"
         size="small"
       ></p-button>
-    </div>
-  </p-card>
-
-  <p-card header="Комментарии">
-    <div class="comments">
-      <div class="comment-list">
-        @for (comment of comments; track comment.id) {
-          <p-card class="comment">
-            <ng-template pTemplate="title">
-              <div class="author">
-                <a [routerLink]="['../../../../users/' + comment.author.id]">
-                  <p-avatar
-                    [image]="comment.author.avatarUrl ? comment.author.avatarUrl : 'https://i.ibb.co/Fx98nVB/default-avatar.png'"
-                    shape="circle"
-                  />
-                </a>
-                <div class="author__info">
-                  <a
-                    [routerLink]="['../../../../users/' + comment.author.id]"
-                    class="author__name"
-                  >
-                    {{ comment.author.lastName }} {{ comment.author.firstName }} {{ comment.author.patronymic }}
-                  </a>
-                  <span class="author__job-title">{{ comment.author.jobTitle }}</span>
-                </div>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="content">{{ comment.content }}</ng-template>
-            <ng-template pTemplate="footer">
-              {{ comment.createDate | date:'dd.MM.yyyy' }}
-              {{ comment.updateDate | date:'dd.MM.yyyy' }}
-            </ng-template>
-          </p-card>
-        } @empty {
-          <span>У этого документа пока нет комментариев!</span>
-        }
-      </div>
-
-      <p-divider></p-divider>
-
-      <form class="comment-form">
-        <textarea
-          pInputTextarea
-          [autoResize]="true"
-          rows="3"
-          class="editor__input"
-          placeholder="Введите комментарий"
-        ></textarea>
-        <p-button
-          label="Отправить комментарий"
-          type="submit"
-        ></p-button>
-      </form>
     </div>
   </p-card>
 </div>

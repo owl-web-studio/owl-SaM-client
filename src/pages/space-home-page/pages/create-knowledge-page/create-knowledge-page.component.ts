@@ -46,49 +46,6 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
   availableFormats: Format[] = [];
 
   uploadedFile: any | undefined;
-
-  departmentOptions = [
-    {
-      name: 'Отдел по подбора персонала'
-    },
-    {
-      name: 'Отдел бухгалтерии'
-    },
-    {
-      name: 'Отдел маркетинга'
-    },
-    {
-      name: 'Департамент информационных технологий'
-    },
-    {
-      name: 'Юридический отдел'
-    },
-  ]
-
-  intellectualPropertyOptions = [
-    {
-      name: 'Документ, связанный с программами для электронных вычислительных машин (программы для ЭВМ)',
-    },
-    {
-      name: 'Документ о базах данных',
-    },
-    {
-      name: 'Изобретение',
-    },
-    {
-      name: 'Полезная модель',
-    },
-    {
-      name: 'Секрет производства (ноу-хау)'
-    },
-    {
-      name: 'Фирменное наименование'
-    },
-    {
-      name: 'Товарный знак/знак обслуживания'
-    },
-  ];
-
   constructor(
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute,
@@ -105,16 +62,12 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
       categories: '',
       content: '',
       description: '',
-      department: '',
-      userSuggested: '',
-      intPropType: ''
     } as {
       name: '',
       format: any,
       categories: any,
       content: any,
       description: any,
-      intPropType: any
     });
   }
 
@@ -124,10 +77,6 @@ export class CreateKnowledgePageComponent implements OnInit, OnDestroy {
       .subscribe(formats => {
         this.availableFormats = formats as Format[];
       });
-  }
-
-  get users$() {
-    return this.userService.getUsers();
   }
 
   get categories$() {

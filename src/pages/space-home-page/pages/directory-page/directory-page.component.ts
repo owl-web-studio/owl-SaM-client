@@ -30,7 +30,7 @@ export class DirectoryPageComponent implements OnInit, OnDestroy {
 
   containerMenuItems = [
     {
-      label: 'Создать документ',
+      label: 'Создать запись',
       icon: 'pi pi-file-plus',
       routerLink: ['../../knowledge/create']
     },

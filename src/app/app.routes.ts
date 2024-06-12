@@ -123,10 +123,10 @@ export const routes: Routes = [
               {
                 path: 'knowledge',
                 children: [
-                  { path: 'create', component: CreateKnowledgePageComponent, title: 'Пространство: создание документа' },
+                  { path: 'create', component: CreateKnowledgePageComponent, title: 'Пространство: создание записи' },
 
-                  { path: ':knowledgeId', component: KnowledgePageComponent, pathMatch: 'full', title: 'Пространство: просмотр документа'},
-                  { path: ':knowledgeId/edit', component: EditKnowledgePageComponent, title: 'Пространство: редактирование документа'},
+                  { path: ':knowledgeId', component: KnowledgePageComponent, pathMatch: 'full', title: 'Пространство: просмотр записи'},
+                  { path: ':knowledgeId/edit', component: EditKnowledgePageComponent, title: 'Пространство: редактирование записи'},
                 ]
               }
             ]

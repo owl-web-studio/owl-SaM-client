@@ -46,7 +46,7 @@ export class SpaceHomePageComponent implements OnInit, OnDestroy {
   ];
   treeDirectoryMenuItems = [
     {
-      label: 'Создать документ',
+      label: 'Создать запись',
       icon: 'pi pi-fw pi-file-edit',
       routerLink: ['knowledge/create']
     },
